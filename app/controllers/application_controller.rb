@@ -5,6 +5,10 @@ class ApplicationController < ActionController::Base
 
   before_action :authenticate_user!, except: ['home#index', 'users#sign_in', 'users#sign_up']
 
+  def after_sign_in_path_for(user)
+    time_entries_path
+  end
+
   protected
 
   def configure_permitted_parameters
