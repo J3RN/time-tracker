@@ -12,6 +12,7 @@
     <span class='auth'>
       <% if user_signed_in? %>
         Hello, <%= link_to current_user.username, edit_user_registration_path(current_user) %>
+        <%= link_to "Sign out", destroy_user_session_path, method: :delete %>
       <% else %>
         <p>
           <%= link_to "Sign in", new_user_session_path %>
