@@ -3,7 +3,16 @@
 }
 
 .header {
+  padding: 10px 15px;
   background: cornflowerblue;
+}
+
+.brand {
+  font-size: 2em;
+
+  a {
+    text-decoration: none;
+  }
 }
 
 .auth {
