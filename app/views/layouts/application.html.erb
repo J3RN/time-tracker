@@ -1,14 +1,14 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>CMM</title>
+  <title>Time Tracker</title>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
 </head>
 <body>
   <div class='header'>
-    <span class='brand'><%= link_to "CMM", '/' %></span>
+    <span class='brand'><%= link_to 'Time Tracker', '/' %></span>
     <span class='auth'>
       <% if user_signed_in? %>
         Hello, <%= link_to current_user.username, edit_user_registration_path(current_user) %>
