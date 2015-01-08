@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>CMM</title>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+  <div class='header'>
+    <span class='brand'><%= link_to "CMM", '/' %></span>
+    <span class='auth'>
+      <% if user_signed_in? %>
+        <%= content_tag :p, "Hello, #{ current_user.email }" %>
+      <% else %>
+        <p>
+          <%= link_to "Sign in", new_user_session_path %>
+          or
+          <%= link_to "Sign up", new_user_registration_path %>
+        </p>
+      <% end %>
+    </span>
+  </div>
+  <div class='flashes'>
+    <% flash.each do |name, msg| %>
+      <%= content_tag :div, msg %>
+    <% end %>
+  </div>
+
+  <%= yield %>
+
+</body>
+</html>
