@@ -2,4 +2,4 @@
 
 ## TODO
 - Updating username and display name does not yet work. To do later.
-- f.association replacement
+- Devise issue for controller tests
