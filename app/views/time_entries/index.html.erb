@@ -1,37 +1,31 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Listing Time Entries</h1>
+<h1>Time Entries</h1>
+<%= std_date(Date.today) %>
+
+<br>
 
 <table>
   <thead>
     <tr>
-      <th>Project</th>
-      <th>User</th>
-      <th>Task</th>
-      <th>Duration</th>
-      <th>Start time</th>
       <th>Note</th>
-      <th colspan="3"></th>
+      <th>Actions</th>
+      <th>Duration</th>
     </tr>
   </thead>
-
   <tbody>
-    <% @time_entries.each do |time_entry| %>
+    <% @time_entries.each do |entry| %>
       <tr>
-        <td><%= time_entry.project_id %></td>
-        <td><%= time_entry.user_id %></td>
-        <td><%= time_entry.task_id %></td>
-        <td><%= time_entry.duration %></td>
-        <td><%= time_entry.start_time %></td>
-        <td><%= time_entry.note %></td>
-        <td><%= link_to 'Show', time_entry %></td>
-        <td><%= link_to 'Edit', edit_time_entry_path(time_entry) %></td>
-        <td><%= link_to 'Destroy', time_entry, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= entry.note %></td>
+        <td>
+          <%= button_to 'Stop Timer', stop_time_time_entry_path(entry), method: :get, disabled: entry.duration.present? %>
+        </td>
+        <td>
+          <%= entry.duration / 60.0 %>
+        </td>
       </tr>
     <% end %>
   </tbody>
 </table>
-
-<br>
 
 <%= link_to 'New Time entry', new_time_entry_path %>

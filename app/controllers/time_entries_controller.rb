@@ -1,10 +1,10 @@
 class TimeEntriesController < ApplicationController
-  before_action :set_time_entry, only: [:show, :edit, :update, :destroy]
+  before_action :set_time_entry, only: [:show, :edit, :update, :destroy, :stop_time]
 
   respond_to :html
 
   def index
-    @time_entries = TimeEntry.all
+    @time_entries = current_user.time_entries
     respond_with(@time_entries)
   end
 
@@ -22,8 +22,17 @@ class TimeEntriesController < ApplicationController
 
   def create
     @time_entry = TimeEntry.new(time_entry_params)
+    @time_entry.user = current_user
     @time_entry.save
     respond_with(@time_entry)
+  end
+
+  def stop_time
+    duration = ((DateTime.now.to_i - @time_entry.start_time.to_i)/60.0).round
+    @time_entry.duration = duration
+    @time_entry.save
+
+    redirect_to time_entries_path
   end
 
   def update

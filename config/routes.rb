@@ -3,7 +3,9 @@ Rails.application.routes.draw do
 
   root to: 'home#index'
 
-  resources :time_entries
+  resources :time_entries do
+    get 'stop_time', on: :member
+  end
 
   resources :tasks
 
