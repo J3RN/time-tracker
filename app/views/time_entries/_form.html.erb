@@ -1,0 +1,41 @@
+<%= form_for(@time_entry) do |f| %>
+  <% if @time_entry.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@time_entry.errors.count, "error") %> prohibited this time_entry from being saved:</h2>
+
+      <ul>
+      <% @time_entry.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :project_id %><br>
+    <%= f.number_field :project_id %>
+  </div>
+  <div class="field">
+    <%= f.label :user_id %><br>
+    <%= f.number_field :user_id %>
+  </div>
+  <div class="field">
+    <%= f.label :task_id %><br>
+    <%= f.number_field :task_id %>
+  </div>
+  <div class="field">
+    <%= f.label :duration %><br>
+    <%= f.number_field :duration %>
+  </div>
+  <div class="field">
+    <%= f.label :start_time %><br>
+    <%= f.datetime_select :start_time %>
+  </div>
+  <div class="field">
+    <%= f.label :note %><br>
+    <%= f.text_area :note %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

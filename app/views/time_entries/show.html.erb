@@ -1,0 +1,34 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Project:</strong>
+  <%= @time_entry.project_id %>
+</p>
+
+<p>
+  <strong>User:</strong>
+  <%= @time_entry.user_id %>
+</p>
+
+<p>
+  <strong>Task:</strong>
+  <%= @time_entry.task_id %>
+</p>
+
+<p>
+  <strong>Duration:</strong>
+  <%= @time_entry.duration %>
+</p>
+
+<p>
+  <strong>Start time:</strong>
+  <%= @time_entry.start_time %>
+</p>
+
+<p>
+  <strong>Note:</strong>
+  <%= @time_entry.note %>
+</p>
+
+<%= link_to 'Edit', edit_time_entry_path(@time_entry) %> |
+<%= link_to 'Back', time_entries_path %>
