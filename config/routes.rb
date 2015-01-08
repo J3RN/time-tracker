@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  devise_for :users
+
+  root to: 'home#index'
+
   resources :time_entries
 
   resources :tasks
@@ -6,8 +10,4 @@ Rails.application.routes.draw do
   resources :projects
 
   resources :customers
-
-  devise_for :users
-
-  root to: 'home#index'
 end
