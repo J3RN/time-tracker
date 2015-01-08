@@ -11,7 +11,7 @@
     <span class='brand'><%= link_to "CMM", '/' %></span>
     <span class='auth'>
       <% if user_signed_in? %>
-        <%= content_tag :p, "Hello, #{ current_user.email }" %>
+        Hello, <%= link_to current_user.username, edit_user_registration_path(current_user) %>
       <% else %>
         <p>
           <%= link_to "Sign in", new_user_session_path %>

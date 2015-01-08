@@ -8,6 +8,16 @@
     <%= f.email_field :email, autofocus: true %>
   </div>
 
+  <div class="username">
+    <%= f.label :username %><br />
+    <%= f.text_field :username %>
+  </div>
+
+  <div class="display_name">
+    <%= f.label :display_name %><br />
+    <%= f.text_field :display_name %>
+  </div>
+
   <div class="field">
     <%= f.label :password %>
     <% if @validatable %>
