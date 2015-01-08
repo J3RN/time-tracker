@@ -18,13 +18,22 @@
       <tr>
         <td><%= entry.note %></td>
         <td>
-          <%= button_to 'Stop Timer', stop_time_time_entry_path(entry), method: :get, disabled: entry.duration.present? %>
+          <% if entry.running? %>
+            <%= button_to 'Stop Timer', stop_time_time_entry_path(entry), method: :get %>
+          <% else %>
+            <%= button_to 'Start Timer', start_time_time_entry_path(entry), method: :get %>
+          <% end %>
+          <%= button_to 'Edit', edit_time_entry_path(entry), method: :get %>
         </td>
         <td>
           <%= entry.duration / 60.0 %>
         </td>
       </tr>
     <% end %>
+    <tr>
+      <td colspan='2'>Total</td>
+      <td><%= @total %></td>
+    </tr>
   </tbody>
 </table>
 

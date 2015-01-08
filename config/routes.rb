@@ -4,7 +4,10 @@ Rails.application.routes.draw do
   root to: 'home#index'
 
   resources :time_entries do
-    get 'stop_time', on: :member
+    member do
+      get 'stop_time'
+      get 'start_time'
+    end
   end
 
   resources :tasks
