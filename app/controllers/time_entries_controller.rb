@@ -1,3 +1,5 @@
+require 'csv'
+
 class TimeEntriesController < ApplicationController
   before_action :set_time_entry, only: [:show, :edit, :update, :destroy,
                                         :stop_time, :start_time]
@@ -5,9 +7,17 @@ class TimeEntriesController < ApplicationController
   respond_to :html
 
   def index
-    @time_entries = current_user.time_entries
+    if current_user.admin?
+      @time_entries = TimeEntry.all
+    else
+      @time_entries = current_user.time_entries
+    end
+
     @total = @time_entries.sum(:duration) / 60.0
-    respond_with(@time_entries)
+    respond_to do |format|
+      format.html
+      format.csv { send_data @time_entries.to_csv }
+    end
   end
 
   def show

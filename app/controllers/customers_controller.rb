@@ -1,3 +1,5 @@
+require 'csv'
+
 class CustomersController < ApplicationController
   before_action :set_customer, only: [:show, :edit, :update, :destroy]
 
@@ -34,6 +36,18 @@ class CustomersController < ApplicationController
   def destroy
     @customer.destroy
     respond_with(@customer)
+  end
+
+  def import
+    uploaded_io = params[:import_data]
+    new_path = Rails.root.join('public', 'uploads', uploaded_io.original_filename)
+    File.open(new_path, 'wb') do |file|
+      file.write(uploaded_io.read)
+    end
+
+    data = CSV.read(new_path, row_sep: :auto)
+
+    redirect_to customers_path
   end
 
   private

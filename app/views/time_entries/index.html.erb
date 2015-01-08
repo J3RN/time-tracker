@@ -6,7 +6,10 @@
 <br>
 
 <div class="col-md-2">
-  <%= button_to "New Entry", new_time_entry_path, method: :get, class: "btn btn-primary" %>
+  <%= button_to "New Entry", new_time_entry_path, method: :get, class: "btn btn-primary" %><br />
+  <% if current_user.admin? %>
+    <%= button_to "Export CSV", time_entries_path(format: :csv), method: :get, class: "btn btn-primary" %>
+  <% end %>
 </div>
 
 <div class="col-md-10">
@@ -19,6 +22,11 @@
           <td>
             <%= hours_duration(entry.duration / 60.0) %>
           </td>
+          <% if current_user.admin? %>
+            <td>
+              <%= entry.user.username %>
+            </td>
+          <% end %>
           <td>
             <% if entry.running? %>
               <%= button_to 'Stop', stop_time_time_entry_path(entry), method: :get, class: "btn btn-primary" %>

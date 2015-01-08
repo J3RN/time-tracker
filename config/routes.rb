@@ -14,5 +14,7 @@ Rails.application.routes.draw do
 
   resources :projects
 
-  resources :customers
+  resources :customers do
+    post 'import', on: :collection
+  end
 end

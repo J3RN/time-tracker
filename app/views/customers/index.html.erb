@@ -2,7 +2,7 @@
 
 <h1>Listing Customers</h1>
 
-<table>
+<table class="table">
   <thead>
     <tr>
       <th>Company</th>
@@ -45,6 +45,15 @@
     <% end %>
   </tbody>
 </table>
+
+<br>
+
+<% if current_user.admin? %>
+  <%= form_tag 'customers/import', multipart: true do %>
+    <%= file_field_tag 'import_data' %>
+    <%= submit_tag "Import Data" %>
+  <% end %>
+<% end %>
 
 <br>
 
