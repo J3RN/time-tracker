@@ -1,35 +1,40 @@
 <p id="notice"><%= notice %></p>
 
 <h1>Time Entries</h1>
-<%= std_date(Date.today) %>
+<h4><time><%= std_date(Date.today) %></time></h4>
 
 <br>
 
-<table>
-  <tbody>
-    <% @time_entries.each do |entry| %>
-      <tr>
-        <td><%= entry.note %></td>
-        <td>
-          <%= entry.duration / 60.0 %>
-        </td>
-        <td>
-          <% if entry.running? %>
-            <%= button_to 'Stop', stop_time_time_entry_path(entry), method: :get %>
-          <% else %>
-            <%= button_to 'Resume', start_time_time_entry_path(entry), method: :get %>
-          <% end %>
-        </td>
-        <td>
-          <%= button_to 'Edit', edit_time_entry_path(entry), method: :get %>
-        </td>
-      </tr>
-    <% end %>
-    <tr>
-      <td>Total</td>
-      <td colspan='3'><%= @total %></td>
-    </tr>
-  </tbody>
-</table>
+<div class="col-md-2">
+  <%= button_to "New Entry", new_time_entry_path, method: :get, class: "btn btn-primary" %>
+</div>
 
-<%= link_to 'New Time entry', new_time_entry_path %>
+<div class="col-md-10">
+  <table class="table">
+    <tbody>
+      <% @time_entries.each do |entry| %>
+        <tr>
+          <td><b><%= entry.task.task_name %> (<%= entry.project.project_name %>)</b><br />
+            <%= entry.note %></td>
+          <td>
+            <%= hours_duration(entry.duration / 60.0) %>
+          </td>
+          <td>
+            <% if entry.running? %>
+              <%= button_to 'Stop', stop_time_time_entry_path(entry), method: :get, class: "btn btn-primary" %>
+            <% else %>
+              <%= button_to 'Resume', start_time_time_entry_path(entry), method: :get, class: "btn btn-primary" %>
+            <% end %>
+          </td>
+          <td>
+            <%= button_to 'Edit', edit_time_entry_path(entry), method: :get, class: "btn" %>
+          </td>
+        </tr>
+      <% end %>
+      <tr>
+        <td><b>Total</b></td>
+        <td colspan='3'><%= hours_duration(@total) %></td>
+      </tr>
+    </tbody>
+  </table>
+</div>

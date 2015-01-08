@@ -11,27 +11,27 @@
     </div>
   <% end %>
 
-  <div class="field">
+  <div class="field col-md-4">
     <%= f.label :project_id %><br>
-    <%= f.number_field :project_id %>
+    <%= f.collection_select :project_id, Project.all, :id, :project_name %>
   </div>
-  <div class="field">
+  <div class="field col-md-4">
     <%= f.label :task_id %><br>
-    <%= f.number_field :task_id %>
+    <%= f.collection_select :task_id, Task.all, :id, :task_name %>
   </div>
-  <div class="field">
-    <%= f.label :duration %><br>
-    <%= f.number_field :duration %>
-  </div>
-  <div>
+  <div class="field col-md-4">
     <%= f.label :running %><br />
     <%= f.check_box :running %>
   </div>
-  <div class="field">
+  <div class="field col-md-4">
+    <%= f.label :duration, "Duration (only if historical, in minutes)" %><br>
+    <%= f.number_field :duration %>
+  </div>
+  <div class="field col-md-4">
     <%= f.label :note %><br>
     <%= f.text_area :note %>
   </div>
-  <div class="actions">
+  <div class="actions col-xs-12">
     <%= f.submit %>
   </div>
 <% end %>

@@ -7,28 +7,34 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-  <div class='header'>
-    <span class='brand'><%= link_to 'Time Tracker', '/' %></span>
-    <span class='auth'>
-      <% if user_signed_in? %>
-        Hello, <%= link_to current_user.username, edit_user_registration_path(current_user) %>
-        <%= link_to "Sign out", destroy_user_session_path, method: :delete %>
-      <% else %>
-        <p>
-          <%= link_to "Sign in", new_user_session_path %>
-          or
-          <%= link_to "Sign up", new_user_registration_path %>
-        </p>
-      <% end %>
-    </span>
-  </div>
-  <div class='flashes'>
-    <% flash.each do |name, msg| %>
-      <%= content_tag :div, msg %>
-    <% end %>
-  </div>
+  <nav class="navbar navbar-default">
+    <div class="container">
+      <div class="navbar-header">
+        <%= link_to 'Time Tracker', '/', class: "navbar-brand" %>
+      </div>
 
-  <%= yield %>
+      <ul class="nav navbar-nav">
+        <li><%= link_to "Time Entries", time_entries_path %></li>
+        <li><%= link_to "Customers", customers_path %></li>
+        <li><%= link_to "Projects", projects_path %></li>
+        <li><%= link_to "Tasks", tasks_path %></li>
+      </ul>
+
+      <ul class="nav navbar-nav navbar-right">
+        <% if user_signed_in? %>
+          <li><%= link_to current_user.username, edit_user_registration_path(current_user) %></li>
+          <li><%= link_to "Sign out", destroy_user_session_path, method: :delete %></li>
+        <% else %>
+          <li><%= link_to "Sign in", new_user_session_path %></li>
+          <li><%= link_to "Sign up", new_user_registration_path %></li>
+        <% end %>
+      </ul>
+    </div>
+  </nav>
+
+  <div class="container">
+    <%= yield %>
+  </div>
 
 </body>
 </html>

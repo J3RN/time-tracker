@@ -25,6 +25,7 @@ class TimeEntriesController < ApplicationController
   def create
     @time_entry = TimeEntry.new(time_entry_params)
     @time_entry.user = current_user
+    @time_entry.start_time = DateTime.now
     @time_entry.duration = 0 if @time_entry.duration.nil?
     @time_entry.save
 
