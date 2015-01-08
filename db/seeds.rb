@@ -1,15 +1,14 @@
 User.create!(username: 'J3RN', display_name: 'J3RN', email: 'j3rn@j3rn.com', password: 'blargblarg')
 
-Task.create!(
+Task.create!([
   { task_name: 'Development' },
-  { task_name: 'Management' })
+  { task_name: 'Management' }])
 
-Customer.create!(
+Customer.create!([
   { company: 'covermymeds' },
   { company: 'Dell' },
-  { company: 'Mozilla' })
+  { company: 'Mozilla' }])
 
-Customer.first.projects.create!(
+Customer.first.projects.create!([
   { project_name: 'Project 1' },
-  { project_name: 'Project 2' }
-)
+  { project_name: 'Project 2' }])
