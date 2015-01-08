@@ -51,7 +51,8 @@ class TimeEntriesController < ApplicationController
 
   def update
     @time_entry.update(time_entry_params)
-    respond_with(@time_entry)
+
+    redirect_to time_entries_path
   end
 
   def destroy

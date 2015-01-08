@@ -6,33 +6,28 @@
 <br>
 
 <table>
-  <thead>
-    <tr>
-      <th>Note</th>
-      <th>Actions</th>
-      <th>Duration</th>
-    </tr>
-  </thead>
   <tbody>
     <% @time_entries.each do |entry| %>
       <tr>
         <td><%= entry.note %></td>
         <td>
-          <% if entry.running? %>
-            <%= button_to 'Stop Timer', stop_time_time_entry_path(entry), method: :get %>
-          <% else %>
-            <%= button_to 'Start Timer', start_time_time_entry_path(entry), method: :get %>
-          <% end %>
-          <%= button_to 'Edit', edit_time_entry_path(entry), method: :get %>
+          <%= entry.duration / 60.0 %>
         </td>
         <td>
-          <%= entry.duration / 60.0 %>
+          <% if entry.running? %>
+            <%= button_to 'Stop', stop_time_time_entry_path(entry), method: :get %>
+          <% else %>
+            <%= button_to 'Resume', start_time_time_entry_path(entry), method: :get %>
+          <% end %>
+        </td>
+        <td>
+          <%= button_to 'Edit', edit_time_entry_path(entry), method: :get %>
         </td>
       </tr>
     <% end %>
     <tr>
-      <td colspan='2'>Total</td>
-      <td><%= @total %></td>
+      <td>Total</td>
+      <td colspan='3'><%= @total %></td>
     </tr>
   </tbody>
 </table>
