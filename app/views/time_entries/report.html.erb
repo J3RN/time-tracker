@@ -1,0 +1,6 @@
+<h1>Time Report</h1>
+
+<% @projects.each do |project| %>
+  <h3><%= project.project_name %></h3>
+  <p>Hours: <%= hours_duration(project.time_entries.sum(:duration)/60.0) %></p>
+<% end %>

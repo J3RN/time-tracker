@@ -2,7 +2,7 @@
 
 <h1>Listing Projects</h1>
 
-<table>
+<table class="table">
   <thead>
     <tr>
       <th>Project name</th>
@@ -15,7 +15,7 @@
     <% @projects.each do |project| %>
       <tr>
         <td><%= project.project_name %></td>
-        <td><%= project.customer_id %></td>
+        <td><%= project.customer.company %></td>
         <td><%= link_to 'Show', project %></td>
         <td><%= link_to 'Edit', edit_project_path(project) %></td>
         <td><%= link_to 'Destroy', project, method: :delete, data: { confirm: 'Are you sure?' } %></td>

@@ -9,6 +9,7 @@ class TimeEntriesController < ApplicationController
   def index
     if current_user.admin?
       @time_entries = TimeEntry.all
+      @customers = Customer.all
     else
       @time_entries = current_user.time_entries
     end
@@ -69,6 +70,17 @@ class TimeEntriesController < ApplicationController
   def destroy
     @time_entry.destroy
     respond_with(@time_entry)
+  end
+
+  def report
+    customer_id = params[:customer_id]
+
+    if customer_id
+      @time_entries = TimeEntry.where(customer_id: customer_id)
+      @projects = Customer.find(customer_id).projects
+    else
+      redirect_to time_entries_path
+    end
   end
 
   private

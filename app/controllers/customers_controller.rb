@@ -45,7 +45,14 @@ class CustomersController < ApplicationController
       file.write(uploaded_io.read)
     end
 
-    data = CSV.read(new_path, row_sep: :auto)
+    CSV.foreach(new_path, row_sep: :auto) do |row|
+      if (row.reduce {|x, y| x || y})
+        row.unshift(nil)
+        model_hash = row.each_with_index.map {|item, index| [Customer.column_names[index], item]}.to_h
+
+        Customer.create!(model_hash)
+      end
+    end
 
     redirect_to customers_path
   end
