@@ -4,7 +4,7 @@ class TasksController < ApplicationController
   respond_to :html
 
   def index
-    @tasks = Task.all
+    @tasks = Task.includes(:project, project: [:customer]).order('customers.company,projects.project_name')
     respond_with(@tasks)
   end
 
