@@ -1,9 +1,10 @@
 require 'csv'
 
 class TimeEntry < ActiveRecord::Base
-  belongs_to :project
   belongs_to :user
   belongs_to :task
+  has_one :project, through: :task
+  has_one :customer, through: :project
 
   def self.to_csv
     CSV.generate do |csv|
