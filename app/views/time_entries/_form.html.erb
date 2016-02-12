@@ -12,12 +12,8 @@
   <% end %>
 
   <div class="field col-md-4">
-    <%= f.label :project_id %><br>
-    <%= f.collection_select :project_id, Project.all, :id, :project_name %>
-  </div>
-  <div class="field col-md-4">
     <%= f.label :task_id %><br>
-    <%= f.collection_select :task_id, Task.all, :id, :task_name %>
+    <%= f.select :task_id, @tasks %>
   </div>
   <div class="field col-md-4">
     <%= f.label :running %><br />
@@ -26,6 +22,14 @@
   <div class="field col-md-4">
     <%= f.label :duration, "Duration (only if historical, in minutes)" %><br>
     <%= f.number_field :duration %>
+  </div>
+  <div class="field col-md-4">
+    <%= f.label :goal %><br>
+    <%= f.text_field :goal %>
+  </div>
+  <div class="field col-md-4">
+    <%= f.label :result %><br>
+    <%= f.text_field :result %>
   </div>
   <div class="field col-md-4">
     <%= f.label :note %><br>

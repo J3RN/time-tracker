@@ -12,8 +12,12 @@
   <% end %>
 
   <div class="field">
+    <%= f.label :project_id %><br>
+    <%= f.select :project_id, @projects %>
+  </div>
+  <div class="field">
     <%= f.label :task_name %><br>
-    <%= f.text_area :task_name %>
+    <%= f.text_field :task_name %>
   </div>
   <div class="actions">
     <%= f.submit %>

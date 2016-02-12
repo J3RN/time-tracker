@@ -14,6 +14,12 @@ class TimeEntriesController < ApplicationController
       @time_entries = current_user.time_entries
     end
 
+    @date = params[:date] ? Date.parse(params[:date]) : Date.today
+    @time_entries = @time_entries.where("start_time >= ?", @date.to_time)
+    @time_entries = @time_entries.where("start_time < ?", (@date + 1.day).to_time)
+
+    @time_entries = @time_entries.order(:start_time)
+
     @total = @time_entries.sum(:duration) / 60.0
     respond_to do |format|
       format.html
@@ -94,6 +100,6 @@ class TimeEntriesController < ApplicationController
     end
 
     def time_entry_params
-      params.require(:time_entry).permit(:project_id, :user_id, :task_id, :duration, :start_time, :note, :running)
+      params.require(:time_entry).permit(:user_id, :task_id, :duration, :start_time, :note, :running, :goal, :result)
     end
 end

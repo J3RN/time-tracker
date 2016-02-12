@@ -1,7 +1,14 @@
 <p id="notice"><%= notice %></p>
 
 <h1>Time Entries</h1>
-<h4><time><%= std_date(Date.today) %></time></h4>
+<div class="row">
+  <span class="btn-group">
+    <%= link_to "<<", time_entries_path(date: @date - 1.day), class: 'btn btn-default' %>
+    <%= link_to "Today", time_entries_path, class: 'btn btn-default' %>
+    <%= link_to ">>", time_entries_path(date: @date + 1.day), class: 'btn btn-default' %>
+  </span>
+  <time style="padding: 15px; font-weight: bold"><%= std_date(@date) %></time>
+</div>
 
 <br>
 
@@ -23,8 +30,11 @@
     <tbody>
       <% @time_entries.each do |entry| %>
         <tr>
-          <td><b><%= entry.task.task_name %> (<%= entry.project.project_name %>)</b><br />
-            <%= entry.note %></td>
+          <td><%= entry.start_time.strftime("%H:%M") %></td>
+          <td><b><%= entry.customer.company %></b><br />
+          <td><b><%= entry.project.project_name %></b><br />
+          <td><b><%= entry.task.task_name %></b><br />
+            <%= entry.goal %>: <%= entry.result %></td>
           <td>
             <%= hours_duration(entry.duration / 60.0) %>
           </td>
@@ -47,6 +57,7 @@
       <% end %>
       <tr>
         <td><b>Total</b></td>
+        <td></td>
         <td colspan='3'><%= hours_duration(@total) %></td>
       </tr>
     </tbody>
