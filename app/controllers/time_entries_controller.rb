@@ -3,7 +3,7 @@ require 'csv'
 class TimeEntriesController < ApplicationController
   before_action :set_time_entry, only: [:show, :edit, :update, :destroy,
                                         :stop_time, :start_time]
-
+  before_action :set_tasks, only: [:new, :edit]
   respond_to :html
 
   def index
@@ -84,6 +84,11 @@ class TimeEntriesController < ApplicationController
   end
 
   private
+    def set_tasks
+      @tasks = Task.includes(:project, :customer).order('customers.company,projects.project_name,tasks.task_name')
+      @tasks = @tasks.map { |x| ["#{x.customer.company} - #{x.project.project_name} - #{x.task_name}", x.id] }
+    end
+
     def set_time_entry
       @time_entry = TimeEntry.find(params[:id])
     end

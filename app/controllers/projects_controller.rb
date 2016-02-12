@@ -1,5 +1,6 @@
 class ProjectsController < ApplicationController
   before_action :set_project, only: [:show, :edit, :update, :destroy]
+  before_action :set_customers, only: [:new, :edit]
 
   respond_to :html
 
@@ -39,6 +40,10 @@ class ProjectsController < ApplicationController
   private
     def set_project
       @project = Project.find(params[:id])
+    end
+
+    def set_customers
+      @customers = Customer.all.map { |x| [x.company, x.id] }
     end
 
     def project_params

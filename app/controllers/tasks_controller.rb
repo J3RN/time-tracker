@@ -1,6 +1,6 @@
 class TasksController < ApplicationController
   before_action :set_task, only: [:show, :edit, :update, :destroy]
-
+  before_action :set_projects, only: [:edit, :new]
   respond_to :html
 
   def index
@@ -39,6 +39,10 @@ class TasksController < ApplicationController
   private
     def set_task
       @task = Task.find(params[:id])
+    end
+
+    def set_projects
+      @projects = Project.includes(:customer).map { |project| ["#{project.customer.company} - #{project.project_name}", project.id]}
     end
 
     def task_params
