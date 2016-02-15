@@ -81,7 +81,7 @@ class TimeEntriesController < ApplicationController
       @time_entries = TimeEntry.where(customer_id: customer_id)
       @projects = Customer.find(customer_id).projects
     else
-      redirect_to time_entries_path
+      redirect_to time_entries_path, alert: "No customer ID provided"
     end
   end
 
@@ -92,7 +92,8 @@ class TimeEntriesController < ApplicationController
 
   private
     def set_tasks
-      @tasks = Task.includes(:project, :customer).order('customers.company,projects.project_name,tasks.task_name')
+      @tasks = Task.includes(:project, :customer, :time_entries)
+      @tasks = @tasks.sort_by { |task| task.time_entries.try(:last).try(:start_time) || DateTime.new }.reverse
       @tasks = @tasks.map { |x| ["#{x.customer.company} - #{x.project.project_name} - #{x.task_name}", x.id] }
     end
 
