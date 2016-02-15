@@ -2,18 +2,26 @@
 
 <h1>Time Entries</h1>
 <div class="row">
-  <span class="btn-group">
-    <%= link_to "<<", time_entries_path(date: @date - 1.day), class: 'btn btn-default' %>
-    <%= link_to "Today", time_entries_path, class: 'btn btn-default' %>
-    <%= link_to ">>", time_entries_path(date: @date + 1.day), class: 'btn btn-default' %>
-  </span>
-  <time style="padding: 15px; font-weight: bold"><%= std_date(@date) %></time>
+  <div class="col-md-2">
+    <span class="btn-group">
+      <%= link_to "<<", time_entries_path(date: @date - 1.day), class: 'btn btn-default' %>
+      <%= link_to "Today", time_entries_path, class: 'btn btn-default' %>
+      <%= link_to ">>", time_entries_path(date: @date + 1.day), class: 'btn btn-default' %>
+    </span>
+  </div>
+
+  <div class="col-md-10">
+    <time style="padding: 15px; font-weight: bold"><%= std_date(@date) %></time>
+  </div>
 </div>
 
 <br>
 
 <div class="col-md-2">
-  <%= button_to "New Entry", new_time_entry_path, method: :get, class: "btn btn-primary" %><br />
+  <div class="row">
+    <%= button_to "New Entry", new_time_entry_path, method: :get, class: "btn btn-primary col-md-12" %><br>
+  </div>
+
   <% if current_user.admin? %>
     <br>
 

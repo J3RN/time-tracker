@@ -11,31 +11,31 @@
     </div>
   <% end %>
 
-  <div class="field col-md-4">
+  <div class="form-group col-md-4">
     <%= f.label :task_id %><br>
-    <%= f.select :task_id, @tasks %>
+    <%= f.select :task_id, @tasks, {}, {class: "form-control"} %>
   </div>
-  <div class="field col-md-4">
+  <div class="form-group col-md-4">
     <%= f.label :running %><br />
     <%= f.check_box :running %>
   </div>
-  <div class="field col-md-4">
+  <div class="form-group col-md-4">
     <%= f.label :duration, "Duration (only if historical, in minutes)" %><br>
-    <%= f.number_field :duration %>
+    <%= f.number_field :duration, class: "form-control" %>
   </div>
-  <div class="field col-md-4">
+  <div class="form-group col-md-4">
     <%= f.label :goal %><br>
-    <%= f.text_field :goal %>
+    <%= f.text_field :goal, class: "form-control" %>
   </div>
-  <div class="field col-md-4">
+  <div class="form-group col-md-4">
     <%= f.label :result %><br>
-    <%= f.text_field :result %>
+    <%= f.text_field :result, class: "form-control" %>
   </div>
-  <div class="field col-md-4">
+  <div class="form-group col-md-4">
     <%= f.label :note %><br>
-    <%= f.text_area :note %>
+    <%= f.text_area :note, class: "form-control" %>
   </div>
   <div class="actions col-xs-12">
-    <%= f.submit %>
+    <%= f.submit "Create entry", class: "btn btn-primary" %>
   </div>
 <% end %>
