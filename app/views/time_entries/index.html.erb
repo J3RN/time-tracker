@@ -15,12 +15,19 @@
 <div class="col-md-2">
   <%= button_to "New Entry", new_time_entry_path, method: :get, class: "btn btn-primary" %><br />
   <% if current_user.admin? %>
-    <%= button_to "Export CSV", time_entries_path(format: :csv), method: :get, class: "btn btn-primary" %>
+    <br>
 
-    <%= form_tag '/time_entries/report', method: :get do %>
-      <%= select_tag "customer_id", options_from_collection_for_select(Customer.all, "id", "company") %>
-      <%= submit_tag "Generate Report", class: "btn btn-primary" %>
-    <% end %>
+    <div class="row">
+      <%= button_to "Export CSV", export_time_entries_path(format: :csv), method: :get, class: "btn btn-default col-md-12" %>
+    </div>
+    <br>
+
+    <div class="row">
+      <%= form_tag '/time_entries/report', method: :get do %>
+        <%= select_tag "customer_id", options_from_collection_for_select(Customer.all, "id", "company"), class: "form-control" %>
+        <%= submit_tag "Generate Report", class: "btn btn-default col-md-12" %>
+      <% end %>
+    </div>
   <% end %>
 
 </div>

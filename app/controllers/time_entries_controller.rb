@@ -21,10 +21,6 @@ class TimeEntriesController < ApplicationController
     @time_entries = @time_entries.order(:start_time)
 
     @total = @time_entries.sum(:duration) / 60.0
-    respond_to do |format|
-      format.html
-      format.csv { send_data @time_entries.to_csv }
-    end
   end
 
   def show
@@ -87,6 +83,11 @@ class TimeEntriesController < ApplicationController
     else
       redirect_to time_entries_path
     end
+  end
+
+  def export
+    @time_entries = TimeEntry.includes(:task).includes(:project).includes(:customer)
+    send_data @time_entries.to_csv
   end
 
   private

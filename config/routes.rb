@@ -4,7 +4,10 @@ Rails.application.routes.draw do
   root to: 'home#index'
 
   resources :time_entries do
-    get 'report', on: :collection
+    collection do
+      get 'report'
+      get 'export'
+    end
 
     member do
       get 'stop_time'
