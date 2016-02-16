@@ -4,12 +4,9 @@ class TasksController < ApplicationController
   respond_to :html
 
   def index
-    @tasks = Task.includes(:project, project: [:customer]).order('customers.company,projects.project_name')
+    @tasks = Task.includes(:project, :time_entries, project: [:customer])
+    @tasks = @tasks.sort_by{|x| x.last_touched}.reverse
     respond_with(@tasks)
-  end
-
-  def show
-    respond_with(@task)
   end
 
   def new
@@ -23,17 +20,17 @@ class TasksController < ApplicationController
   def create
     @task = Task.new(task_params)
     @task.save
-    respond_with(@task)
+    redirect_to tasks_path
   end
 
   def update
     @task.update(task_params)
-    respond_with(@task)
+    redirect_to tasks_path
   end
 
   def destroy
     @task.destroy
-    respond_with(@task)
+    redirect_to tasks_path
   end
 
   private
@@ -46,6 +43,6 @@ class TasksController < ApplicationController
     end
 
     def task_params
-      params.require(:task).permit(:task_name, :project_id)
+      params.require(:task).permit(:task_name, :project_id, :estimate)
     end
 end
