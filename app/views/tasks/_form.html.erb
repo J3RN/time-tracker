@@ -11,15 +11,21 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :project_id %><br>
-    <%= f.select :project_id, @projects %>
-  </div>
-  <div class="field">
-    <%= f.label :task_name %><br>
-    <%= f.text_field :task_name %>
+  <div class="row">
+    <div class="form-group col-md-4">
+      <%= f.label :project_id %><br>
+      <%= f.select :project_id, @projects, {}, class: "form-control" %>
+    </div>
+    <div class="form-group col-md-4">
+      <%= f.label :task_name %><br>
+      <%= f.text_field :task_name, class: "form-control"%>
+    </div>
+    <div class="form-group col-md-4">
+      <%= f.label :estimate %><br>
+      <%= f.number_field :estimate, class: "form-control" %>
+    </div>
   </div>
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit(nil, class: "btn btn-primary") %>
   </div>
 <% end %>
