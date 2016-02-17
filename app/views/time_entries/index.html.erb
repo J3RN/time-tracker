@@ -51,7 +51,7 @@
           <td><b><%= entry.task.task_name %></b><br />
             <%= entry.goal %>: <%= entry.result %></td>
           <td>
-            <%= hours_duration(entry.duration / 60.0) %>
+            <%= duration_display(entry.duration) %>
           </td>
           <% if @admin %>
             <td>
@@ -76,7 +76,7 @@
       <tr>
         <td><b>Total</b></td>
         <td></td>
-        <td colspan='3'><%= hours_duration(@total) %></td>
+        <td colspan='3'><%= long_duration_display(@total) %></td>
       </tr>
     </tbody>
   </table>
