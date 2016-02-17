@@ -7,20 +7,25 @@ class TimeEntriesController < ApplicationController
   respond_to :html
 
   def index
-    if current_user.admin?
-      @time_entries = TimeEntry.all
-      @customers = Customer.all
-    else
-      @time_entries = current_user.time_entries
-    end
+    @time_entries = TimeEntry.includes(:user, :task, :project, :customer)
 
+    @admin = current_user.admin?
+
+    # Admin requires customers
+    @customers = Customer.all if @admin
+
+    # Only my entries if not admin
+    @time_entries = @time_entries.where(user: current_user) unless @admin
+
+    # If there's a date, make sure all time entries are from that date
     @date = params[:date] ? Date.parse(params[:date]) : Date.today
     @time_entries = @time_entries.where("start_time >= ?", @date.to_time)
     @time_entries = @time_entries.where("start_time < ?", (@date + 1.day).to_time)
 
-    @time_entries = @time_entries.order(:start_time)
+    # Most recent first
+    @time_entries = @time_entries.order(start_time: :desc)
 
-    @total = @time_entries.sum(:duration) / 60.0
+    @total = @time_entries.sum(:duration)
   end
 
   def show

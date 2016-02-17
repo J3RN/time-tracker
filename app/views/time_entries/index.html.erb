@@ -22,7 +22,7 @@
     <%= button_to "New Entry", new_time_entry_path, method: :get, class: "btn btn-primary col-md-12" %><br>
   </div>
 
-  <% if current_user.admin? %>
+  <% if @admin %>
     <br>
 
     <div class="row">
@@ -32,7 +32,7 @@
 
     <div class="row">
       <%= form_tag '/time_entries/report', method: :get do %>
-        <%= select_tag "customer_id", options_from_collection_for_select(Customer.all, "id", "company"), class: "form-control" %>
+        <%= select_tag "customer_id", options_from_collection_for_select(@customers, "id", "company"), class: "form-control" %>
         <%= submit_tag "Generate Report", class: "btn btn-default col-md-12" %>
       <% end %>
     </div>
@@ -53,7 +53,7 @@
           <td>
             <%= hours_duration(entry.duration / 60.0) %>
           </td>
-          <% if current_user.admin? %>
+          <% if @admin %>
             <td>
               <%= entry.user.username %>
             </td>
