@@ -4,9 +4,11 @@ class TasksController < ApplicationController
   respond_to :html
 
   def index
-    @tasks = Task.includes(:project, :time_entries, project: [:customer])
-    @tasks = @tasks.sort_by{|x| x.last_touched}.reverse
-    respond_with(@tasks)
+    @tasks = Task.includes(:time_entries, project: [:customer])
+    @tasks = @tasks.order_last_touched
+
+    @active = @tasks.active
+    @archived = @tasks.archived
   end
 
   def new
@@ -43,6 +45,7 @@ class TasksController < ApplicationController
     end
 
     def task_params
-      params.require(:task).permit(:task_name, :project_id, :estimate)
+      params.require(:task).permit(:task_name, :project_id, :estimate,
+                                   :archived)
     end
 end

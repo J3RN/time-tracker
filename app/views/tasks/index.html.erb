@@ -1,32 +1,9 @@
 <p id="notice"><%= notice %></p>
 
 <h1>Tasks</h1>
+<%= render 'task_table', locals: { tasks: @active} %>
 
-<table class="table">
-  <thead>
-    <tr>
-      <th>Customer</th>
-      <th>Project</th>
-      <th>Task name</th>
-      <th>Time used</th>
-      <th colspan="2"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @tasks.each do |task| %>
-      <tr>
-        <td><%= task.project.customer.company %></td>
-        <td><%= task.project.project_name %></td>
-        <td><%= task.task_name %></td>
-        <td><%= task.percent_time_used.round %>%</td>
-        <td><%= link_to 'Edit', edit_task_path(task) %></td>
-        <td><%= link_to 'Delete', task, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<br>
+<h2>Archived</h2>
+<%= render 'task_table', locals: { tasks: @archived } %>
 
 <%= link_to 'New Task', new_task_path %>

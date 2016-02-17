@@ -5,6 +5,12 @@ class Task < ActiveRecord::Base
 
   validates_presence_of :project
 
+  scope :order_last_touched, -> do
+    includes(:time_entries).order('time_entries.start_time DESC')
+  end
+  scope :active, -> { where(archived: false) }
+  scope :archived, -> { where(archived: true) }
+
   def time_spent
     self.time_entries.sum(:duration)
   end
@@ -15,9 +21,5 @@ class Task < ActiveRecord::Base
     end
 
     (self.time_spent.to_f / self.estimate) * 100
-  end
-
-  def last_touched
-    self.time_entries.order(:start_time).try(:last).try(:start_time) || DateTime.new
   end
 end
