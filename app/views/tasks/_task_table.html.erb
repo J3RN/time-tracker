@@ -10,7 +10,7 @@
   </thead>
 
   <tbody>
-    <% @active.each do |task| %>
+    <% tasks.each do |task| %>
       <tr>
         <td><%= task.project.customer.company %></td>
         <td><%= task.project.project_name %></td>

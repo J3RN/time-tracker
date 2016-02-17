@@ -1,9 +1,7 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Tasks</h1>
-<%= render 'task_table', locals: { tasks: @active} %>
+<h1>Tasks<%= link_to '+', new_task_path %></h1>
+<%= render 'task_table', tasks: @active %>
 
 <h2>Archived</h2>
-<%= render 'task_table', locals: { tasks: @archived } %>
-
-<%= link_to 'New Task', new_task_path %>
+<%= render 'task_table', tasks: @archived  %>
