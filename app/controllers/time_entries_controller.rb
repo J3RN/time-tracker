@@ -60,8 +60,7 @@ class TimeEntriesController < ApplicationController
   end
 
   def stop_time
-    duration = ((DateTime.now.to_i - @time_entry.start_time.to_i)/60.0).round
-    @time_entry.duration += duration
+    @time_entry.duration += @time_entry.calculate_duration
     @time_entry.running = false
     @time_entry.save
 

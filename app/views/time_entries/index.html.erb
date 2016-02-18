@@ -51,7 +51,7 @@
           <td><b><%= entry.task.task_name %></b><br />
             <%= entry.goal %>: <%= entry.result %></td>
           <td>
-            <%= duration_display(entry.duration) %>
+            <%= duration_display(entry.running ? entry.calculate_duration : entry.duration) %>
           </td>
           <% if @admin %>
             <td>

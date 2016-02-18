@@ -6,6 +6,10 @@ class TimeEntry < ActiveRecord::Base
   has_one :project, through: :task
   has_one :customer, through: :project
 
+  def calculate_duration
+    ((DateTime.now.to_i - self.start_time.to_i) / 60.0).round
+  end
+
   def self.to_csv
     CSV.generate do |csv|
       csv << column_names
