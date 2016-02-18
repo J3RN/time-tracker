@@ -20,16 +20,16 @@
     <%= f.check_box :running %>
   </div>
   <div class="form-group col-md-4">
-    <%= f.label :duration, "Duration (only if historical, in minutes)" %><br>
-    <%= f.number_field :duration, class: "form-control" %>
-  </div>
-  <div class="form-group col-md-4">
     <%= f.label :goal %><br>
     <%= f.text_field :goal, class: "form-control" %>
   </div>
   <div class="form-group col-md-4">
     <%= f.label :result %><br>
     <%= f.text_field :result, class: "form-control" %>
+  </div>
+  <div class="form-group col-md-4">
+    <%= f.label :duration, "Duration (minutes)" %><br>
+    <%= f.number_field :duration, class: "form-control" %>
   </div>
   <div class="form-group col-md-4">
     <%= f.label :note %><br>
