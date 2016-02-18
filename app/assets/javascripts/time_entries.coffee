@@ -6,3 +6,5 @@ $ ->
   $('input[name="time_entry[running]"]').change ->
     $('#time_entry_duration').val(null)
     $('#time_entry_duration').prop('disabled', $(this).is(':checked'))
+    $('#time_entry_result').val(null)
+    $('#time_entry_result').prop('disabled', $(this).is(':checked'))
