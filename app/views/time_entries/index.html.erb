@@ -46,10 +46,11 @@
       <% @time_entries.each do |entry| %>
         <tr>
           <td><%= entry.start_time.strftime("%H:%M") %></td>
-          <td><b><%= entry.customer.company %></b><br />
-          <td><b><%= entry.project.project_name %></b><br />
-          <td><b><%= entry.task.task_name %></b><br />
-            <%= entry.goal %>: <%= entry.result %></td>
+          <td><b><%= entry.customer.company %></b></td>
+          <td><b><%= entry.project.project_name %></b></td>
+          <td><b><%= entry.task.task_name %></b></td>
+          <td><%= entry.goal %></td>
+          <td><%= entry.result %></td>
           <td>
             <%= duration_display(entry.running ? entry.calculate_duration : entry.duration) %>
           </td>
@@ -74,9 +75,9 @@
         </tr>
       <% end %>
       <tr>
-        <td><b>Total</b></td>
+        <td colspan='5'><b>Total</b></td>
         <td></td>
-        <td colspan='3'><%= long_duration_display(@total) %></td>
+        <td colspan='5'><%= long_duration_display(@total) %></td>
       </tr>
     </tbody>
   </table>
