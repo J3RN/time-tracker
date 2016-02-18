@@ -5,10 +5,9 @@ class TasksController < ApplicationController
 
   def index
     @tasks = Task.includes(:time_entries, project: [:customer])
-    @tasks = @tasks.order_last_touched
 
-    @active = @tasks.active
-    @archived = @tasks.archived
+    @active = @tasks.active.order(priority: :desc)
+    @archived = @tasks.archived.order_last_touched
   end
 
   def new
@@ -46,6 +45,6 @@ class TasksController < ApplicationController
 
     def task_params
       params.require(:task).permit(:task_name, :project_id, :estimate,
-                                   :archived)
+                                   :archived, :priority)
     end
 end

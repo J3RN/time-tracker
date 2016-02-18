@@ -17,6 +17,10 @@
       <%= f.select :project_id, @projects, {}, class: "form-control" %>
     </div>
     <div class="form-group col-md-4">
+      <%= f.label :priority, "Priority (1-5)" %><br>
+      <%= f.select :priority, 1..5, {}, class: "form-control"  %>
+    </div>
+    <div class="form-group col-md-4">
       <%= f.label :task_name %><br>
       <%= f.text_field :task_name, class: "form-control"%>
     </div>
