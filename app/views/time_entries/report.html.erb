@@ -2,5 +2,5 @@
 
 <% @projects.each do |project| %>
   <h3><%= project.project_name %></h3>
-  <p>Hours: <%= hours_duration(project.time_entries.sum(:duration)/60.0) %></p>
+  <p>Hours: <%= long_duration_display(project.time_entries.sum(:duration)) %></p>
 <% end %>
