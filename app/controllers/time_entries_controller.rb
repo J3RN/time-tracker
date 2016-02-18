@@ -98,7 +98,7 @@ class TimeEntriesController < ApplicationController
   private
     def set_tasks
       @tasks = Task.includes(:project, :customer, :time_entries)
-      @tasks = @tasks.sort_by { |task| task.time_entries.try(:last).try(:start_time) || DateTime.new }.reverse
+      @tasks = @tasks.active.order_last_touched
       @tasks = @tasks.map { |x| ["#{x.customer.company} - #{x.project.project_name} - #{x.task_name}", x.id] }
     end
 
