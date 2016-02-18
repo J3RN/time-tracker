@@ -33,7 +33,7 @@ class TimeEntriesController < ApplicationController
   end
 
   def new
-    @time_entry = TimeEntry.new
+    @time_entry = TimeEntry.new(running: true)
     respond_with(@time_entry)
   end
 
