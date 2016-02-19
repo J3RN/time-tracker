@@ -18,6 +18,9 @@ gem 'devise'
 gem 'bootstrap-sass'
 gem 'autoprefixer-rails'
 
+# Use passenger for server
+gem 'passenger'
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
@@ -30,5 +33,8 @@ group :development, :test do
 
   # Awesome print
   gem 'awesome_print'
+
+  gem 'guard'
+  gem 'guard-process'
 end
 
