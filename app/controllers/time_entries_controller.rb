@@ -94,7 +94,7 @@ class TimeEntriesController < ApplicationController
     def set_tasks
       @tasks = Task.includes(:time_entries, :tags)
       @tasks = @tasks.active.order_last_touched
-      @tasks = @tasks.map(&:explicit_name)
+      @tasks = @tasks.map { |task| [ task.explicit_name, task.id ]}
     end
 
     def set_time_entry
@@ -102,6 +102,8 @@ class TimeEntriesController < ApplicationController
     end
 
     def time_entry_params
-      params.require(:time_entry).permit(:user_id, :task_id, :duration, :start_time, :note, :running, :goal, :result)
+      params.require(:time_entry).permit(:user_id, :task_id, :duration,
+                                         :start_time, :note, :running, :goal,
+                                         :result)
     end
 end
