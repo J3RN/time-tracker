@@ -3,12 +3,14 @@
 <table class="table">
   <thead>
     <th>Name</th>
+    <th>Task count</th>
     <th colspan='2'></td>
   </thead>
   <tbody>
     <% @tags.each do |tag| %>
       <tr>
         <td><%= tag.name %></td>
+        <td><%= tag.tasks.count %></td>
         <td><%= link_to "Edit", edit_tag_path(tag) %></td>
         <td><%= link_to "Delete", tag, method: 'delete', data: {confirm: "Are you sure?"} %>
       </tr>
