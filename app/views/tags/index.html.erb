@@ -1,0 +1,17 @@
+<h1>Tags <%= link_to "+", new_tag_path %></h1>
+
+<table class="table">
+  <thead>
+    <th>Name</th>
+    <th colspan='2'></td>
+  </thead>
+  <tbody>
+    <% @tags.each do |tag| %>
+      <tr>
+        <td><%= tag.name %></td>
+        <td><%= link_to "Edit", edit_tag_path(tag) %></td>
+        <td><%= link_to "Delete", tag, method: 'delete', data: {confirm: "Are you sure?"} %>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
