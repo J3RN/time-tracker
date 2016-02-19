@@ -18,7 +18,7 @@ class TimeEntriesControllerTest < ActionController::TestCase
 
   test "should create time_entry" do
     assert_difference('TimeEntry.count') do
-      post :create, time_entry: { duration: @time_entry.duration, note: @time_entry.note, project_id: @time_entry.project_id, start_time: @time_entry.start_time, task_id: @time_entry.task_id, user_id: @time_entry.user_id }
+      post :create, time_entry: { duration: @time_entry.duration, note: @time_entry.note, start_time: @time_entry.start_time, task_id: @time_entry.task_id, user_id: @time_entry.user_id }
     end
 
     assert_redirected_to time_entry_path(assigns(:time_entry))
@@ -35,7 +35,7 @@ class TimeEntriesControllerTest < ActionController::TestCase
   end
 
   test "should update time_entry" do
-    patch :update, id: @time_entry, time_entry: { duration: @time_entry.duration, note: @time_entry.note, project_id: @time_entry.project_id, start_time: @time_entry.start_time, task_id: @time_entry.task_id, user_id: @time_entry.user_id }
+    patch :update, id: @time_entry, time_entry: { duration: @time_entry.duration, note: @time_entry.note, start_time: @time_entry.start_time, task_id: @time_entry.task_id, user_id: @time_entry.user_id }
     assert_redirected_to time_entry_path(assigns(:time_entry))
   end
 

@@ -7,12 +7,12 @@ class TimeEntriesController < ApplicationController
   respond_to :html
 
   def index
-    @time_entries = TimeEntry.includes(:user, :task, :project, :customer)
+    @time_entries = TimeEntry.includes(:user, task: [:tags])
 
     @admin = current_user.admin?
 
-    # Admin requires customers
-    @customers = Customer.all if @admin
+    # Admin requires tags for reporting
+    @tags = Tag.all
 
     # Only my entries if not admin
     @time_entries = @time_entries.where(user: current_user) unless @admin
@@ -79,26 +79,22 @@ class TimeEntriesController < ApplicationController
   end
 
   def report
-    customer_id = params[:customer_id]
+    tag_time_entries = Tag.includes(tasks: [:time_entries])
+    @tag = tag_time_entries.find_by('tags.id = ?', params[:tag_id])
 
-    if customer_id
-      @time_entries = TimeEntry.where(customer_id: customer_id)
-      @projects = Customer.find(customer_id).projects
-    else
-      redirect_to time_entries_path, alert: "No customer ID provided"
-    end
+    redirect_to time_entries_path, alert: "No tag provided" unless @tag
   end
 
   def export
-    @time_entries = TimeEntry.includes(:task).includes(:project).includes(:customer)
+    @time_entries = TimeEntry.includes(task: [:tags])
     send_data @time_entries.to_csv
   end
 
   private
     def set_tasks
-      @tasks = Task.includes(:project, :customer, :time_entries)
+      @tasks = Task.includes(:time_entries, :tags)
       @tasks = @tasks.active.order_last_touched
-      @tasks = @tasks.map { |x| ["#{x.customer.company} - #{x.project.project_name} - #{x.task_name}", x.id] }
+      @tasks = @tasks.map(&:explicit_name)
     end
 
     def set_time_entry

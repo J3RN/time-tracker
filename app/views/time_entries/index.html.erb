@@ -32,7 +32,7 @@
 
     <div class="row">
       <%= form_tag '/time_entries/report', method: :get do %>
-        <%= select_tag "customer_id", options_from_collection_for_select(@customers, "id", "company"), class: "form-control" %>
+        <%= select_tag "tag_id", options_from_collection_for_select(@tags, "id", "name"), class: "form-control" %>
         <%= submit_tag "Generate Report", class: "btn btn-default col-md-12" %>
       <% end %>
     </div>
@@ -46,9 +46,7 @@
       <% @time_entries.each do |entry| %>
         <tr>
           <td><%= entry.start_time.strftime("%H:%M") %></td>
-          <td><b><%= entry.customer.company %></b></td>
-          <td><b><%= entry.project.project_name %></b></td>
-          <td><b><%= entry.task.task_name %></b></td>
+          <td><b><%= entry.task.explicit_name %></b></td>
           <td><%= entry.goal %></td>
           <td><%= entry.result %></td>
           <td>
@@ -75,8 +73,7 @@
         </tr>
       <% end %>
       <tr>
-        <td colspan='5'><b>Total</b></td>
-        <td></td>
+        <td colspan='4'><b>Total</b></td>
         <td colspan='5'><%= long_duration_display(@total) %></td>
       </tr>
     </tbody>
