@@ -1,6 +1,8 @@
 class Task < ActiveRecord::Base
-  belongs_to :project
+  has_many :taggings
+  has_many :tags, through: :taggings
   has_many :time_entries
+  belongs_to :project
   has_one :customer, through: :project
 
   validates_presence_of :project
