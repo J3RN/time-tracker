@@ -3,8 +3,7 @@ require 'csv'
 class TimeEntry < ActiveRecord::Base
   belongs_to :user
   belongs_to :task
-  has_one :project, through: :task
-  has_one :customer, through: :project
+  has_many :tags, through: :task
 
   def calculate_duration
     ((DateTime.now.to_i - self.start_time.to_i) / 60.0).round

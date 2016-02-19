@@ -11,35 +11,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160219150401) do
+ActiveRecord::Schema.define(version: 20160219162438) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
-
-  create_table "customers", force: :cascade do |t|
-    t.text     "company"
-    t.text     "address1"
-    t.text     "address2"
-    t.text     "address3"
-    t.text     "city"
-    t.text     "state"
-    t.text     "zip"
-    t.text     "phone1"
-    t.text     "phone2"
-    t.text     "fax1"
-    t.text     "fax2"
-    t.text     "email"
-    t.text     "website"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "projects", force: :cascade do |t|
-    t.text     "project_name"
-    t.integer  "customer_id"
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
-  end
 
   create_table "taggings", force: :cascade do |t|
     t.integer  "tag_id"
@@ -61,7 +36,6 @@ ActiveRecord::Schema.define(version: 20160219150401) do
     t.text     "task_name"
     t.datetime "created_at",                 null: false
     t.datetime "updated_at",                 null: false
-    t.integer  "project_id"
     t.integer  "estimate"
     t.boolean  "archived",   default: false, null: false
     t.integer  "priority",   default: 1,     null: false

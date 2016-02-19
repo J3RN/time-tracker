@@ -2,8 +2,6 @@
   <thead>
     <tr>
       <th></th>
-      <th>Customer</th>
-      <th>Project</th>
       <th>Task name</th>
       <th>Time used</th>
       <th colspan="3"></th>
@@ -14,9 +12,7 @@
     <% tasks.each do |task| %>
       <tr>
         <td class="swatch priority<%= task.priority %>"></td>
-        <td><%= task.project.customer.company %></td>
-        <td><%= task.project.project_name %></td>
-        <td><%= task.customer.company %> - <%= task.task_name %></td>
+        <td><%= task.task_name %> - <%= task.tags.pluck(:name).join(", ") %></td>
         <td><%= task.percent_time_used.round %>%</td>
         <td>
           <%= form_for task do |f| %>

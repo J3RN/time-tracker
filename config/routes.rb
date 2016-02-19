@@ -3,7 +3,7 @@ Rails.application.routes.draw do
 
   root to: 'home#index'
 
-  resources :time_entries do
+  resources :time_entries, except: :show do
     collection do
       get 'report'
       get 'export'
@@ -16,10 +16,5 @@ Rails.application.routes.draw do
   end
 
   resources :tasks, except: :show
-
-  resources :projects
-
-  resources :customers do
-    post 'import', on: :collection
-  end
+  resources :tags, except: :show
 end

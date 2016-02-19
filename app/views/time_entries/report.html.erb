@@ -1,6 +1,26 @@
-<h1>Time Report</h1>
+<h1>Time Report for <%= @tag.name %></h1>
 
-<% @projects.each do |project| %>
-  <h3><%= project.project_name %></h3>
-  <p>Hours: <%= long_duration_display(project.time_entries.sum(:duration)) %></p>
+<% @tag.tasks.each do |task| %>
+  <h3><%= task.task_name %></h3>
+  <table class="table">
+    <thead>
+      <th>Goal</th>
+      <th>Result</th>
+      <th>Time Spent</th>
+    </thead>
+    <tbody>
+      <% task.time_entries.each do |time_entry| %>
+        <tr>
+          <td><%= time_entry.goal %></td>
+          <td><%= time_entry.result %></td>
+          <td><%= duration_display(time_entry.duration) %></td>
+        </tr>
+      <% end %>
+      <tr>
+        <td></td>
+        <td></td>
+        <td><%= long_duration_display(task.time_spent) %></td>
+      </tr>
+    </tbody>
+  </table>
 <% end %>

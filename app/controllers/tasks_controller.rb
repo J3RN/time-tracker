@@ -1,10 +1,10 @@
 class TasksController < ApplicationController
   before_action :set_task, only: [:show, :edit, :update, :destroy]
-  before_action :set_projects, only: [:edit, :new]
+  before_action :set_tags, only: [:new, :edit]
   respond_to :html
 
   def index
-    @tasks = Task.includes(:time_entries, project: [:customer])
+    @tasks = Task.includes(:tags)
 
     @active = @tasks.active.order(priority: :desc)
     @archived = @tasks.archived.order_last_touched
@@ -39,12 +39,12 @@ class TasksController < ApplicationController
       @task = Task.find(params[:id])
     end
 
-    def set_projects
-      @projects = Project.includes(:customer).map { |project| ["#{project.customer.company} - #{project.project_name}", project.id]}
+    def set_tags
+      @tags = Tag.all
     end
 
     def task_params
-      params.require(:task).permit(:task_name, :project_id, :estimate,
-                                   :archived, :priority)
+      params.require(:task).permit(:task_name, :estimate, :archived, :priority,
+                                   tag_ids: [])
     end
 end
