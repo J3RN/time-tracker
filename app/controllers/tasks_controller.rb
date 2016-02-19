@@ -1,5 +1,5 @@
 class TasksController < ApplicationController
-  before_action :set_task, only: [:show, :edit, :update, :destroy]
+  before_action :set_task, only: [:edit, :update, :destroy]
   before_action :set_tags, only: [:new, :edit]
   respond_to :html
 
@@ -20,8 +20,12 @@ class TasksController < ApplicationController
 
   def create
     @task = Task.new(task_params)
-    @task.save
-    redirect_to tasks_path
+
+    if @task.save
+      redirect_to tasks_path
+    else
+      render 'new'
+    end
   end
 
   def update
