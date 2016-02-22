@@ -42,5 +42,7 @@ group :development, :test do
   # Capistrano for deployment
   gem 'capistrano', '~> 3.1'
   gem 'capistrano-rails', '~> 1.1'
+  gem 'capistrano-rvm'
+  gem 'capistrano-passenger'
 end
 
