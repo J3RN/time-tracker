@@ -40,6 +40,7 @@ group :development, :test do
   gem 'guard-process'
 
   # Capistrano for deployment
-  gem 'capistrano', '~> 3.4'
+  gem 'capistrano', '~> 3.1'
+  gem 'capistrano-rails', '~> 1.1'
 end
 
