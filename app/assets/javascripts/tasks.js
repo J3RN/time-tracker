@@ -3,5 +3,7 @@
 // You can use CoffeeScript in this file: http://coffeescript.org/
 
 $(() => {
-    $("#task_tag_ids").select2();
-})
+    $(document).on("page:change", () => {
+        $("#task_tag_ids").select2();
+    });
+});
