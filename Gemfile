@@ -24,9 +24,6 @@ gem 'passenger'
 # Use Dotenv for env vars
 gem 'dotenv-rails', group: :production
 
-# For JS
-gem 'therubyracer'
-
 group :development do
   # Access an IRB console on exception pages or by using <%= console %> in views
   gem 'web-console', '~> 2.0'
