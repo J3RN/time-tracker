@@ -7,7 +7,7 @@ class TimeEntriesController < ApplicationController
   respond_to :html
 
   def index
-    @time_entries = TimeEntry.includes(:user, task: [:tags])
+    @time_entries = TimeEntry.all
 
     @admin = current_user.admin?
 
@@ -22,10 +22,14 @@ class TimeEntriesController < ApplicationController
     @time_entries = @time_entries.where("start_time >= ?", @date.to_time)
     @time_entries = @time_entries.where("start_time < ?", (@date + 1.day).to_time)
 
+    # Total time for today
+    @total = @time_entries.sum(:duration)
+
+    # Include tasks and tags
+    @time_entries.includes(task: :tags)
+
     # Most recent first
     @time_entries = @time_entries.order(start_time: :desc)
-
-    @total = @time_entries.sum(:duration)
   end
 
   def show
