@@ -81,6 +81,7 @@ GEM
       responders
       thread_safe (~> 0.1)
       warden (~> 1.2.3)
+    dotenv (2.1.0)
     erubis (2.7.0)
     execjs (2.6.0)
     ffi (1.9.10)
@@ -231,6 +232,7 @@ DEPENDENCIES
   capistrano-rvm
   coffee-rails (~> 4.1.0)
   devise
+  dotenv
   guard
   guard-process
   jbuilder (~> 2.0)
