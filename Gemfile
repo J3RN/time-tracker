@@ -22,7 +22,7 @@ gem 'autoprefixer-rails'
 gem 'passenger'
 
 # Use Dotenv for env vars
-gem 'dotenv', group: :production
+gem 'dotenv-rails', group: :production
 
 group :development do
   # Access an IRB console on exception pages or by using <%= console %> in views
