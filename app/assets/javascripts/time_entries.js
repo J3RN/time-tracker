@@ -2,8 +2,8 @@
 // All this logic will automatically be available in application.js.
 // You can use CoffeeScript in this file: http://coffeescript.org/
 
-$(() => {
-    $('input[name="time_entry[running]"]').change((event) => {
+$(function() {
+    $('input[name="time_entry[running]"]').change(function(event) {
         const checked = $(event.currentTarget).is(':checked');
 
         $('#time_entry_duration').val(null);
@@ -11,5 +11,5 @@ $(() => {
 
         $('#time_entry_result').val(null);
         $('#time_entry_result').prop('disabled', checked);
-    })
-})
+    });
+});

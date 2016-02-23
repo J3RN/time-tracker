@@ -2,8 +2,8 @@
 // All this logic will automatically be available in application.js.
 // You can use CoffeeScript in this file: http://coffeescript.org/
 
-$(() => {
-    $(document).on("page:change", () => {
+$(function() {
+    $(document).on("page:change", function() {
         $("#task_tag_ids").select2();
     });
 });
