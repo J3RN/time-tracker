@@ -22,6 +22,9 @@ set :repo_url, 'git@github.com:J3RN/timesheet.git'
 # Default value for :pty is false
 # set :pty, true
 
+# Set RVM as system
+set :rvm_type, :system
+
 # Use Dotenv for all secrets
 set :linked_files, fetch(:linked_files, []).push('.env')
 
