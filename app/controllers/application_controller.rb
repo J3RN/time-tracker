@@ -16,4 +16,10 @@ class ApplicationController < ActionController::Base
     devise_parameter_sanitizer.for(:sign_up) << [ :username, :display_name ]
     devise_parameter_sanitizer.for(:account_update) << [ :username, :display_name ]
   end
+
+  def ensure_ownership(item)
+    unless item.user == current_user || current_user.admin?
+      redirect_to action: 'index', alert: "That's not yours!"
+    end
+  end
 end

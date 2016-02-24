@@ -1,8 +1,11 @@
 class TagsController < ApplicationController
   before_action :set_tag, only: [:edit, :update, :destroy]
+  before_action ->{ ensure_ownership(@tag) }, only: [:edit, :update, :destroy]
 
   def index
     @tags = Tag.includes(:tasks)
+
+    @tags = @tags.where(user: current_user) unless current_user.admin?
   end
 
   def new

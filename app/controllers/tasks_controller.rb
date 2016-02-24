@@ -1,10 +1,12 @@
 class TasksController < ApplicationController
   before_action :set_task, only: [:edit, :update, :destroy]
   before_action :set_tags, only: [:new, :edit]
-  respond_to :html
+  before_action ->{ ensure_ownership(@tag) }, only: [:edit, :update, :destroy]
 
   def index
     @tasks = Task.includes(:tags)
+
+    @tasks = @tasks.where(user: current_user) unless current_user.admin?
 
     @active = @tasks.active.order(priority: :desc)
     @archived = @tasks.archived.order_last_touched
@@ -45,6 +47,7 @@ class TasksController < ApplicationController
 
     def set_tags
       @tags = Tag.all
+      @tags = @tags.where(user: current_user) unless current_user.admin?
     end
 
     def task_params

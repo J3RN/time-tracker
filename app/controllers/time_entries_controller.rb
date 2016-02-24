@@ -11,8 +11,10 @@ class TimeEntriesController < ApplicationController
 
     @admin = current_user.admin?
 
-    # Admin requires tags for reporting
+    # Tags for reporting
     @tags = Tag.all
+    # Only mine if not admin
+    @tags = @tags.where(user: current_user) unless @admin
 
     # Only my entries if not admin
     @time_entries = @time_entries.where(user: current_user) unless @admin
@@ -91,6 +93,7 @@ class TimeEntriesController < ApplicationController
 
   def export
     @time_entries = TimeEntry.includes(task: [:tags])
+    @time_entries = @time_entries.where(user: current_user) if !current_user.admin?
     send_data @time_entries.to_csv
   end
 
