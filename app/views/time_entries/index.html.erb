@@ -51,17 +51,17 @@
               <%= entry.user.username %>
             </td>
           <% end %>
-          <td>
+          <td class="col-md-1">
             <% if entry.running? %>
               <%= button_to 'Stop', stop_time_time_entry_path(entry), method: :get, class: "btn btn-primary" %>
             <% else %>
               <%= button_to 'Resume', start_time_time_entry_path(entry), method: :get, class: "btn btn-primary" %>
             <% end %>
           </td>
-          <td>
+          <td class="col-md-1">
             <%= button_to 'Edit', edit_time_entry_path(entry), method: :get, class: "btn btn-default" %>
           </td>
-          <td>
+          <td class="col-md-1">
             <%= button_to 'Delete', entry, method: :delete, class: "btn btn-danger" %>
           </td>
         </tr>
