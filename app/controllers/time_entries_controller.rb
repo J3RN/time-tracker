@@ -19,8 +19,7 @@ class TimeEntriesController < ApplicationController
 
     # If there's a date, make sure all time entries are from that date
     @date = params[:date] ? Date.parse(params[:date]) : Date.today
-    @time_entries = @time_entries.where("start_time >= ?", @date.to_time)
-    @time_entries = @time_entries.where("start_time < ?", (@date + 1.day).to_time)
+    @time_entries = @time_entries.filter_by_date(@date)
 
     # Total time for today
     @total = @time_entries.sum(:duration)

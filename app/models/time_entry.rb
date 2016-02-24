@@ -20,4 +20,9 @@ class TimeEntry < ActiveRecord::Base
       end
     end
   end
+
+  def self.filter_by_date(date)
+    entries = self.where("start_time >= ?", date.to_time)
+    entries.where("start_time < ?", (date + 1.day).to_time)
+  end
 end
