@@ -1,3 +1,9 @@
+class Customer < ActiveRecord::Base
+end
+
+class Project < ActiveRecord::Base
+end
+
 class UpdateCustomersAndProjectsToTags < ActiveRecord::Migration
   def up
     # Convert all Customers and Projects to Tags
