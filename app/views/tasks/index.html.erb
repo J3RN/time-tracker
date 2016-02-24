@@ -1,5 +1,7 @@
 <h1>Tasks<%= link_to '+', new_task_path %></h1>
 <%= render 'task_table', tasks: @active %>
 
-<h2>Archived</h2>
-<%= render 'task_table', tasks: @archived  %>
+<% if @archived.any? %>
+  <h2>Archived</h2>
+  <%= render 'task_table', tasks: @archived  %>
+<% end %>
