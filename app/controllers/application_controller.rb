@@ -15,6 +15,10 @@ class ApplicationController < ActionController::Base
   def configure_permitted_parameters
     devise_parameter_sanitizer.for(:sign_up) << [ :username, :display_name ]
     devise_parameter_sanitizer.for(:account_update) << [ :username, :display_name ]
+
+    if user_signed_in? && current_user.admin?
+      devise_parameter_sanitizer.for(:account_update) << [ :admin ]
+    end
   end
 
   def ensure_ownership(item)
