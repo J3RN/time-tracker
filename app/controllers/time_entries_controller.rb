@@ -12,9 +12,7 @@ class TimeEntriesController < ApplicationController
     @admin = current_user.admin?
 
     # Tags for reporting
-    @tags = Tag.all
-    # Only mine if not admin
-    @tags = @tags.where(user: current_user) unless @admin
+    @tags = current_user.admin ? Tag.all : Tag.where(user: current_user)
 
     # Only my entries if not admin
     @time_entries = @time_entries.where(user: current_user) unless @admin
