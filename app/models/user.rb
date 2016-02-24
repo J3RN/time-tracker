@@ -5,4 +5,6 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
 
   has_many :time_entries
+  has_many :tags
+  has_many :tasks
 end
