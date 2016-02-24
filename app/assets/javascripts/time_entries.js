@@ -3,13 +3,21 @@
 // You can use CoffeeScript in this file: http://coffeescript.org/
 
 $(function() {
-    $('input[name="time_entry[running]"]').change(function(event) {
-        const checked = $(event.currentTarget).is(':checked');
+    var hideOrShowFields = function() {
+        const checked = $("#time_entry_running").is(':checked');
+        console.log(checked);
+        if (checked) {
+            $('#time_entry_duration').val(null);
+            $('#time_entry_duration').parent().hide();
 
-        $('#time_entry_duration').val(null);
-        $('#time_entry_duration').prop('disabled', checked);
+            $('#time_entry_result').val(null);
+            $('#time_entry_result').parent().hide();
+        } else {
+            $('#time_entry_duration').parent().show();
+            $('#time_entry_result').parent().show();
+        }
+    }
 
-        $('#time_entry_result').val(null);
-        $('#time_entry_result').prop('disabled', checked);
-    });
+    $('input[name="time_entry[running]"]').change(hideOrShowFields);
+    $(document).on("page:change", hideOrShowFields)
 });

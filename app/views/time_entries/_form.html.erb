@@ -25,11 +25,11 @@
   </div>
   <div class="form-group col-md-4">
     <%= f.label :result %><br>
-    <%= f.text_field :result, disabled: @time_entry.running, class: "form-control" %>
+    <%= f.text_field :result, class: "form-control" %>
   </div>
   <div class="form-group col-md-4">
     <%= f.label :duration, "Duration (minutes)" %><br>
-    <%= f.number_field :duration, disabled: @time_entry.running, class: "form-control" %>
+    <%= f.number_field :duration, class: "form-control" %>
   </div>
   <div class="form-group col-md-4">
     <%= f.label :note %><br>
