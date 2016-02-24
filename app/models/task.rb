@@ -4,6 +4,8 @@ class Task < ActiveRecord::Base
   has_many :time_entries
   belongs_to :user
 
+  validates_presence_of :user_id
+
   scope :order_last_touched, -> do
     includes(:time_entries).order('time_entries.start_time DESC')
   end

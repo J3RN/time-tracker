@@ -4,6 +4,9 @@
   <thead>
     <th>Name</th>
     <th>Task count</th>
+    <% if current_user.admin? %>
+      <th>User</th>
+    <% end %>
     <th colspan='2'></td>
   </thead>
   <tbody>
@@ -11,8 +14,11 @@
       <tr>
         <td><%= tag.name %></td>
         <td><%= tag.tasks.count %></td>
-        <td><%= link_to "Edit", edit_tag_path(tag) %></td>
-        <td><%= link_to "Delete", tag, method: 'delete', data: {confirm: "Are you sure?"} %>
+        <% if current_user.admin? %>
+          <td><%= tag.user.username %>
+        <% end %>
+        <td><%= link_to "Edit", edit_tag_path(tag), class: 'btn btn-default' %></td>
+        <td><%= link_to "Delete", tag, method: 'delete', data: {confirm: "Are you sure?"}, class: 'btn btn-danger' %>
       </tr>
     <% end %>
   </tbody>

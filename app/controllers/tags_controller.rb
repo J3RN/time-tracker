@@ -42,6 +42,8 @@ class TagsController < ApplicationController
     end
 
     def tag_params
-      params.require(:tag).permit(:name)
+      new_params = params.require(:tag).permit(:name, :user_id)
+      new_params[:user_id] = current_user.id unless current_user.admin?
+      new_params
     end
 end

@@ -1,8 +1,24 @@
 <%= form_for @tag do |f| %>
-  <div class="form-group">
-    <%= f.label :name %>
-    <%= f.text_field :name %>
+  <% if @tag.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@tag.errors.count, "error") %> prohibited this tag from being saved:</h2>
+
+      <ul>
+      <% @tag.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="row">
+    <div class="form-group col-md-4">
+      <%= f.label :name %>
+      <%= f.text_field :name, class: "form-control" %>
+    </div>
   </div>
 
-  <%= f.submit nil, class: "btn btn-primary" %>
+  <div class="actions">
+    <%= f.submit nil, class: "btn btn-primary" %>
+  </div>
 <% end %>

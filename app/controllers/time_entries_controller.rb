@@ -100,6 +100,7 @@ class TimeEntriesController < ApplicationController
   private
     def set_tasks
       @tasks = Task.includes(:time_entries, :tags)
+      @tasks = @tasks.where(user: current_user) unless current_user.admin?
       @tasks = @tasks.active.order_last_touched
       @tasks = @tasks.map { |task| [ task.explicit_name, task.id ]}
     end
