@@ -34,6 +34,15 @@
   </nav>
 
   <div class="container">
+    <div class="notices">
+      <% unless flash["notice"].nil? %>
+        <p class="notice"><%= flash["notice"] %></p>
+      <% end %>
+
+      <% unless flash["alert"].nil? %>
+        <p class="alert"><%= flash["alert"] %></p>
+      <% end %>
+    </div>
     <%= yield %>
   </div>
 

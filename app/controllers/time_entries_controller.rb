@@ -88,7 +88,7 @@ class TimeEntriesController < ApplicationController
     tag_time_entries = Tag.includes(tasks: [:time_entries])
     @tag = tag_time_entries.find_by('tags.id = ?', params[:tag_id])
 
-    redirect_to time_entries_path, alert: "No tag provided" unless @tag
+    redirect_to time_entries_path, alert: "No tag provided!" unless @tag
   end
 
   def export
