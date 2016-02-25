@@ -32,3 +32,7 @@ config/initializers/secret_token.rb
 bower.json
 
 *.swp
+
+# Pandoc items to convert Markdown to HTML
+Makefile
+readme.html
