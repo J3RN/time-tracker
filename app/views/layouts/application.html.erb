@@ -15,11 +15,13 @@
         <%= link_to 'Time Tracker', '/', class: "navbar-brand" %>
       </div>
 
-      <ul class="nav navbar-nav">
-        <li><%= link_to "Tags", tags_path %></li>
-        <li><%= link_to "Tasks", tasks_path %></li>
-        <li><%= link_to "Time Entries", time_entries_path %></li>
-      </ul>
+      <% if user_signed_in? %>
+        <ul class="nav navbar-nav">
+          <li><%= link_to "Tags", tags_path %></li>
+          <li><%= link_to "Tasks", tasks_path %></li>
+          <li><%= link_to "Time Entries", time_entries_path %></li>
+        </ul>
+      <% end %>
 
       <ul class="nav navbar-nav navbar-right">
         <% if user_signed_in? %>

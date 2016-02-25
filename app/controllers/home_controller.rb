@@ -1,7 +1,7 @@
 class HomeController < ApplicationController
+  skip_before_action :authenticate_user!
+
   def index
-    if user_signed_in?
-      redirect_to time_entries_url
-    end
+    redirect_to time_entries_url if user_signed_in?
   end
 end
