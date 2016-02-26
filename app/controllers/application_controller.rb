@@ -23,7 +23,7 @@ class ApplicationController < ActionController::Base
 
   def ensure_ownership(item)
     unless item.user == current_user || current_user.admin?
-      redirect_to action: 'index', alert: "That's not yours!"
+      redirect_to({action: 'index'}, alert: "That's not yours!")
     end
   end
 end
