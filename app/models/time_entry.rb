@@ -22,7 +22,7 @@ class TimeEntry < ActiveRecord::Base
   end
 
   def self.filter_by_date(date)
-    entries = self.where("start_time >= ?", date.to_time)
-    entries.where("start_time < ?", (date + 1.day).to_time)
+    entries = self.where("created_at >= ?", date.to_time)
+    entries.where("created_at < ?", (date + 1.day).to_time)
   end
 end
