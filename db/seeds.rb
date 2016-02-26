@@ -13,9 +13,14 @@ j3rn_tags = j3rn.tags.create!([
   { name: 'Projects' }
 ])
 
-j3rn_tags.first.tasks.create!([
-  { task_name: 'Homework #5', user_id: j3rn.id },
-  { task_name: 'Homework #4', user_id: j3rn.id }
+j3rn_tasks = j3rn_tags.first.tasks.create!([
+  { task_name: 'Homework #5', priority: 4, user_id: j3rn.id },
+  { task_name: 'Homework #4', user_id: j3rn.id },
+  { task_name: 'Homework #3', priority: 3, archived: true, user_id: j3rn.id }
+])
+
+j3rn_tasks.first.time_entries.create!([
+  { goal: 'Finish #1', result: 'Done', start_time: Time.now, duration: 25 }
 ])
 
 test_tags = test.tags.create!([
