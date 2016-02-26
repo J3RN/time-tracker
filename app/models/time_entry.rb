@@ -1,8 +1,8 @@
 require 'csv'
 
 class TimeEntry < ActiveRecord::Base
-  belongs_to :user
   belongs_to :task
+  has_one :user, through: :task
   has_many :tags, through: :task
 
   validates_presence_of :task_id
