@@ -6,6 +6,7 @@ class TagsController < ApplicationController
     @tags = Tag.includes(:tasks)
 
     @tags = @tags.where(user: current_user) unless current_user.admin?
+    @tags = @tags.sort {|x, y| y.tasks.count <=> x.tasks.count}
   end
 
   def new
