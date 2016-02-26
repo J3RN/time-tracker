@@ -20,7 +20,8 @@ j3rn_tasks = j3rn_tags.first.tasks.create!([
 ])
 
 j3rn_tasks.first.time_entries.create!([
-  { goal: 'Finish #1', result: 'Done', start_time: Time.now, duration: 25 }
+  { goal: 'Finish #1', result: 'Done', start_time: Time.now, duration: 25,
+    user: j3rn }
 ])
 
 test_tags = test.tags.create!([
