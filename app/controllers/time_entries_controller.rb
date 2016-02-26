@@ -63,7 +63,7 @@ class TimeEntriesController < ApplicationController
   end
 
   def stop_time
-    @time_entry.duration += @time_entry.calculate_duration
+    @time_entry.duration = @time_entry.calculate_duration
     @time_entry.running = false
     @time_entry.save
 
