@@ -1,11 +1,17 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+#
+# NOTE: Here I have set the 'encrypted_password' fields to faux passwords. This
+# is NOT what happens with real user's passwords. Real user's passwords are
+# hashed using bcrypt before being stored in the 'encrypted_password' field.
 
-# This model initially had no columns defined.  If you add columns to the
-# model remove the '{}' from the fixture names and add the columns immediately
-# below each fixture, per the syntax in the comments below
-#
-one: {}
-# column: value
-#
-two: {}
-#  column: value
+one:
+  email: jonarnett90@gmail.com
+  username: J3RN
+  display_name: J3RN
+  encrypted_password: blargblarg
+
+two:
+  email: example@example.com
+  username: Test
+  display_name: Test
+  encrypted_password: foobarbar
