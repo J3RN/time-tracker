@@ -2,6 +2,9 @@ require 'test_helper'
 
 class TasksControllerTest < ActionController::TestCase
   setup do
+    @user = users(:one)
+    sign_in @user
+
     @task = tasks(:one)
   end
 
@@ -21,12 +24,7 @@ class TasksControllerTest < ActionController::TestCase
       post :create, task: { task_name: @task.task_name }
     end
 
-    assert_redirected_to task_path(assigns(:task))
-  end
-
-  test "should show task" do
-    get :show, id: @task
-    assert_response :success
+    assert_redirected_to tasks_path(assigns(:tasks))
   end
 
   test "should get edit" do
@@ -36,7 +34,7 @@ class TasksControllerTest < ActionController::TestCase
 
   test "should update task" do
     patch :update, id: @task, task: { task_name: @task.task_name }
-    assert_redirected_to task_path(assigns(:task))
+    assert_redirected_to tasks_path(assigns(:tasks))
   end
 
   test "should destroy task" do

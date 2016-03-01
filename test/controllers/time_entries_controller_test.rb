@@ -2,6 +2,9 @@ require 'test_helper'
 
 class TimeEntriesControllerTest < ActionController::TestCase
   setup do
+    @user = users(:one)
+    sign_in @user
+
     @time_entry = time_entries(:one)
   end
 
@@ -21,12 +24,7 @@ class TimeEntriesControllerTest < ActionController::TestCase
       post :create, time_entry: { duration: @time_entry.duration, note: @time_entry.note, start_time: @time_entry.start_time, task_id: @time_entry.task_id, user_id: @time_entry.user_id }
     end
 
-    assert_redirected_to time_entry_path(assigns(:time_entry))
-  end
-
-  test "should show time_entry" do
-    get :show, id: @time_entry
-    assert_response :success
+    assert_redirected_to time_entries_path(assigns(:time_entries))
   end
 
   test "should get edit" do
@@ -36,7 +34,7 @@ class TimeEntriesControllerTest < ActionController::TestCase
 
   test "should update time_entry" do
     patch :update, id: @time_entry, time_entry: { duration: @time_entry.duration, note: @time_entry.note, start_time: @time_entry.start_time, task_id: @time_entry.task_id, user_id: @time_entry.user_id }
-    assert_redirected_to time_entry_path(assigns(:time_entry))
+    assert_redirected_to time_entries_path(assigns(:time_entries))
   end
 
   test "should destroy time_entry" do
