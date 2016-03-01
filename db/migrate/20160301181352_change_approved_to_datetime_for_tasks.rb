@@ -4,7 +4,7 @@ class ChangeApprovedToDatetimeForTasks < ActiveRecord::Migration
 
     Task.where(archived: true).each do |task|
       if task.time_entries.last
-        task.update(archived_at: task.time_entries.last.started_at)
+        task.update(archived_at: task.time_entries.last.updated_at)
       else
         task.update(archived_at: task.updated_at)
       end
