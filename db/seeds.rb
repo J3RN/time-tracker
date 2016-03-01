@@ -16,7 +16,7 @@ j3rn_tags = j3rn.tags.create!([
 j3rn_tasks = j3rn_tags.first.tasks.create!([
   { task_name: 'Homework #5', priority: 4, user_id: j3rn.id },
   { task_name: 'Homework #4', user_id: j3rn.id },
-  { task_name: 'Homework #3', priority: 3, archived: true, user_id: j3rn.id }
+  { task_name: 'Homework #3', priority: 3, archived_at: DateTime.now, user_id: j3rn.id }
 ])
 
 j3rn_tasks.first.time_entries.create!([

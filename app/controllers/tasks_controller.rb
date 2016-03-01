@@ -10,7 +10,7 @@ class TasksController < ApplicationController
     @tasks = @tasks.where(user: current_user) unless current_user.admin?
 
     @active = @tasks.active.order(priority: :desc)
-    @archived = @tasks.archived.order_last_touched
+    @archived = @tasks.archived.order(archived_at: :desc)
   end
 
   def new
@@ -58,7 +58,7 @@ class TasksController < ApplicationController
 
     def task_params
       new_params = params.require(:task).permit(:task_name, :estimate,
-                                                :archived, :priority, :user_id,
+                                                :archived_at, :priority, :user_id,
                                                 tag_ids: [])
       new_params[:user_id] = current_user.id unless current_user.admin?
       new_params

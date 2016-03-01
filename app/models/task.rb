@@ -9,8 +9,8 @@ class Task < ActiveRecord::Base
   scope :order_last_touched, -> do
     includes(:time_entries).order('time_entries.start_time DESC')
   end
-  scope :active, -> { where(archived: false) }
-  scope :archived, -> { where(archived: true) }
+  scope :active, -> { where(archived_at: nil) }
+  scope :archived, -> { where.not(archived_at: nil) }
 
   def time_spent
     self.time_entries.sum(:duration)
@@ -26,5 +26,9 @@ class Task < ActiveRecord::Base
 
   def explicit_name
     "#{self.tags.pluck(:name).join(", ")} - #{self.task_name}"
+  end
+
+  def archived?
+    self.archived_at.present?
   end
 end

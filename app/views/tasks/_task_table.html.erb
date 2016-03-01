@@ -22,8 +22,13 @@
         <% end %>
         <td>
           <%= form_for task do |f| %>
-            <%= f.hidden_field :archived, value: !task.archived %>
-            <%= f.submit (task.archived ? 'Unarchive' : 'Archive'), class: "btn btn-default" %>
+            <% if task.archived? %>
+              <%= f.hidden_field :archived_at, value: nil %>
+              <%= f.submit 'Unarchive', class: "btn btn-default" %>
+            <% else %>
+              <%= f.hidden_field :archived_at, value: DateTime.now %>
+              <%= f.submit 'Archive', class: "btn btn-default" %>
+            <% end %>
           <% end %>
         </td>
         <td><%= link_to 'Edit', edit_task_path(task), class: 'btn btn-default' %></td>
