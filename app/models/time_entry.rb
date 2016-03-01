@@ -9,7 +9,7 @@ class TimeEntry < ActiveRecord::Base
   validates_presence_of :user_id
 
   def calculate_duration
-    duration + ((DateTime.now.to_i - self.start_time.to_i) / 60.0).round
+    (duration || 0) + ((DateTime.now.to_i - self.start_time.to_i) / 60.0).round
   end
 
   def self.to_csv
