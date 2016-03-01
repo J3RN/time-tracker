@@ -1,5 +1,7 @@
 # Time Tracker
 
+![Travis CI badge](https://travis-ci.org/J3RN/timesheet.svg)
+
 This is an application that I wrote long ago, but have since repurposed to play a critical role as my To-Do List and time tracker. I have found it to be exceptionally useful, and I hope you will as well.
 
 ## Prerequisites
