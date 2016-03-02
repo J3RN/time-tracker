@@ -1,39 +1,41 @@
-<h2>Sign up</h2>
+<h2 class="devise-title">Sign up</h2>
 
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-  <%= devise_error_messages! %>
+<div class="panel panel-default devise-panel col-md-4 col-sm-10 col-md-offset-4 col-sm-offset-1">
+  <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+    <%= devise_error_messages! %>
 
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true %>
-  </div>
+    <div class="form-group">
+      <%= f.label :email %><br />
+      <%= f.email_field :email, autofocus: true, class: "form-control" %>
+    </div>
 
-  <div class="username">
-    <%= f.label :username %><br />
-    <%= f.text_field :username %>
-  </div>
+    <div class="form-group">
+      <%= f.label :username %><br />
+      <%= f.text_field :username, class: "form-control" %>
+    </div>
 
-  <div class="display_name">
-    <%= f.label :display_name %><br />
-    <%= f.text_field :display_name %>
-  </div>
+    <div class="form-group">
+      <%= f.label :display_name %><br />
+      <%= f.text_field :display_name, class: "form-control" %>
+    </div>
 
-  <div class="field">
-    <%= f.label :password %>
-    <% if @validatable %>
-    <em>(<%= @minimum_password_length %> characters minimum)</em>
-    <% end %><br />
-    <%= f.password_field :password, autocomplete: "off" %>
-  </div>
+    <div class="form-group">
+      <%= f.label :password %>
+      <% if @validatable %>
+      <em>(<%= @minimum_password_length %> characters minimum)</em>
+      <% end %><br />
+      <%= f.password_field :password, autocomplete: "off", class: "form-control" %>
+    </div>
 
-  <div class="field">
-    <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "off" %>
-  </div>
+    <div class="form-group">
+      <%= f.label :password_confirmation %><br />
+      <%= f.password_field :password_confirmation, autocomplete: "off", class: "form-control" %>
+    </div>
 
-  <div class="actions">
-    <%= f.submit "Sign up" %>
-  </div>
-<% end %>
+    <div class="actions">
+      <%= f.submit "Sign up", class: "btn btn-primary form-control" %>
+    </div>
+  <% end %>
+  <%= render "devise/shared/links" %>
+</div>
 
-<%= render "devise/shared/links" %>
