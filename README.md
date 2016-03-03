@@ -35,9 +35,3 @@ This is an application that I wrote long ago, but have since repurposed to play 
   ```
   bundle exec passenger start
   ```
-
-## TODO
-- Security audit. I'm none too confident in my user authorization (NOTE: NOT USER AUTHENTICATION. Your passwords are safe).
-- `dependent: :destroy` relations
-- Testing. This has been largely neglected, and really ought to be implemented.
-- Redo the UI with [Ember.js](http://emberjs.com)
