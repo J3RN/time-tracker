@@ -54,8 +54,6 @@
           <td class="col-md-1">
             <% if entry.running? %>
               <%= button_to 'Stop', stop_time_time_entry_path(entry), method: :get, class: "btn btn-primary" %>
-            <% else %>
-              <%= button_to 'Resume', start_time_time_entry_path(entry), method: :get, class: "btn btn-primary" %>
             <% end %>
           </td>
           <td class="col-md-1">
