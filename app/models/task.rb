@@ -1,7 +1,7 @@
 class Task < ActiveRecord::Base
-  has_many :taggings
+  has_many :taggings, dependent: :destroy
   has_many :tags, through: :taggings
-  has_many :time_entries
+  has_many :time_entries, dependent: :destroy
   belongs_to :user
 
   validates_presence_of :user_id
