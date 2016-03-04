@@ -31,4 +31,8 @@ class Task < ActiveRecord::Base
   def archived?
     self.archived_at.present?
   end
+
+  def days_left
+    (self.due_date - Date.today).to_i if self.due_date
+  end
 end
