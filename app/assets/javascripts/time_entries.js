@@ -5,7 +5,7 @@
 $(function() {
     var hideOrShowFields = function() {
         const checked = $("#time_entry_running").is(':checked');
-        console.log(checked);
+
         if (checked) {
             $('#time_entry_duration').val(null);
             $('#time_entry_duration').parent().hide();

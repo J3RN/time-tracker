@@ -28,6 +28,11 @@
       <%= f.label :estimate, "Estimate (minutes)" %><br>
       <%= f.number_field :estimate, class: "form-control" %>
     </div>
+    <div class="form-group col-md-4">
+      <%= f.label :due_date %><br>
+      <input type="checkbox" id="task_due" <%= "checked=checked" unless @task.due_date.nil? %> />
+      <%= f.date_select :due_date, class: "form-control", visible: @task.due_date.nil? %>
+    </div>
     <% if current_user.admin? %>
       <div class="form-group col-md-4">
         <%= f.label :user_id, "User" %><br>
