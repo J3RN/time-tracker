@@ -54,5 +54,6 @@ group :development, :test do
 
   # Pry-rails for better console
   gem 'pry-rails'
+  gem 'therubyracer'
 end
 
