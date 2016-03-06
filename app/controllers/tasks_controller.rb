@@ -4,15 +4,6 @@ class TasksController < ApplicationController
   before_action :set_users, only: [:new, :edit]
   before_action ->{ ensure_ownership(@task) }, only: [:edit, :update, :destroy]
 
-  def index
-    @tasks = Task.includes(:tags)
-
-    @tasks = @tasks.where(user: current_user) unless current_user.admin?
-
-    @active = @tasks.active
-    @archived = @tasks.unscoped.archived.order(archived_at: :desc)
-  end
-
   def new
     @task = Task.new
   end
