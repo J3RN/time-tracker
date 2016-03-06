@@ -16,7 +16,7 @@
     <% tasks.each do |task| %>
       <tr>
         <td class="swatch priority<%= task.priority %>"></td>
-        <td><%= task.task_name %> - <%= task.tags.pluck(:name).join(", ") %></td>
+        <td><%= task.explicit_name %></td>
         <td><%= task.percent_time_used.round %>%</td>
         <td><%= days_left(task.days_left) %>
         <% if current_user.admin? %>

@@ -25,7 +25,7 @@ class Task < ActiveRecord::Base
   end
 
   def explicit_name
-    "#{self.tags.pluck(:name).join(", ")} - #{self.task_name}"
+    "#{self.task_name} - #{self.tags.pluck(:name).join(", ")}"
   end
 
   def archived?
