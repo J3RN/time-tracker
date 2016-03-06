@@ -6,6 +6,11 @@ class TimeEntriesControllerTest < ActionController::TestCase
     sign_in @user
 
     @time_entry = time_entries(:one)
+    @tag = tags(:one)
+
+    user2 = users(:two)
+    @tag2 = tags(:two)
+    @tag2.update!(user: user2)
   end
 
   test "should get index" do
@@ -41,6 +46,17 @@ class TimeEntriesControllerTest < ActionController::TestCase
     assert_difference('TimeEntry.count', -1) do
       delete :destroy, id: @time_entry
     end
+
+    assert_redirected_to time_entries_path
+  end
+
+  test "should get report" do
+    get :report, tag_id: @tag.id
+    assert_response :success
+  end
+
+  test "should not get report on other's tags" do
+    get :report, tag_id: @tag2.id
 
     assert_redirected_to time_entries_path
   end

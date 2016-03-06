@@ -4,6 +4,8 @@ class TimeEntriesController < ApplicationController
   before_action :set_time_entry, only: [:show, :edit, :update, :destroy,
                                         :stop_time, :start_time]
   before_action :set_tasks, only: [:new, :edit]
+  before_action :set_tag, only: [:report]
+  before_action -> { ensure_ownership(@tag) }, only: [:report]
   respond_to :html
 
   def index
@@ -82,8 +84,6 @@ class TimeEntriesController < ApplicationController
   end
 
   def report
-    @tag = Tag.find(params[:tag_id])
-
     redirect_to time_entries_path, alert: "No tag provided!" unless @tag
 
     @tasks = @tag.tasks.includes(:time_entries).order_last_touched
@@ -101,6 +101,10 @@ class TimeEntriesController < ApplicationController
       @tasks = @tasks.where(user: current_user) unless current_user.admin?
       @tasks = @tasks.active.order(priority: :desc)
       @tasks = @tasks.map { |task| [ task.explicit_name, task.id ]}
+    end
+
+    def set_tag
+      @tag = Tag.find(params[:tag_id])
     end
 
     def set_time_entry
