@@ -1,0 +1,41 @@
+<table class="table">
+  <thead>
+    <tr>
+      <th></th>
+      <th>Task name</th>
+      <th>Time used</th>
+      <th>Days Left</th>
+      <% if current_user.admin? %>
+        <th>User</th>
+      <% end %>
+      <th colspan="3" class="col-md-3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% tasks.each do |task| %>
+      <tr>
+        <td class="swatch priority<%= task.priority %>"></td>
+        <td><%= task.explicit_name %></td>
+        <td><%= task.percent_time_used.round %>%</td>
+        <td><%= days_left(task.days_left) %>
+        <% if current_user.admin? %>
+          <td><%= task.user.username %></td>
+        <% end %>
+        <td><%= link_to 'Edit', edit_task_path(task), class: 'btn btn-default' %></td>
+        <td>
+          <%= form_for task do |f| %>
+            <% if task.archived? %>
+              <%= f.hidden_field :archived_at, value: nil %>
+              <%= f.submit 'Unarchive', class: "btn btn-default" %>
+            <% else %>
+              <%= f.hidden_field :archived_at, value: DateTime.now %>
+              <%= f.submit 'Archive', class: "btn btn-default" %>
+            <% end %>
+          <% end %>
+        </td>
+        <td><%= link_to 'Delete', task, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

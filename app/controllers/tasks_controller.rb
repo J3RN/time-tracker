@@ -24,7 +24,7 @@ class TasksController < ApplicationController
     @task = Task.new(task_params)
 
     if @task.save
-      redirect_to tasks_path
+      redirect_to dashboard_path
     else
       set_tags
       set_users

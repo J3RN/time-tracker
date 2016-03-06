@@ -20,7 +20,7 @@ class TagsController < ApplicationController
     @tag = Tag.create(tag_params)
 
     if @tag.save
-      redirect_to tags_path
+      redirect_to dashboard_path
     else
       render 'new'
     end
@@ -28,12 +28,12 @@ class TagsController < ApplicationController
 
   def update
     @tag.update(tag_params)
-    redirect_to tags_path
+    redirect_to dashboard_path
   end
 
   def destroy
     @tag.destroy
-    redirect_to tags_path
+    redirect_to dashboard_path
   end
 
   private
