@@ -43,4 +43,7 @@
   <div class="actions">
     <%= f.submit(nil, class: "btn btn-primary") %>
   </div>
+  <div>
+    <%= link_to 'Delete', @task.delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' %>
+  </div>
 <% end %>
