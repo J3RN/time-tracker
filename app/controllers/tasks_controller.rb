@@ -9,8 +9,8 @@ class TasksController < ApplicationController
 
     @tasks = @tasks.where(user: current_user) unless current_user.admin?
 
-    @active = @tasks.active.order(priority: :desc, due_date: :asc)
-    @archived = @tasks.archived.order(archived_at: :desc)
+    @active = @tasks.active
+    @archived = @tasks.archived.unscoped.order(archived_at: :desc)
   end
 
   def new
