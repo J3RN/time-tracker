@@ -6,6 +6,7 @@ class Task < ActiveRecord::Base
 
   validates_presence_of :user_id
 
+  default_scope { order(priority: :desc, due_date: :asc) }
   scope :order_last_touched, -> do
     includes(:time_entries).order('time_entries.start_time DESC')
   end
