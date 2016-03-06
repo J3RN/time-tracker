@@ -17,6 +17,7 @@
 
       <% if user_signed_in? %>
         <ul class="nav navbar-nav">
+          <li><%= link_to "Dashboard", dashboard_path %></li>
           <li><%= link_to "Tags", tags_path %></li>
           <li><%= link_to "Tasks", tasks_path %></li>
           <li><%= link_to "Time Entries", time_entries_path %></li>

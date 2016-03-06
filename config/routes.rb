@@ -3,6 +3,8 @@ Rails.application.routes.draw do
 
   root to: 'home#index'
 
+  get :dashboard, to: 'home#dashboard'
+
   resources :time_entries, except: :show do
     collection do
       get 'report'
