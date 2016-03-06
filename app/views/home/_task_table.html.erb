@@ -22,6 +22,7 @@
         <% if current_user.admin? %>
           <td><%= task.user.username %></td>
         <% end %>
+        <td><%= link_to 'Edit', edit_task_path(task), class: 'btn btn-default' %></td>
         <td>
           <%= form_for task do |f| %>
             <% if task.archived? %>
@@ -33,8 +34,6 @@
             <% end %>
           <% end %>
         </td>
-        <td><%= link_to 'Edit', edit_task_path(task), class: 'btn btn-default' %></td>
-        <td><%= link_to 'Delete', task, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' %></td>
       </tr>
     <% end %>
   </tbody>
