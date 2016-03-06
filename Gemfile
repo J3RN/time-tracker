@@ -42,6 +42,7 @@ group :development, :test do
   # Awesome print
   gem 'awesome_print'
 
+  # Guard for automation goodies
   gem 'guard'
   gem 'guard-process'
 
@@ -50,5 +51,8 @@ group :development, :test do
   gem 'capistrano-rails', '~> 1.1'
   gem 'capistrano-rvm'
   gem 'capistrano-passenger'
+
+  # Pry-rails for better console
+  gem 'pry-rails'
 end
 
