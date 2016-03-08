@@ -42,6 +42,13 @@ j3rn_tasks = j3rn_tags.first.tasks.create!([
     priority: 3,
     user_id: j3rn.id,
     archived_at: DateTime.now,
+  },
+  {
+    task_name: 'Homework #2',
+    priority: 5,
+    user_id: j3rn.id,
+    archived_at: DateTime.now - 3.days,
+    due_date: DateTime.now - 3.day
   }
 ])
 
@@ -56,5 +63,18 @@ test_tags = test.tags.create!([
 ])
 
 test_tags.last.tasks.create!([
-  { task_name: 'Testing things', user_id: test.id }
+  {
+    task_name: 'Testing things',
+    user_id: test.id
+  },
+  { task_name: 'Testing some things',
+    user_id: test.id,
+    archived_at: DateTime.now,
+    due_date: Date.today
+  },
+  {
+    task_name: 'Testing other things',
+    user_id: test.id,
+    archived_at: DateTime.now - 1.days
+  }
 ])
