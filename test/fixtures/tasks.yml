@@ -3,7 +3,22 @@
 one:
   user: one
   task_name: Task One
+  priority: 4
+  due_date: <%= Date.today + 1 %>
 
 two:
   user: one
   task_name: Task Two
+  archived_at: <%= DateTime.now - 1.days %>
+
+three:
+  user: two
+  priority: 2
+  task_name: Task Three
+  due_date: <%= Date.today + 1 %>
+
+four:
+  user: two
+  task_name: Task Four
+  archived_at: <%= DateTime.now - 1.days %>
+  due_date: <%= Date.today + 1 %>
