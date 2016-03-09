@@ -1,6 +1,6 @@
 module TimeEntriesHelper
   def duration_display(minutes)
-    if minutes > 60
+    if minutes >= 60
       hours = minutes / 60
       minutes = minutes - (hours * 60)
 
@@ -11,7 +11,7 @@ module TimeEntriesHelper
   end
 
   def long_duration_display(minutes)
-    if minutes > 60
+    if minutes >= 60
       hours = minutes / 60
       minutes = minutes - (hours * 60)
 
