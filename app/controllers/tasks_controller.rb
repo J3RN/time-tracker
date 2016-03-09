@@ -4,6 +4,10 @@ class TasksController < ApplicationController
   before_action :set_users, only: [:new, :edit]
   before_action ->{ ensure_ownership(@task) }, only: [:edit, :update, :destroy]
 
+  def index
+    redirect_to dashboard_path
+  end
+
   def new
     @task = Task.new
   end

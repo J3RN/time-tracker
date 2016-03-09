@@ -12,18 +12,18 @@ class HomeController < ApplicationController
     @date = params[:date] ? Date.parse(params[:date]) : Date.today
     @tasks = Task.includes(:tags)
     @time_entries = TimeEntry.all
-    @tags = @admin ? Tag.all : Tag.where(user: current_user)
+    @tags = Tag.all
 
-
-    ## Sort
-    @tasks = @tasks.where(user: current_user) unless @admin
-    @time_entries = @time_entries.where(user: current_user) unless @admin
-
+    # Limit to just ours if we're not an admin
+    unless @admin
+      @tasks = @tasks.where(user: current_user)
+      @time_entries = @time_entries.where(user: current_user)
+      @tags.where(user: current_user)
+    end
 
     ## Group
     @active = @tasks.active
     @archived = @tasks.unscoped.archived.order(archived_at: :desc)
-
 
     ## Time Sorting
     # If there's a date, make sure all time entries are from that date
