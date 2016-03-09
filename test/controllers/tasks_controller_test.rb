@@ -44,4 +44,11 @@ class TasksControllerTest < ActionController::TestCase
 
     assert_redirected_to tasks_path
   end
+
+  test "should not see others' tasks" do
+    get :index
+
+    assert_equal(@user.tasks.active.count, assigns(:active).count)
+    assert_equal(@user.tasks.archived.count, assigns(:archived).count)
+  end
 end

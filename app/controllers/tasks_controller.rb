@@ -5,7 +5,6 @@ class TasksController < ApplicationController
   before_action ->{ ensure_ownership(@task) }, only: [:edit, :update, :destroy]
 
   def index
-    redirect_to dashboard_path
   end
 
   def new
