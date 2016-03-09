@@ -4,19 +4,22 @@
   <h3><%= task.task_name %></h3>
   <table class="table">
     <thead>
+      <th class="col-md-2">Start Date</th>
       <th class="col-md-4">Goal</th>
       <th class="col-md-4">Result</th>
-      <th class="col-md-4">Time Spent</th>
+      <th class="col-md-2">Time Spent</th>
     </thead>
     <tbody>
       <% task.time_entries.each do |time_entry| %>
         <tr>
+          <td><%= std_date(time_entry.start_time) %></td>
           <td><%= time_entry.goal %></td>
           <td><%= time_entry.result %></td>
           <td><%= duration_display(time_entry.duration) %></td>
         </tr>
       <% end %>
       <tr>
+        <td></td>
         <td></td>
         <td></td>
         <td><%= long_duration_display(task.time_spent) %></td>
