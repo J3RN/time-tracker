@@ -37,4 +37,19 @@ $(function() {
         loadSelect2();
     });
 
+    var archivedShown = false;
+    var archiveToggle = $("#archive-toggle");
+    $(archiveToggle).click(function() {
+        var archived = $("#archived-tasks");
+
+        if (archivedShown) {
+            $(archived).hide();
+            $(archiveToggle).html("Show archived");
+        } else {
+            $(archived).show();
+            $(archiveToggle).html("Hide archived");
+        }
+
+        archivedShown = !archivedShown;
+    });
 });
