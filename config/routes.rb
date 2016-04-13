@@ -17,6 +17,6 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :tasks, except: :show
+  resources :tasks, except: [:show, :index]
   resources :tags, except: :show
 end

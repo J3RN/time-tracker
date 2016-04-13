@@ -8,9 +8,6 @@ class TasksControllerTest < ActionController::TestCase
     @task = tasks(:one)
   end
 
-  test "should get index" do
-  end
-
   test "should get new" do
     get :new
     assert_response :success

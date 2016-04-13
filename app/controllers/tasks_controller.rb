@@ -4,9 +4,6 @@ class TasksController < ApplicationController
   before_action :set_users, only: [:new, :edit]
   before_action ->{ ensure_ownership(@task) }, only: [:edit, :update, :destroy]
 
-  def index
-  end
-
   def new
     @task = Task.new
   end
@@ -33,11 +30,6 @@ class TasksController < ApplicationController
 
   def destroy
     @task.destroy
-    redirect_to dashboard_path
-  end
-
-  def delete
-    @task.delete
     redirect_to dashboard_path
   end
 

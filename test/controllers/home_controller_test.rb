@@ -13,12 +13,10 @@ class HomeControllerTest < ActionController::TestCase
     # TODO - Fix?
   end
 
-  # test "should not see others' tasks" do
-  '''
+  test "should not see others' tasks" do
     get :dashboard
 
     assert_equal(@user.tasks.active.count, assigns(:active).count)
     assert_equal(@user.tasks.archived.count, assigns(:archived).count)
   end
-  '''
 end
