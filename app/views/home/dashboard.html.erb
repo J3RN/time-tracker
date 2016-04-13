@@ -1,4 +1,4 @@
-<h1>Tasks <%= link_to '+', new_task_path %></h1>
+<h1>Upcoming <%= link_to '+', new_task_path %></h1>
 <%= render 'task_table', tasks: @active %>
 
 <% if @archived.any? %>

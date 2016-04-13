@@ -4,15 +4,6 @@ class TasksController < ApplicationController
   before_action :set_users, only: [:new, :edit]
   before_action ->{ ensure_ownership(@task) }, only: [:edit, :update, :destroy]
 
-  def index
-    @tasks = Task.includes(:tags)
-
-    @tasks = @tasks.where(user: current_user) unless current_user.admin?
-
-    @active = @tasks.active
-    @archived = @tasks.archived.reorder(archived_at: :desc)
-  end
-
   def new
     @task = Task.new
   end
@@ -24,7 +15,7 @@ class TasksController < ApplicationController
     @task = Task.new(task_params)
 
     if @task.save
-      redirect_to tasks_path
+      redirect_to dashboard_path
     else
       set_tags
       set_users
@@ -34,12 +25,12 @@ class TasksController < ApplicationController
 
   def update
     @task.update(task_params)
-    redirect_to tasks_path
+    redirect_to dashboard_path
   end
 
   def destroy
     @task.destroy
-    redirect_to tasks_path
+    redirect_to dashboard_path
   end
 
   private

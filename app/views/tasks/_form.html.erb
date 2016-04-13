@@ -43,4 +43,12 @@
   <div class="actions">
     <%= f.submit(nil, class: "btn btn-primary") %>
   </div>
+  <div>
+    <% if @task.id == nil %>
+      <%= link_to 'Back', dashboard_path, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' %>
+    <% else %>
+      <%= link_to 'Delete', task_path(@task), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' %>
+    <% end %>
+
+  </div>
 <% end %>

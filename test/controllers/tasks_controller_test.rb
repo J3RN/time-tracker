@@ -8,12 +8,6 @@ class TasksControllerTest < ActionController::TestCase
     @task = tasks(:one)
   end
 
-  test "should get index" do
-    get :index
-    assert_response :success
-    assert_not_nil assigns(:tasks)
-  end
-
   test "should get new" do
     get :new
     assert_response :success
@@ -24,7 +18,7 @@ class TasksControllerTest < ActionController::TestCase
       post :create, task: { task_name: @task.task_name }
     end
 
-    assert_redirected_to tasks_path(assigns(:tasks))
+    assert_redirected_to dashboard_path(assigns(:tasks))
   end
 
   test "should get edit" do
@@ -34,7 +28,7 @@ class TasksControllerTest < ActionController::TestCase
 
   test "should update task" do
     patch :update, id: @task, task: { task_name: @task.task_name }
-    assert_redirected_to tasks_path(assigns(:tasks))
+    assert_redirected_to dashboard_path(assigns(:tasks))
   end
 
   test "should destroy task" do
@@ -42,13 +36,6 @@ class TasksControllerTest < ActionController::TestCase
       delete :destroy, id: @task
     end
 
-    assert_redirected_to tasks_path
-  end
-
-  test "should not see others' tasks" do
-    get :index
-
-    assert_equal(@user.tasks.active.count, assigns(:active).count)
-    assert_equal(@user.tasks.archived.count, assigns(:archived).count)
+    assert_redirected_to dashboard_path
   end
 end
