@@ -2,6 +2,9 @@
 <%= render 'task_table', tasks: @active %>
 
 <% if @archived.any? %>
-  <h1>Archived</h1>
-  <%= render 'task_table', tasks: @archived  %>
+  <a id="archive-toggle">Show archived</a>
+  <div id="archived-tasks">
+    <h2>Archived</h2>
+    <%= render 'task_table', tasks: @archived  %>
+  </div>
 <% end %>

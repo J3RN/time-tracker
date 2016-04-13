@@ -55,3 +55,12 @@
 .devise-panel {
   padding: 10px;
 }
+
+// Hide archived tasks by default
+#archive-toggle {
+  cursor: pointer;
+}
+
+#archived-tasks {
+  display: none;
+}
