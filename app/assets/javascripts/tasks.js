@@ -31,15 +31,9 @@ $(function() {
         $("#task_tag_ids").select2();
     }
 
-    $(document).on("page:change", function() {
-        $("#task_due").change(hideOrShowDueDate);
-        hideOrShowDueDate();
-        loadSelect2();
-    });
-
     var archivedShown = false;
-    var archiveToggle = $("#archive-toggle");
-    $(archiveToggle).click(function() {
+    var toggleArchived = function(e) {
+        var archiveToggle = e.currentTarget;
         var archived = $("#archived-tasks");
 
         if (archivedShown) {
@@ -51,5 +45,12 @@ $(function() {
         }
 
         archivedShown = !archivedShown;
+    }
+
+    $(document).on("page:change", function() {
+        $("#task_due").change(hideOrShowDueDate);
+        $("#archive-toggle").click(toggleArchived);
+        hideOrShowDueDate();
+        loadSelect2();
     });
 });
