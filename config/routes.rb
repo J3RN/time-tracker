@@ -15,6 +15,11 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :tasks, except: :show
+  resources :tasks, except: :show do
+    member do
+      post 'archive'
+      post 'unarchive'
+    end
+  end
   resources :tags, except: :show
 end
