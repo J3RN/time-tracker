@@ -37,6 +37,16 @@ class TasksController < ApplicationController
     redirect_to tasks_path
   end
 
+  def archive
+    @task.update(archived_at: DateTime.now)
+    redirect_to tasks_path
+  end
+
+  def unarchive
+    @task.update(archived_at: nil)
+    redirect_to tasks_path
+  end
+
   def destroy
     @task.destroy
     redirect_to tasks_path

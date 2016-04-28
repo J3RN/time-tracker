@@ -17,8 +17,12 @@
         <% if current_user.admin? %>
           <td><%= tag.user.username %>
         <% end %>
-        <td><%= link_to "Edit", edit_tag_path(tag), class: 'btn btn-default' %></td>
-        <td><%= link_to "Delete", tag, method: 'delete', data: {confirm: "Are you sure?"}, class: 'btn btn-danger' %>
+        <td>
+          <div class="btn-container">
+            <%= edit_btn edit_tag_path(tag) %>
+            <%= delete_btn tag_path(tag) %>
+          </div>
+        </td>
       </tr>
     <% end %>
   </tbody>

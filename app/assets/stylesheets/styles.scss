@@ -64,3 +64,56 @@
 #archived-tasks {
   display: none;
 }
+
+// Adaptive classes
+.only-desktop {
+  @extend .visible-md;
+  @extend .visible-lg;
+}
+
+// Glyphy buttons
+form.button_to {
+  display: inline;
+}
+
+.btn-container {
+  @extend .btn-group;
+  float: right;
+}
+
+.btn-stop {
+  @include custom-button;
+  @extend .btn-default;
+}
+
+.btn-edit {
+  @include custom-button;
+  @extend .btn-default;
+}
+
+.btn-delete {
+  @include custom-button;
+  @extend .btn-danger;
+}
+
+.btn-archive {
+  @include custom-button;
+  @extend .btn-default;
+}
+
+.btn-unarchive {
+  @include custom-button;
+  @extend .btn-default;
+}
+
+// Date changing
+.time-title {
+  margin-bottom: 20px;
+}
+
+.time-container {
+  margin-top: .5em;
+  font-size: medium;
+  float: right;
+  text-align: center;
+}
