@@ -1,19 +1,15 @@
-<h1>Time Entries <%= link_to '+', new_time_entry_path %></h1>
-<div class="row">
-  <div class="col-md-2">
-    <span class="btn-group">
+<h1 class="time-title">
+  Time Entries <%= link_to '+', new_time_entry_path %>
+  <div class="time-container">
+    <time style="padding: 15px; font-weight: bold"><%= std_date(@date) %></time>
+    <br class="visible-sm visible-xs">
+    <div class="btn-group time-nav">
       <%= link_to "<<", time_entries_path(date: @date - 1.day), class: 'btn btn-default' %>
       <%= link_to "Today", time_entries_path, class: 'btn btn-default' %>
       <%= link_to ">>", time_entries_path(date: @date + 1.day), class: 'btn btn-default' %>
-    </span>
+    </div>
   </div>
-
-  <div class="col-md-10">
-    <time style="padding: 15px; font-weight: bold"><%= std_date(@date) %></time>
-  </div>
-</div>
-
-<br>
+</h1>
 
 <div class="col-md-2">
   <div class="row only-desktop">

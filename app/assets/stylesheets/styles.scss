@@ -105,3 +105,15 @@ form.button_to {
   @include custom-button;
   @extend .btn-default;
 }
+
+// Date changing
+.time-title {
+  margin-bottom: 20px;
+}
+
+.time-container {
+  margin-top: .5em;
+  font-size: medium;
+  float: right;
+  text-align: center;
+}
