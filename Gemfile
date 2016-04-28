@@ -18,14 +18,13 @@ gem 'devise'
 gem 'bootstrap-sass'
 gem 'autoprefixer-rails'
 
-# Use passenger for server
-gem 'passenger'
+group :production do
+  # Use passenger for server
+  gem 'passenger'
 
-# Use Dotenv for env vars
-gem 'dotenv-rails', group: :production
-
-# Use Babel for ES6 support
-gem 'sprockets-es6'
+  # Use Dotenv for env vars
+  gem 'dotenv-rails'
+end
 
 group :development do
   # Access an IRB console on exception pages or by using <%= console %> in views
