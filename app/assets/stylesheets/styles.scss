@@ -65,10 +65,6 @@
   display: none;
 }
 
-.inline {
-  display: inline;
-}
-
 // Adaptive classes
 .only-desktop {
   @extend .visible-md;
