@@ -4,10 +4,10 @@ module TasksHelper
   end
 
   def archive_btn(path)
-    link_to "\ue118", path, class: "btn-archive"
+    link_to "\ue117", path, class: "btn-archive"
   end
 
   def unarchive_btn(path)
-    link_to "\ue117", path, class: "btn-unarchive"
+    link_to "\ue118", path, class: "btn-unarchive"
   end
 end

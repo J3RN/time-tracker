@@ -26,9 +26,9 @@
         <td>
           <div class="btn-container">
             <% if task.archived? %>
-              <%= archive_btn archive_task_path(task) %>
-            <% else %>
               <%= unarchive_btn unarchive_task_path(task) %>
+            <% else %>
+              <%= archive_btn archive_task_path(task) %>
             <% end %>
             <%= edit_btn edit_task_path(task) %>
             <%= delete_btn task %>

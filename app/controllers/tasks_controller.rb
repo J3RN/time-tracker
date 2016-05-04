@@ -1,5 +1,5 @@
 class TasksController < ApplicationController
-  before_action :set_task, only: [:edit, :update, :destroy]
+  before_action :set_task, only: [:edit, :update, :destroy, :archive, :unarchive]
   before_action :set_tags, only: [:new, :edit]
   before_action :set_users, only: [:new, :edit]
   before_action ->{ ensure_ownership(@task) }, only: [:edit, :update, :destroy]
