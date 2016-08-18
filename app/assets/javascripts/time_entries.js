@@ -18,6 +18,8 @@ $(function() {
         }
     }
 
-    $('input[name="time_entry[running]"]').change(hideOrShowFields);
-    $(document).on("page:change", hideOrShowFields)
+    $(document).on("page:change", function() {
+	hideOrShowFields();
+	$('input[name="time_entry[running]"]').change(hideOrShowFields);
+    })
 });
