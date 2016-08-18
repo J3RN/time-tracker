@@ -1,6 +1,7 @@
-<table class="table">
+<table class="table task-table">
   <thead>
     <tr>
+      <th></th>
       <th></th>
       <th>Task name</th>
       <th>Time used</th>
@@ -16,6 +17,13 @@
     <% tasks.each do |task| %>
       <tr>
         <td class="swatch priority<%= task.priority %>"></td>
+	<td>
+	  <% if task.archived? %>
+	    <input type="checkbox" id="task-<%= task.id %>" checked />
+	  <% else %>
+	    <input type="checkbox" id="task-<%= task.id %>" />
+	  <% end %>
+	</td>
         <td><%= task.explicit_name %></td>
         <td><%= task.percent_time_used.round %>%</td>
         <td><%= days_left(task.days_left) %>
@@ -25,11 +33,6 @@
         <td>
         <td>
           <div class="btn-container">
-            <% if task.archived? %>
-              <%= unarchive_btn unarchive_task_path(task) %>
-            <% else %>
-              <%= archive_btn archive_task_path(task) %>
-            <% end %>
             <%= edit_btn edit_task_path(task) %>
             <%= delete_btn task %>
           </div>

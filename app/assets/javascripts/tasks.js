@@ -47,9 +47,23 @@ $(function() {
         archivedShown = !archivedShown;
     }
 
+    var setupCompleteHandlers = function() {
+	$(".task-table input[type=checkbox]").change(function(event) {
+	    var id = event.target.id.substr(5);
+	    var target = $(event.target);
+
+	    if (target.prop("checked")) {
+		window.location = "/tasks/" + id + "/archive"
+	    } else {
+		window.location = "/tasks/" + id + "/unarchive"
+	    }
+	});
+    }
+
     $(document).on("page:change", function() {
         $("#task_due").change(hideOrShowDueDate);
         $("#archive-toggle").click(toggleArchived);
+	setupCompleteHandlers();
         hideOrShowDueDate();
         loadSelect2();
     });
