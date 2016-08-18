@@ -12,9 +12,11 @@ $(function() {
 
             $('#time_entry_result').val(null);
             $('#time_entry_result').parent().hide();
+            $('#time_entry_start_time').parent().hide();
         } else {
             $('#time_entry_duration').parent().show();
             $('#time_entry_result').parent().show();
+            $('#time_entry_start_time').parent().show();
         }
     }
 

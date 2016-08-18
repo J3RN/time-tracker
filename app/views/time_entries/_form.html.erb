@@ -27,6 +27,10 @@
     <%= f.label :result %><br>
     <%= f.text_field :result, class: "form-control" %>
   </div>
+  <div class="from-group col-md-4">
+    <%= f.label :start_time %><br>
+    <%= f.datetime_field :start_time, value: @time_entry.start_time || DateTime.now %>
+  </div>
   <div class="form-group col-md-4">
     <%= f.label :duration, "Duration (minutes)" %><br>
     <%= f.number_field :duration, class: "form-control" %>
