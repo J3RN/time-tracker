@@ -18,6 +18,10 @@ gem 'devise'
 gem 'bootstrap-sass'
 gem 'autoprefixer-rails'
 
+# Datetime picker
+gem 'momentjs-rails', '>= 2.9.0'
+gem 'bootstrap3-datetimepicker-rails', '~> 4.17'
+
 group :production do
   # Use passenger for server
   gem 'passenger'

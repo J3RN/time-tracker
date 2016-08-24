@@ -111,8 +111,12 @@ class TimeEntriesController < ApplicationController
     end
 
     def time_entry_params
-      params.require(:time_entry).permit(:user_id, :task_id, :duration,
-                                         :start_time, :note, :running, :goal,
-                                         :result)
+      new_params = params.require(:time_entry).permit(:user_id, :task_id,
+                                                      :duration, :start_time,
+                                                      :note, :running, :goal,
+                                                      :result)
+      new_time = DateTime.strptime(new_params[:start_time], "%m/%d/%Y %H:%M %p")
+      new_params[:start_time] = new_time
+      new_params
     end
 end
