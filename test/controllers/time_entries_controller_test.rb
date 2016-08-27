@@ -7,6 +7,7 @@ class TimeEntriesControllerTest < ActionController::TestCase
 
     @time_entry = time_entries(:one)
     @tag = tags(:one)
+    @start_time = "08/02/2016 10:32 PM"
 
     user2 = users(:two)
     @tag2 = tags(:two)
@@ -26,7 +27,14 @@ class TimeEntriesControllerTest < ActionController::TestCase
 
   test "should create time_entry" do
     assert_difference('TimeEntry.count') do
-      post :create, time_entry: { duration: @time_entry.duration, note: @time_entry.note, start_time: @time_entry.start_time, task_id: @time_entry.task_id, user_id: @time_entry.user_id }
+      params = {
+        duration: @time_entry.duration,
+        note: @time_entry.note,
+        start_time: @start_time,
+        task_id: @time_entry.task_id,
+        user_id: @time_entry.user_id
+      }
+      post :create, time_entry: params
     end
 
     assert_redirected_to time_entries_path(assigns(:time_entries))
@@ -38,7 +46,14 @@ class TimeEntriesControllerTest < ActionController::TestCase
   end
 
   test "should update time_entry" do
-    patch :update, id: @time_entry, time_entry: { duration: @time_entry.duration, note: @time_entry.note, start_time: @time_entry.start_time, task_id: @time_entry.task_id, user_id: @time_entry.user_id }
+    params = {
+      duration: @time_entry.duration,
+      note: @time_entry.note,
+      start_time: @start_time,
+      task_id: @time_entry.task_id,
+      user_id: @time_entry.user_id
+    }
+    patch :update, id: @time_entry, time_entry: params
     assert_redirected_to time_entries_path(assigns(:time_entries))
   end
 

@@ -38,7 +38,7 @@ class TimeEntriesController < ApplicationController
   end
 
   def new
-    @time_entry = TimeEntry.new(running: true)
+    @time_entry = TimeEntry.new(running: true, start_time: Time.now)
     respond_with(@time_entry)
   end
 
@@ -48,7 +48,7 @@ class TimeEntriesController < ApplicationController
   def create
     @time_entry = TimeEntry.new(time_entry_params)
     @time_entry.user = current_user
-    @time_entry.start_time = DateTime.now
+    @time_entry.start_time ||= DateTime.now
     @time_entry.duration = 0 if @time_entry.duration.nil?
     @time_entry.save
 
@@ -58,7 +58,6 @@ class TimeEntriesController < ApplicationController
   def start_time
     @time_entry.start_time = DateTime.now
     @time_entry.running = true
-
     @time_entry.save
 
     redirect_to time_entries_path
@@ -112,8 +111,21 @@ class TimeEntriesController < ApplicationController
     end
 
     def time_entry_params
-      params.require(:time_entry).permit(:user_id, :task_id, :duration,
-                                         :start_time, :note, :running, :goal,
-                                         :result)
+      new_params = params.require(:time_entry).permit(:user_id, :task_id,
+                                                      :duration, :start_time,
+                                                      :note, :running, :goal,
+                                                      :result)
+
+      if new_params[:running] == "1"
+        new_params = remove_stopped_elements(new_params)
+      else
+        new_params[:start_time] = Time.american_date(new_params[:start_time])
+      end
+
+      new_params
+    end
+
+    def remove_stopped_elements(new_params)
+      new_params.reject { |key, _| [:duration, :start_time, :result].include? key.to_sym }
     end
 end
