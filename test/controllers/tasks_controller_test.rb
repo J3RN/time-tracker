@@ -6,6 +6,14 @@ class TasksControllerTest < ActionController::TestCase
     sign_in @user
 
     @task = tasks(:one)
+
+    @params = {
+      task_name: "Foobar",
+      tags: tags(:one),
+      priority: 1,
+      estimate: 60,
+      due_date: "08/05/2016"
+    }
   end
 
   test "should get index" do
@@ -21,7 +29,7 @@ class TasksControllerTest < ActionController::TestCase
 
   test "should create task" do
     assert_difference('Task.count') do
-      post :create, task: { task_name: @task.task_name }
+      post :create, task: @params
     end
 
     assert_redirected_to tasks_path(assigns(:tasks))
@@ -33,7 +41,7 @@ class TasksControllerTest < ActionController::TestCase
   end
 
   test "should update task" do
-    patch :update, id: @task, task: { task_name: @task.task_name }
+    patch :update, id: @task, task: @params
     assert_redirected_to tasks_path(assigns(:tasks))
   end
 
