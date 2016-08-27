@@ -115,8 +115,17 @@ class TimeEntriesController < ApplicationController
                                                       :duration, :start_time,
                                                       :note, :running, :goal,
                                                       :result)
-      new_time = DateTime.strptime(new_params[:start_time], "%m/%d/%Y %H:%M %p")
-      new_params[:start_time] = new_time
+
+      if new_params[:running] == "1"
+        new_params = remove_stopped_elements(new_params)
+      else
+        new_params[:start_time] = Time.american_date(new_params[:start_time])
+      end
+
       new_params
+    end
+
+    def remove_stopped_elements(new_params)
+      new_params.reject { |key, _| [:duration, :start_time, :result].include? key.to_sym }
     end
 end

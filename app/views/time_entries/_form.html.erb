@@ -30,7 +30,7 @@
   <div class="form-group col-md-4">
     <%= f.label :start_time %><br>
     <div class='input-group date' id='datetimepicker1'>
-      <%= f.text_field :start_time, class: "form-control" %>
+      <%= f.text_field :start_time, value: (@time_entry.start_time || Time.now).american_date, class: "form-control" %>
       <span class="input-group-addon">
 	<span class="glyphicon glyphicon-calendar"></span>
       </span>

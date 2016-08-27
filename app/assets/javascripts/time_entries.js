@@ -7,10 +7,7 @@ $(function() {
         const checked = $("#time_entry_running").is(':checked');
 
         if (checked) {
-            $('#time_entry_duration').val(null);
             $('#time_entry_duration').parent().hide();
-
-            $('#time_entry_result').val(null);
             $('#time_entry_result').parent().hide();
             $('#time_entry_start_time').parents(".form-group").hide();
         } else {
