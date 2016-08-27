@@ -17,9 +17,7 @@ class TagsController < ApplicationController
   end
 
   def create
-    @tag = Tag.create(tag_params)
-
-    if @tag.save
+    if Tag.new(tag_params).save
       redirect_to tags_path
     else
       render 'new'
@@ -27,8 +25,11 @@ class TagsController < ApplicationController
   end
 
   def update
-    @tag.update(tag_params)
-    redirect_to tags_path
+    if @tag.update(tag_params)
+      redirect_to tags_path
+    else
+      render 'edit'
+    end
   end
 
   def destroy
