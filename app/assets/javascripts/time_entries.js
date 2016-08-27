@@ -19,7 +19,7 @@ $(function() {
 
     $(document).on("page:change", function() {
 	hideOrShowFields();
-	$('#datetimepicker1').datetimepicker();
+	$('#te_datetimepicker').datetimepicker();
 	$('input[name="time_entry[running]"]').change(hideOrShowFields);
     })
 });

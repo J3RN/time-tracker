@@ -72,6 +72,9 @@ class TasksController < ApplicationController
                                                 :user_id, :due_date,
                                                 tag_ids: [])
       new_params[:user_id] = current_user.id unless current_user.admin?
+      unless new_params[:due_date].blank?
+        new_params[:due_date] = Date.american_date(new_params[:due_date])
+      end
       new_params
     end
 end

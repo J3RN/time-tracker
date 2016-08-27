@@ -30,15 +30,19 @@
     </div>
     <div class="form-group col-md-4">
       <%= f.label :due_date %><br>
-      <input type="checkbox" id="task_due" <%= "checked=checked" unless @task.due_date.nil? %> />
-      <%= f.date_select :due_date, class: "form-control", visible: @task.due_date.nil? %>
+      <div class='input-group date' id='task_datetimepicker'>
+	<%= f.text_field :due_date, value: @task.due_date.try(:american_date), class: "form-control" %>
+	<span class="input-group-addon">
+	  <span class="glyphicon glyphicon-calendar"></span>
+	</span>
+      </div>
     </div>
     <% if current_user.admin? %>
       <div class="form-group col-md-4">
         <%= f.label :user_id, "User" %><br>
         <%= f.collection_select :user_id, @users, :id, :username, {}, class: "form-control" %>
       </div>
-  <% end %>
+    <% end %>
   </div>
   <div class="actions">
     <%= f.submit(nil, class: "btn btn-primary") %>
