@@ -3,7 +3,7 @@ require 'csv'
 class TimeEntriesController < ApplicationController
   before_action :set_time_entry, only: [:show, :edit, :update, :destroy,
                                         :stop_time, :start_time]
-  before_action :set_tasks, only: [:new, :edit]
+  before_action :set_tasks, only: [:new, :edit, :create, :update]
   before_action :set_tag, only: [:report]
   before_action -> { ensure_ownership(@tag) }, only: [:report]
   respond_to :html
