@@ -5,6 +5,7 @@ class Task < ActiveRecord::Base
   belongs_to :user
 
   validates_presence_of :user_id
+  validates :task_name, presence: true, uniqueness: true
 
   default_scope { order(due_date: :asc, priority: :desc, estimate: :desc) }
   scope :order_last_touched, -> do
