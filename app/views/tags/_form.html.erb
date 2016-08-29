@@ -1,7 +1,7 @@
 <%= form_for @tag do |f| %>
   <% if @tag.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(@tag.errors.count, "error") %> prohibited this tag from being saved:</h2>
+      <p><%= pluralize(@tag.errors.count, "error") %> prohibited this tag from being saved:</p>
 
       <ul>
       <% @tag.errors.full_messages.each do |message| %>

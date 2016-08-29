@@ -3,7 +3,7 @@ require 'csv'
 class TimeEntriesController < ApplicationController
   before_action :set_time_entry, only: [:show, :edit, :update, :destroy,
                                         :stop_time, :start_time]
-  before_action :set_tasks, only: [:new, :edit]
+  before_action :set_tasks, only: [:new, :edit, :create, :update]
   before_action :set_tag, only: [:report]
   before_action -> { ensure_ownership(@tag) }, only: [:report]
   respond_to :html
@@ -50,31 +50,40 @@ class TimeEntriesController < ApplicationController
     @time_entry.user = current_user
     @time_entry.start_time ||= DateTime.now
     @time_entry.duration = 0 if @time_entry.duration.nil?
-    @time_entry.save
 
-    redirect_to time_entries_path
+    if @time_entry.save
+      redirect_to time_entries_path
+    else
+      render 'new'
+    end
   end
 
   def start_time
     @time_entry.start_time = DateTime.now
     @time_entry.running = true
-    @time_entry.save
-
-    redirect_to time_entries_path
+    if @time_entry.save
+      redirect_to time_entries_path
+    else
+      redirect_to time_entries_path, alert: "Failed to start timer"
+    end
   end
 
   def stop_time
     @time_entry.duration = @time_entry.calculate_duration
     @time_entry.running = false
-    @time_entry.save
-
-    redirect_to time_entries_path
+    if @time_entry.save
+      redirect_to time_entries_path
+    else
+      redirect_to time_entries_path, alert: "Failed to stop timer"
+    end
   end
 
   def update
-    @time_entry.update(time_entry_params)
-
-    redirect_to time_entries_path
+    if @time_entry.update(time_entry_params)
+      redirect_to time_entries_path
+    else
+      render 'edit'
+    end
   end
 
   def destroy
