@@ -108,6 +108,7 @@ class TimeEntriesController < ApplicationController
       @tasks = Task.includes(:time_entries, :tags)
       @tasks = @tasks.where(user: current_user) unless current_user.admin?
       @tasks = @tasks.active
+      @tasks << @time_entry.task if @time_entry and !@tasks.include? @time_entry.task
       @tasks = @tasks.map { |task| [ task.explicit_name, task.id ]}
     end
 
