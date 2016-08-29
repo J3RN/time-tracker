@@ -14,6 +14,8 @@ class TasksControllerTest < ActionController::TestCase
       estimate: 60,
       due_date: "08/05/2016"
     }
+
+    @bad_params = @params.dup.tap { |p| p[:task_name] = nil }
   end
 
   test "should get index" do
@@ -35,6 +37,13 @@ class TasksControllerTest < ActionController::TestCase
     assert_redirected_to tasks_path(assigns(:tasks))
   end
 
+  test "render 'new' on fail to create" do
+    assert_no_difference('Task.count') do
+      post :create, task: @bad_params
+    end
+    assert_response :success
+  end
+
   test "should get edit" do
     get :edit, id: @task
     assert_response :success
@@ -43,6 +52,15 @@ class TasksControllerTest < ActionController::TestCase
   test "should update task" do
     patch :update, id: @task, task: @params
     assert_redirected_to tasks_path(assigns(:tasks))
+    @task.reload
+    assert_equal @params[:priority], @task.priority
+  end
+
+  test "render 'edit' on fail to update" do
+    patch :update, id: @task, task: @bad_params
+    assert_response :success
+    @task.reload
+    refute_equal @bad_params[:priority], @task.priority
   end
 
   test "should destroy task" do
