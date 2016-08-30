@@ -4,8 +4,7 @@ class Task < ActiveRecord::Base
   has_many :time_entries, dependent: :destroy
   belongs_to :user
 
-  validates_presence_of :user_id
-  validates :task_name, presence: true, uniqueness: true
+  validates_presence_of :user_id, :task_name
 
   default_scope { order(due_date: :asc, priority: :desc, estimate: :desc) }
   scope :order_last_touched, -> do
