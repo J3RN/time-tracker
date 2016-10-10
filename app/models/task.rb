@@ -38,6 +38,6 @@ class Task < ActiveRecord::Base
   end
 
   def overdue?
-    true unless days_left.nil? || days_left >= 0 || archived?
+    !archived? && days_left.present? && days_left < 0
   end
 end
