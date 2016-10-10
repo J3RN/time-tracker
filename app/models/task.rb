@@ -36,4 +36,8 @@ class Task < ActiveRecord::Base
   def days_left
     (self.due_date - Date.today).to_i if self.due_date
   end
+
+  def overdue?
+    !archived? && days_left.present? && days_left < 0
+  end
 end

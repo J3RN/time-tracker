@@ -20,27 +20,59 @@
 }
 
 // For color swatches
+
+// Color Definitions
+$gray: gray;
+$green:  green;
+$yellow: yellow;
+$orange: orange;
+$red:    red;
+
+
 .swatch {
   width: 15px;
+  border-right: 1px solid #ccc;
 }
 
 .priority1 {
+  background: $gray;
+
+  &.overdue {
+    background: lighten($gray, 40%);
+  }
 }
 
 .priority2 {
-  background: green;
+  background: $green;
+
+  &.overdue {
+    background: lighten($green, 70%);
+  }
+
 }
 
 .priority3 {
-  background: yellow;
+  background: $yellow;
+
+  &.overdue {
+    background: lighten($yellow, 40%);
+  }
 }
 
 .priority4 {
-  background: orange;
+  background: $orange;
+
+  &.overdue {
+    background: lighten($orange, 30%);
+  }
 }
 
 .priority5 {
-  background: red;
+  background: $red;
+
+  &.overdue {
+    background: lighten($red, 40%);
+  }
 }
 
 #admin {
