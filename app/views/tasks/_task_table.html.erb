@@ -44,5 +44,14 @@
         </td>
       </tr>
     <% end %>
+    <tr>
+      <td></td>
+      <td></td>
+      <td class="total">Total</td>
+      <td><%= long_duration_display(@tasks.to_a.sum(&:time_remaining_today).round) %></td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
   </tbody>
 </table>
