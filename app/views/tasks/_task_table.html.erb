@@ -4,6 +4,7 @@
       <th></th>
       <th></th>
       <th>Task name</th>
+      <th>Time due today</th>
       <th>Time used</th>
       <th>Days Left</th>
       <% if current_user.admin? %>
@@ -25,6 +26,11 @@
 	  <% end %>
 	</td>
         <td><%= task.explicit_name %></td>
+        <% if task.time_remaining_today > 0 %>
+          <td><%= duration_display(task.time_remaining_today.round) %></td>
+        <% else %>
+          <td></td>
+        <% end %>
         <td><%= task.percent_time_used.round %>%</td>
         <td><%= days_left(task.days_left) %>
         <% if current_user.admin? %>
