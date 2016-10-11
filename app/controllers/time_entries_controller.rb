@@ -107,7 +107,7 @@ class TimeEntriesController < ApplicationController
     def set_tasks
       @tasks = Task.includes(:time_entries, :tags)
       @tasks = @tasks.where(user: current_user) unless current_user.admin?
-      @tasks = @tasks.active
+      @tasks = @tasks.active.order_todo
       if @time_entry.try(:task) and @tasks.exclude? @time_entry.task
         @tasks << @time_entry.task
       end
