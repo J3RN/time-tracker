@@ -4,6 +4,7 @@
       <th></th>
       <th></th>
       <th>Task name</th>
+      <th>Time due today</th>
       <th>Time used</th>
       <th>Days Left</th>
       <% if current_user.admin? %>
@@ -15,26 +16,26 @@
 
   <tbody>
     <% tasks.each do |task| %>
-      <% if task.overdue? %>
-        <tr class="priority<%= task.priority %> overdue">
-      <% else %>
-        <tr>
-      <% end %>
+      <tr class="<%= "priority#{task.priority} overdue" if task.overdue? %>">
         <td class="swatch priority<%= task.priority %>"></td>
-	<td>
-	  <% if task.archived? %>
-	    <input type="checkbox" id="task-<%= task.id %>" checked />
-	  <% else %>
-	    <input type="checkbox" id="task-<%= task.id %>" />
-	  <% end %>
-	</td>
+        <td>
+          <% if task.archived? %>
+            <input type="checkbox" id="task-<%= task.id %>" checked />
+          <% else %>
+            <input type="checkbox" id="task-<%= task.id %>" />
+          <% end %>
+        </td>
         <td><%= task.explicit_name %></td>
+        <% if task.time_remaining_today > 0 %>
+          <td><%= duration_display(task.time_remaining_today.round) %></td>
+        <% else %>
+          <td></td>
+        <% end %>
         <td><%= task.percent_time_used.round %>%</td>
-        <td><%= days_left(task.days_left) %>
+        <td><%= days_left(task.days_left) %></td>
         <% if current_user.admin? %>
           <td><%= task.user.username %></td>
         <% end %>
-        <td>
         <td>
           <div class="btn-container">
             <%= edit_btn edit_task_path(task) %>
@@ -43,5 +44,14 @@
         </td>
       </tr>
     <% end %>
+    <tr>
+      <td></td>
+      <td></td>
+      <td class="total">Total</td>
+      <td><%= long_duration_display(@tasks.to_a.sum(&:time_remaining_today).round) %></td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
   </tbody>
 </table>
