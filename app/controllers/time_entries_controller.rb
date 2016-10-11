@@ -49,7 +49,6 @@ class TimeEntriesController < ApplicationController
     @time_entry = TimeEntry.new(time_entry_params)
     @time_entry.user = current_user
     @time_entry.start_time ||= DateTime.now
-    @time_entry.duration = 0 if @time_entry.duration.nil?
 
     if @time_entry.save
       redirect_to time_entries_path
