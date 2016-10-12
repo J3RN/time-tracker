@@ -15,19 +15,9 @@ module ApplicationHelper
     hours = minutes / 60
     minutes = minutes - (hours * 60)
 
-    minute_string = minutes > 0 ? "#{minutes}m" : ""
-    hour_string = hours > 0 ? "#{hours}h" : ""
+    minute_string = minutes > 0 ? "#{minutes}" : ""
+    hour_string = hours > 0 ? "#{hours}" : ""
 
-    "#{hour_string} #{minute_string}".strip
-  end
-
-  def long_duration_display(minutes)
-    hours = minutes / 60
-    minutes = minutes - (hours * 60)
-
-    minute_string = minutes > 0 ? "#{minutes} #{'minute'.pluralize(minutes)}" : ""
-    hour_string = hours > 0 ? "#{hours} #{'hour'.pluralize(hours)}" : ""
-
-    "#{hour_string} #{minute_string}".strip
+    "#{hour_string}:#{minute_string}".strip
   end
 end
