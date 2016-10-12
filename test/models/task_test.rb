@@ -50,4 +50,10 @@ class TaskTest < ActiveSupport::TestCase
     @task.update(due_date: Date.today - 1.days)
     assert_equal(60, @task.time_remaining_today)
   end
+
+  test "time remaining handles timezones at least sort of" do
+    initial_time_remaining = @task.time_remaining_today
+    @task.time_entries.create!(user: users(:one), duration: 30, start_time: Date.today.to_time + 22.hours)
+    assert_equal(initial_time_remaining - 30, @task.time_remaining_today)
+  end
 end
