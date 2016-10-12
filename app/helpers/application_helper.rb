@@ -15,9 +15,6 @@ module ApplicationHelper
     hours = minutes / 60
     minutes = minutes - (hours * 60)
 
-    minute_string = minutes > 0 ? "#{minutes}" : ""
-    hour_string = hours > 0 ? "#{hours}" : ""
-
-    "#{hour_string}:#{minute_string}".strip
+    "#{'%02d' % hours}:#{'%02d' % minutes}".strip
   end
 end
