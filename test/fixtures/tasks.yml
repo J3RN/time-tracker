@@ -5,6 +5,7 @@ one:
   task_name: Task One
   priority: 4
   due_date: <%= Date.today + 1 %>
+  estimate: 60
 
 two:
   user: one

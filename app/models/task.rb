@@ -49,7 +49,7 @@ class Task < ActiveRecord::Base
 
     per_day = self.estimate - done_before_today
 
-    if self.due_date >= Date.today
+    if self.due_date > Date.today
       per_day = per_day / (self.due_date - Date.today).to_f
     end
 

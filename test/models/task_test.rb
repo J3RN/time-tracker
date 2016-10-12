@@ -35,4 +35,19 @@ class TaskTest < ActiveSupport::TestCase
     # Assert the time entry was destroyed with the task
     assert_equal(TimeEntry.count, before_count - 1)
   end
+
+  test "time remaining base case" do
+    @task.update(due_date: Date.today + 1.days)
+    assert_equal(60, @task.time_remaining_today)
+  end
+
+  test "time remaining handles zero days case" do
+    @task.update(due_date: Date.today)
+    assert_equal(60, @task.time_remaining_today)
+  end
+
+  test "time remaining handles negative days case" do
+    @task.update(due_date: Date.today - 1.days)
+    assert_equal(60, @task.time_remaining_today)
+  end
 end
