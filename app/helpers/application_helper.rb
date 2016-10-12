@@ -14,7 +14,6 @@ module ApplicationHelper
   def duration_display(minutes)
     hours = minutes / 60
     minutes = minutes - (hours * 60)
-
-    "#{'%02d' % hours}:#{'%02d' % minutes}".strip
+    "#{format('%02d', hours)}:#{format('%02d', minutes)}"
   end
 end
