@@ -11,7 +11,16 @@ class Task < ActiveRecord::Base
   end
   scope :active, -> { where(archived_at: nil) }
   scope :archived, -> { where.not(archived_at: nil) }
-  scope :order_todo, -> { all.sort_by(&:time_remaining_today).reverse }
+
+  def self.order_todo
+    today = all.reject { |x| x.time_remaining_today.zero? }
+    today.sort_by! { |x| -x.priority }
+
+    not_today = all.select { |x| x.time_remaining_today.zero? }
+    not_today.sort_by! { |x| -x.priority }
+
+    today + not_today
+  end
 
   def time_spent
     self.time_entries.sum(:duration)
