@@ -58,9 +58,9 @@ class TimeEntriesControllerTest < ActionController::TestCase
 
   test "should update time_entry" do
     patch :update, id: @time_entry, time_entry: @params
-    assert_redirected_to time_entries_path(assigns(:time_entries))
     @time_entry.reload
-    assert_equal @params[:note], @time_entry.note
+    assert_equal @params[:duration], @time_entry.duration
+    assert_equal @params[:start_time], @time_entry.start_time.american_date
   end
 
   test "renders edit on failed time_entry update" do
@@ -69,6 +69,16 @@ class TimeEntriesControllerTest < ActionController::TestCase
     assert_response :success
     @time_entry.reload
     assert_equal original_note, @time_entry.note
+  end
+
+  test "redirects to today's entries after updating an entry for today" do
+    patch :update, id: @time_entry, time_entry: { start_time: 1.minute.ago.american_date }
+    assert_redirected_to time_entries_path
+  end
+
+  test "redirects to past entries after updating a past time entry" do
+    patch :update, id: @time_entry, time_entry: { start_time: 2.days.ago.american_date }
+    assert_redirected_to time_entries_path(date: 2.days.ago.to_date)
   end
 
   test "should destroy time_entry" do

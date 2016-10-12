@@ -79,7 +79,7 @@ class TimeEntriesController < ApplicationController
 
   def update
     if @time_entry.update(time_entry_params)
-      redirect_to time_entries_path
+      redirect_to_entries_on(@time_entry.start_time.to_date)
     else
       render 'edit'
     end
@@ -138,5 +138,12 @@ class TimeEntriesController < ApplicationController
 
     def remove_stopped_elements(new_params)
       new_params.reject { |key, _| [:duration, :start_time, :result].include? key.to_sym }
+    end
+
+    def redirect_to_entries_on(date)
+      args = {}
+      args[:date] = date unless date == Date.today
+
+      redirect_to time_entries_path(args)
     end
 end
