@@ -13,19 +13,23 @@
 
   <div class="row">
     <div class="form-group col-md-4">
-      <%= f.label :task_name %><br>
+      <%= f.label :task_name %>
+      <button class="fit_to_row" type="button" data-toggle="tooltip" data-placement="right" title=" This name will appear in your task list and serve as an identification for the task. Consider making this descriptive for later reference. ">info</button><br>
       <%= f.text_field :task_name, autofocus: true, class: "form-control"%>
     </div>
     <div class="form-group col-md-4">
-      <%= f.label :tags %><br>
+      <%= f.label :tags %>
+      <button class="fit_to_row" type="button" data-toggle="tooltip" data-placement="right" title=" Tags act as a helpful way to group your tasks.">info</button><br>
       <%= f.collection_select :tag_ids, @tags, :id, :name, {}, {multiple: true, class: "form-control"} %>
     </div>
     <div class="form-group col-md-4">
-      <%= f.label :priority, "Priority (1-5)" %><br>
+      <%= f.label :priority, "Priority (1-5)" %>
+      <button class="fit_to_row" type="button" data-toggle="tooltip" data-placement="right" title=" 1 represents the lowest priority while 5 represents the highest priority">info</button><br>
       <%= f.select :priority, 1..5, {}, class: "form-control"  %>
     </div>
     <div class="form-group col-md-4">
-      <%= f.label :estimate, "Estimate (minutes)" %><br>
+      <%= f.label :estimate, "Estimate (minutes)" %>
+      <button class="fit_to_row" type="button" data-toggle="tooltip" data-placement="right" title=" Making estimates allow you to learn how long tasks actually take you. (Hopefully) as you make more estimates you'll start to become more and more accurate ">info</button><br>
       <%= f.number_field :estimate, class: "form-control" %>
     </div>
     <div class="form-group col-md-4">
