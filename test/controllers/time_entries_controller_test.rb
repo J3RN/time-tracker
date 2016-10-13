@@ -7,7 +7,6 @@ class TimeEntriesControllerTest < ActionController::TestCase
 
     @time_entry = time_entries(:one)
     @tag = tags(:one)
-    @start_time = "08/02/2016 10:32 PM"
 
     user2 = users(:two)
     @tag2 = tags(:two)
@@ -16,7 +15,7 @@ class TimeEntriesControllerTest < ActionController::TestCase
     @params = {
       duration: 30,
       note: "note",
-      start_time: "08/28/2016 10:30 AM",
+      start_time: Time.new(2016, 8, 28, 10, 30).american_date,
       task_id: tasks(:one).id,
       user_id: users(:one).id
     }
