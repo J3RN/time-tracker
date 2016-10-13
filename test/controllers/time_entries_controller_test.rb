@@ -73,7 +73,7 @@ class TimeEntriesControllerTest < ActionController::TestCase
 
   test "redirects to today's entries after updating an entry for today" do
     patch :update, id: @time_entry, time_entry: { start_time: 1.minute.ago.american_date }
-    assert_redirected_to time_entries_path
+    assert_redirected_to time_entries_path(date: Date.today)
   end
 
   test "redirects to past entries after updating a past time entry" do
