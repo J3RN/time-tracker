@@ -42,22 +42,38 @@ class Task < ActiveRecord::Base
   end
 
   def time_remaining_today
-    return 0 unless self.due_date && self.estimate
+    return 0 unless due_date && estimate
 
-    today = Date.today.to_time
+    left_today = due_today - done_today
 
-    entries_before_today = self.time_entries.where("start_time < ?", today)
-    done_before_today = entries_before_today.sum(:duration)
-
-    per_day = self.estimate - done_before_today
-
-    if self.due_date > Date.today
-      per_day = per_day / days_left.to_f
+    if left_today < 0
+      0
+    else
+      left_today
     end
+  end
 
-    todays_entries = self.time_entries.where("start_time >= ? AND start_time < ?", today, today + 1.days)
-    done_today = todays_entries.sum(:duration)
+  private
 
-    per_day - done_today
+  def done_before_today
+    today = Date.today.to_time
+    entries_before_today = time_entries.where('start_time < ?', today)
+    entries_before_today.sum(:duration)
+  end
+
+  def due_today
+    work_left = estimate - done_before_today
+
+    if due_date > Date.today
+      work_left / days_left.to_f
+    else
+      work_left
+    end
+  end
+
+  def done_today
+    today = Date.today.to_time
+    todays_entries = time_entries.where('start_time >= ?', today)
+    todays_entries.sum(:duration)
   end
 end
