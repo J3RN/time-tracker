@@ -39,7 +39,7 @@ class TimeEntriesControllerTest < ActionController::TestCase
       post :create, time_entry: @params
     end
 
-    assert_redirected_to time_entries_path(assigns(:time_entries))
+    assert_redirected_to time_entries_path(date: assigns(:time_entry).start_time.to_date)
   end
 
   test "renders new on failed time_entry create" do
@@ -48,6 +48,11 @@ class TimeEntriesControllerTest < ActionController::TestCase
     end
 
     assert_response :success
+  end
+
+  test "redirects to past entries after creating an past entry" do
+    post :create, time_entry: @params.dup.update(start_time: (Time.new - 1.day).american_date)
+    assert_redirected_to time_entries_path(date: 1.day.ago.to_date)
   end
 
   test "should get edit" do

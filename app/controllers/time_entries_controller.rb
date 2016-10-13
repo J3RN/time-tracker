@@ -51,7 +51,7 @@ class TimeEntriesController < ApplicationController
     @time_entry.start_time ||= DateTime.now
 
     if @time_entry.save
-      redirect_to time_entries_path
+      redirect_to time_entries_path(date: @time_entry.start_time.to_date)
     else
       render 'new'
     end
