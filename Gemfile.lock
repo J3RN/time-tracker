@@ -130,6 +130,7 @@ GEM
     minitest (5.9.0)
     momentjs-rails (2.11.1)
       railties (>= 3.1)
+    mousetrap-rails (1.4.6)
     multi_json (1.11.2)
     nenv (0.3.0)
     net-scp (1.2.1)
@@ -255,6 +256,7 @@ DEPENDENCIES
   jbuilder (~> 2.0)
   jquery-rails
   momentjs-rails (>= 2.9.0)
+  mousetrap-rails
   passenger
   pg
   pry-rails

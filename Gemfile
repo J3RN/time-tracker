@@ -22,6 +22,9 @@ gem 'autoprefixer-rails'
 gem 'momentjs-rails', '>= 2.9.0'
 gem 'bootstrap3-datetimepicker-rails', '~> 4.17'
 
+# Keybinding support
+gem 'mousetrap-rails'
+
 group :production do
   # Use passenger for server
   gem 'passenger'
