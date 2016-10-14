@@ -1,5 +1,5 @@
 <h1 class="time-title">
-  Time Entries <%= link_to '+', new_time_entry_path %>
+  Time Entries <%= link_to '+', new_time_entry_path, data: { keybinding: 'n' } %>
   <div class="time-container">
     <time style="padding: 15px; font-weight: bold"><%= std_date(@date) %></time>
     <br class="visible-sm visible-xs">
