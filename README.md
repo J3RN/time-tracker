@@ -15,7 +15,7 @@ This is an application that I wrote long ago, but have since repurposed to play 
 
 2. Clone this repository
   ```
-  git clone git@github.com:J3RN/timesheet.git
+  git clone https://github.com/J3RN/timesheet.git
   ```
 
 3. Enter the directory
