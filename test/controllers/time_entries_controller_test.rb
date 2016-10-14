@@ -51,8 +51,9 @@ class TimeEntriesControllerTest < ActionController::TestCase
   end
 
   test "redirects to past entries after creating an past entry" do
-    post :create, time_entry: @params.dup.update(start_time: (Time.new - 1.day).american_date)
-    assert_redirected_to time_entries_path(date: 1.day.ago.to_date)
+    yesterday = Time.current - 1.day
+    post :create, time_entry: @params.dup.update(start_time: yesterday.american_date)
+    assert_redirected_to time_entries_path(date: yesterday.to_date)
   end
 
   test "should get edit" do
@@ -76,8 +77,9 @@ class TimeEntriesControllerTest < ActionController::TestCase
   end
 
   test "redirects to today's entries after updating an entry for today" do
-    patch :update, id: @time_entry, time_entry: { start_time: 1.minute.ago.american_date }
-    assert_redirected_to time_entries_path(date: Date.today)
+    now = Time.current
+    patch :update, id: @time_entry, time_entry: { start_time: now.american_date }
+    assert_redirected_to time_entries_path(date: now.to_date)
   end
 
   test "redirects to past entries after updating a past time entry" do
