@@ -130,7 +130,7 @@ class TimeEntriesController < ApplicationController
       if new_params[:running] == "1"
         new_params = remove_stopped_elements(new_params)
       else
-        new_params[:start_time] = Time.american_date(new_params[:start_time])
+        new_params[:start_time] = Time.zone.local_to_utc(Time.american_date(new_params[:start_time]))
       end
 
       new_params
