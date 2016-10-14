@@ -16,23 +16,19 @@
       <%= f.label :task_name %>
       <span class="glyphicon glyphicon-question-sign cursor-tooltip" rel="tooltip" data-placement="right" title="This name will appear in your task list and serve as an identification for the task. Consider making this descriptive for later reference. "></span><br>
       <%= f.text_field :task_name, autofocus: true, class: "form-control"%>
-    </div>
-    <div class="form-group col-md-4">
+    <br>
       <%= f.label :tags %>
       <span class="glyphicon glyphicon-question-sign cursor-tooltip" rel="tooltip" data-placement="right" title="Tags act as a helpful way to group your tasks."></span><br>
       <%= f.collection_select :tag_ids, @tags, :id, :name, {}, {multiple: true, class: "form-control"} %>
-    </div>
-    <div class="form-group col-md-4">
+    <br>
       <%= f.label :priority, "Priority (1-5)" %>
       <span class="glyphicon glyphicon-question-sign cursor-tooltip" rel="tooltip" data-placement="right" title="1 represents the lowest priority while 5 represents the highest priority."></span><br>
       <%= f.select :priority, 1..5, {}, class: "form-control"  %>
-    </div>
-    <div class="form-group col-md-4">
+    <br>
       <%= f.label :estimate, "Estimate (minutes)" %>
       <span class="glyphicon glyphicon-question-sign cursor-tooltip" rel="tooltip" data-placement="right" title="Estimates help Time Tracker help you manage your time more efficiently."></span><br>
       <%= f.number_field :estimate, class: "form-control" %>
-    </div>
-    <div class="form-group col-md-4">
+    <br>
       <%= f.label :due_date %><br>
       <div class='input-group date' id='task_datetimepicker'>
 	<%= f.text_field :due_date, value: @task.due_date.try(:american_date), class: "form-control" %>
