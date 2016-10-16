@@ -6,7 +6,7 @@ class TimeEntriesController < ApplicationController
   before_action :set_tasks, only: [:new, :edit, :create, :update]
   before_action :set_tag, only: [:report]
   before_action -> { ensure_ownership(@tag) }, only: [:report]
-  respond_to :html
+  respond_to :html, :js
 
   def index
     @time_entries = TimeEntry.all
@@ -100,6 +100,11 @@ class TimeEntriesController < ApplicationController
     @time_entries = TimeEntry.includes(task: [:tags])
     @time_entries = @time_entries.where(user: current_user) if !current_user.admin?
     send_data @time_entries.to_csv
+  end
+
+  def updates_all_time_entries
+    @date = params[:date] ? Date.parse(params[:date]) : Date.today
+    @time_entries = current_user.time_entries.filter_by_date(@date)
   end
 
   private

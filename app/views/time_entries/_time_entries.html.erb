@@ -1,0 +1,34 @@
+<table class="table">
+    <tbody>
+      <% time_entries.each do |entry| %>
+        <tr>
+          <td><%= entry.start_time.strftime("%H:%M") %></td>
+          <td><b><%= entry.task.explicit_name %></b></td>
+          <td><div class="only-desktop"><%= entry.goal %></div></td>
+          <td><div class="only-desktop"><%= entry.result %></div></td>
+          <td>
+            <%= duration_display(entry.running ? entry.calculate_duration : entry.duration) %>
+          </td>
+          <% if @admin %>
+            <td>
+              <%= entry.user.username %>
+            </td>
+          <% end %>
+          <td class="col-md-3 btn-col">
+            <div class="btn-container">
+              <% if entry.running? %>
+                <%= stop_btn stop_time_time_entry_path(entry) %>
+              <% end %>
+              <%= edit_btn edit_time_entry_path(entry) %>
+              <%= delete_btn time_entry_path(entry) %>
+            </div>
+          </td>
+        </tr>
+      <% end %>
+      <tr>
+        <td colspan='4'><b>Total</b></td>
+        <td colspan='5'><%= duration_display(time_entries.sum(:duration)) %></td>
+      </tr>
+    </tbody>
+  </table>
+
