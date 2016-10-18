@@ -14,20 +14,20 @@
   <div class="form-group col-md-4">
     <%= f.label :task_id %><br>
     <%= f.select :task_id, @tasks, {}, {class: "form-control", autofocus: true} %>
-  </div>
-  <div class="form-group col-md-4">
+    <br>
+  
     <%= f.label :running %><br />
     <%= f.check_box :running %>
-  </div>
-  <div class="form-group col-md-4">
+   <br>
+	  
     <%= f.label :goal %><br>
     <%= f.text_field :goal, class: "form-control" %>
-  </div>
-  <div class="form-group col-md-4">
+   <br>
+	  
     <%= f.label :result %><br>
     <%= f.text_field :result, class: "form-control" %>
-  </div>
-  <div class="form-group col-md-4">
+   <br>
+	  
     <%= f.label :start_time %><br>
     <div class='input-group date' id='te_datetimepicker'>
       <%= f.text_field :start_time, value: @time_entry.start_time.american_date, class: "form-control" %>
