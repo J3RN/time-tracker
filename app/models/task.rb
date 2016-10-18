@@ -13,11 +13,9 @@ class Task < ActiveRecord::Base
   scope :archived, -> { where.not(archived_at: nil) }
 
   def self.order_todo
-    today = all.reject { |x| x.time_remaining_today.zero? }
-    today.sort_by! { |x| -x.priority }
-
-    not_today = all.select { |x| x.time_remaining_today.zero? }
-    not_today.sort_by! { |x| -x.priority }
+    tasks = order(priority: :desc)
+    today = tasks.reject { |x| x.time_remaining_today.zero? }
+    not_today = tasks.select { |x| x.time_remaining_today.zero? }
 
     today + not_today
   end
