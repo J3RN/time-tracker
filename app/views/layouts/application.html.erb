@@ -19,15 +19,15 @@
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </button>
-        <%= link_to 'Time Tracker', '/', data: { keybinding: '1' }, class: "navbar-brand" %>
+        <%= link_to 'Time Tracker', '/', class: "navbar-brand" %>
       </div>
 
       <div class="collapse navbar-collapse" id="ts-nav-collapse">
         <% if user_signed_in? %>
           <ul class="nav navbar-nav">
-            <li><%= link_to "Tags", tags_path, data: { keybinding: '2' } %></li>
-            <li><%= link_to "Tasks", tasks_path, data: { keybinding: '3' } %></li>
-            <li><%= link_to "Time Entries", time_entries_path, data: { keybinding: '4' } %></li>
+            <li><%= link_to "Tags", tags_path, data: { keybinding: '1' } %></li>
+            <li><%= link_to "Tasks", tasks_path, data: { keybinding: '2' } %></li>
+            <li><%= link_to "Time Entries", time_entries_path, data: { keybinding: '3' } %></li>
           </ul>
         <% end %>
 
