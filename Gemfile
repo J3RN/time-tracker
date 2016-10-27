@@ -60,6 +60,11 @@ group :development, :test do
 
   # JavaScript runtime for those Linux users out there
   gem 'therubyracer'
+end
+
+group :test do
+  # assigns and assert_template in controller tests
+  gem 'rails-controller-testing'
 
   # SimpleCov for test coverage
   gem 'simplecov', require: false
