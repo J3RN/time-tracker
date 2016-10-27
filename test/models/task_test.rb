@@ -61,4 +61,25 @@ class TaskTest < ActiveSupport::TestCase
     @task.time_entries.create!(user: users(:one), duration: 75, start_time: Date.today.to_time)
     assert_equal(0, @task.time_remaining_today)
   end
+
+  test 'due today base case' do
+    @task.update!(estimate: 100, due_date: Date.today)
+    assert_equal(@task.due_today, 100)
+  end
+
+  test 'due today with time entry' do
+    @task.update!(estimate: 100, due_date: Date.today)
+    @task.time_entries.create!(user: users(:one), duration: 75, start_time: Date.today.to_time)
+    assert_equal(@task.due_today, 100)
+  end
+
+  test 'due today no due date case' do
+    @task.update!(estimate: 100, due_date: nil)
+    assert_equal(@task.due_today, 0)
+  end
+
+  test 'due today no estimate case' do
+    @task.update!(estimate: nil, due_date: Date.today)
+    assert_equal(@task.due_today, 0)
+  end
 end

@@ -13,7 +13,7 @@ class Task < ActiveRecord::Base
   scope :archived, -> { where.not(archived_at: nil) }
 
   def self.order_todo
-    tasks = all.sort_by { |x| -x.time_remaining_today }
+    tasks = all.sort_by { |x| -x.due_today }
 
     today = tasks.reject { |x| x.time_remaining_today.zero? }
     today.sort_by! { |x| -x.priority }
@@ -53,8 +53,6 @@ class Task < ActiveRecord::Base
   end
 
   def time_remaining_today
-    return 0 unless due_date && estimate
-
     left_today = due_today - done_today
 
     if left_today < 0
@@ -64,15 +62,9 @@ class Task < ActiveRecord::Base
     end
   end
 
-  private
-
-  def done_before_today
-    today = Date.today.to_time
-    entries_before_today = time_entries.where('start_time < ?', today)
-    entries_before_today.sum(:duration)
-  end
-
   def due_today
+    return 0 unless estimate && due_date
+
     work_left = estimate - done_before_today
 
     if due_date > Date.today
@@ -80,6 +72,14 @@ class Task < ActiveRecord::Base
     else
       work_left
     end
+  end
+
+  private
+
+  def done_before_today
+    today = Date.today.to_time
+    entries_before_today = time_entries.where('start_time < ?', today)
+    entries_before_today.sum(:duration)
   end
 
   def done_today
