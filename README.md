@@ -37,3 +37,8 @@ This is an application that I wrote long ago, but have since repurposed to play 
   ```
   bundle exec passenger start
   ```
+
+## Testing
+
+- Tests can be run using `rake test`
+- For test coverage, run your tests, open up `coverage/index.html` in your browser
