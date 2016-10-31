@@ -7,6 +7,7 @@ Rails.application.routes.draw do
     collection do
       get 'report'
       get 'export'
+      get :updates_all_time_entries
     end
 
     member do
