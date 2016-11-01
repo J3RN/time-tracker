@@ -5,32 +5,18 @@ class TimeEntriesController < ApplicationController
                                         :stop_time, :start_time]
   before_action :set_tasks, only: [:new, :edit, :create, :update]
   before_action :set_tag, only: [:report]
+  before_action :set_time_entries, only: [:index, :updates_all_time_entries]
   before_action -> { ensure_ownership(@tag) }, only: [:report]
   respond_to :html, :js
 
   def index
-    @time_entries = TimeEntry.all
-
     @admin = current_user.admin?
 
     # Tags for reporting
     @tags = current_user.admin ? Tag.all : Tag.where(user: current_user)
 
-    # Only my entries if not admin
-    @time_entries = @time_entries.where(user: current_user) unless @admin
-
-    # If there's a date, make sure all time entries are from that date
-    @date = params[:date] ? Date.parse(params[:date]) : Date.today
-    @time_entries = @time_entries.filter_by_date(@date)
-
     # Total time for today
     @total = @time_entries.sum(:duration)
-
-    # Include tasks and tags
-    @time_entries.includes(task: :tags)
-
-    # Most recent first
-    @time_entries = @time_entries.order(start_time: :desc)
   end
 
   def show
@@ -103,11 +89,10 @@ class TimeEntriesController < ApplicationController
   end
 
   def updates_all_time_entries
-    @date = params[:date] ? Date.parse(params[:date]) : Date.today
-    @time_entries = current_user.time_entries.filter_by_date(@date)
   end
 
   private
+
     def set_tasks
       @tasks = Task.includes(:time_entries, :tags)
       @tasks = @tasks.where(user: current_user) unless current_user.admin?
@@ -124,6 +109,23 @@ class TimeEntriesController < ApplicationController
 
     def set_time_entry
       @time_entry = TimeEntry.find(params[:id])
+    end
+
+    def set_time_entries
+      @time_entries = TimeEntry.all
+
+      # Only my entries if not admin
+      @time_entries = @time_entries.where(user: current_user) unless @admin
+
+      # If there's a date, make sure all time entries are from that date
+      @date = params[:date] ? Date.parse(params[:date]) : Date.today
+      @time_entries = @time_entries.filter_by_date(@date)
+
+      # Include tasks and tags
+      @time_entries.includes(task: :tags)
+
+      # Most recent first
+      @time_entries = @time_entries.order(start_time: :desc)
     end
 
     def time_entry_params
