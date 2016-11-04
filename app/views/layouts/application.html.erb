@@ -25,9 +25,9 @@
       <div class="collapse navbar-collapse" id="ts-nav-collapse">
         <% if user_signed_in? %>
           <ul class="nav navbar-nav">
-            <li><%= link_to "Tags", tags_path, data: { keybinding: '1' } %></li>
-            <li><%= link_to "Tasks", tasks_path, data: { keybinding: '2' } %></li>
-            <li><%= link_to "Time Entries", time_entries_path, data: { keybinding: '3' } %></li>
+            <li><%= link_to "Tags", tags_path, data: { keybinding: 'a' } %></li>
+            <li><%= link_to "Tasks", tasks_path, data: { keybinding: 's' } %></li>
+            <li><%= link_to "Time Entries", time_entries_path, data: { keybinding: 'e' } %></li>
           </ul>
         <% end %>
 
@@ -36,8 +36,8 @@
             <li><%= link_to current_user.username, edit_user_registration_path(current_user), id: ('admin' if current_user.admin?) %></li>
             <li><%= link_to "Sign out", destroy_user_session_path, method: :delete %></li>
           <% else %>
-            <li><%= link_to "Log in", new_user_session_path %></li>
-            <li><%= link_to "Sign up", new_user_registration_path %></li>
+            <li><%= link_to "Log in", new_user_session_path, data: { keybinding: 'l' } %></li>
+            <li><%= link_to "Sign up", new_user_registration_path, data: { keybinding: 'i' } %></li>
           <% end %>
         </ul>
       </div>
