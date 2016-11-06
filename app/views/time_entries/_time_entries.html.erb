@@ -7,7 +7,7 @@
           <td><div class="only-desktop"><%= entry.goal %></div></td>
           <td><div class="only-desktop"><%= entry.result %></div></td>
           <td>
-            <%= duration_display(entry.running ? entry.calculate_duration : entry.duration) %>
+            <%= duration_display(entry.real_duration) %>
           </td>
           <% if @admin %>
             <td>
@@ -27,7 +27,7 @@
       <% end %>
       <tr>
         <td colspan='4'><b>Total</b></td>
-        <td colspan='5'><%= duration_display(time_entries.sum(:duration)) %></td>
+        <td colspan='5'><%= duration_display(total) %></td>
       </tr>
     </tbody>
   </table>

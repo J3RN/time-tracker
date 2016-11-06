@@ -8,8 +8,12 @@ class TimeEntry < ActiveRecord::Base
   validates_presence_of :task_id
   validates_presence_of :user_id
 
-  def calculate_duration
-    (duration || 0) + ((DateTime.now.to_i - self.start_time.to_i) / 60.0).round
+  def real_duration
+    if running?
+      (duration || 0) + ((DateTime.now.to_i - self.start_time.to_i) / 60.0).round
+    else
+      duration
+    end
   end
 
   def self.to_csv
