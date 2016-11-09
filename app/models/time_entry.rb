@@ -10,7 +10,7 @@ class TimeEntry < ActiveRecord::Base
 
   def real_duration
     if running?
-      (duration || 0) + ((DateTime.now.to_i - self.start_time.to_i) / 60.0).round
+      ((DateTime.now.to_i - start_time.to_i) / 60.0).round
     else
       duration
     end
