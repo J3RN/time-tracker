@@ -125,7 +125,7 @@ class TimeEntriesController < ApplicationController
     end
 
     def set_total
-      @total = @time_entries.map(&:real_duration).sum
+      @total = @time_entries.total_real_duration
     end
 
     def time_entry_params

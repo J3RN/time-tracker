@@ -29,4 +29,8 @@ class TimeEntry < ActiveRecord::Base
     entries = self.where("start_time >= ?", date.to_time)
     entries.where("start_time < ?", (date + 1.day).to_time)
   end
+
+  def self.total_real_duration
+    all.map(&:real_duration).sum
+  end
 end

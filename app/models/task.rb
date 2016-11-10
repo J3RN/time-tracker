@@ -25,7 +25,7 @@ class Task < ActiveRecord::Base
   end
 
   def time_spent
-    self.time_entries.map(&:real_duration).sum
+    self.time_entries.total_real_duration
   end
 
   def percent_time_used
@@ -79,12 +79,12 @@ class Task < ActiveRecord::Base
   def done_before_today
     today = Date.today.to_time
     entries_before_today = time_entries.where('start_time < ?', today)
-    entries_before_today.map(&:real_duration).sum
+    entries_before_today.total_real_duration
   end
 
   def done_today
     today = Date.today.to_time
     todays_entries = time_entries.where('start_time >= ?', today)
-    todays_entries.map(&:real_duration).sum
+    todays_entries.total_real_duration
   end
 end
