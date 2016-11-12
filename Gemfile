@@ -22,13 +22,11 @@ gem 'autoprefixer-rails'
 gem 'momentjs-rails', '>= 2.9.0'
 gem 'bootstrap3-datetimepicker-rails', '~> 4.17'
 
-group :production do
-  # Use passenger for server
-  gem 'passenger'
+# Use passenger for server
+gem 'passenger'
 
-  # Use Dotenv for env vars
-  gem 'dotenv-rails'
-end
+# Use Dotenv for env vars
+gem 'dotenv-rails'
 
 group :development do
   # Access an IRB console on exception pages or by using <%= console %> in views
@@ -57,6 +55,8 @@ group :development, :test do
 
   # Pry-rails for better console
   gem 'pry-rails'
+
+  # JavaScript runtime for those Linux users out there
   gem 'therubyracer'
 
   # SimpleCov for test coverage
