@@ -6,17 +6,13 @@ class TimeEntriesController < ApplicationController
   before_action :set_tasks, only: [:new, :edit, :create, :update]
   before_action :set_tag, only: [:report]
   before_action :set_time_entries, only: [:index, :updates_all_time_entries]
+  before_action :set_total, only: [:index, :updates_all_time_entries]
   before_action -> { ensure_ownership(@tag) }, only: [:report]
   respond_to :html, :js
 
   def index
-    @admin = current_user.admin?
-
     # Tags for reporting
     @tags = current_user.admin ? Tag.all : Tag.where(user: current_user)
-
-    # Total time for today
-    @total = @time_entries.sum(:duration)
   end
 
   def show
@@ -54,7 +50,7 @@ class TimeEntriesController < ApplicationController
   end
 
   def stop_time
-    @time_entry.duration = @time_entry.calculate_duration
+    @time_entry.duration = @time_entry.real_duration
     @time_entry.running = false
     if @time_entry.save
       redirect_to time_entries_path
@@ -126,6 +122,10 @@ class TimeEntriesController < ApplicationController
 
       # Most recent first
       @time_entries = @time_entries.order(start_time: :desc)
+    end
+
+    def set_total
+      @total = @time_entries.total_real_duration
     end
 
     def time_entry_params
