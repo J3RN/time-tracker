@@ -38,7 +38,8 @@ $(function() {
 
     $(document).on("page:change", function() {
         $("#archive-toggle").click(toggleArchived);
-	$("#task_datetimepicker").datetimepicker({ format: "L" });
+	$("#task_start_datetimepicker").datetimepicker({ format: "L" });
+	$("#task_due_datetimepicker").datetimepicker({ format: "L" });
 	setupCompleteHandlers();
         loadSelect2();
     });

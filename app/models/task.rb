@@ -64,6 +64,7 @@ class Task < ActiveRecord::Base
 
   def due_today
     return 0 unless estimate && due_date
+    return 0 if start_date && start_date > Date.today
 
     work_left = estimate - done_before_today
 
