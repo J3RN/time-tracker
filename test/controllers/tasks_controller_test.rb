@@ -21,7 +21,6 @@ class TasksControllerTest < ActionController::TestCase
   test 'should get index' do
     get :index
     assert_response :success
-    assert_not_nil assigns(:tasks)
   end
 
   test 'should get new' do
@@ -34,7 +33,7 @@ class TasksControllerTest < ActionController::TestCase
       post :create, params: { task: @params }
     end
 
-    assert_redirected_to tasks_path(assigns(:tasks))
+    assert_redirected_to tasks_path
   end
 
   test "render 'new' on fail to create" do
@@ -51,7 +50,7 @@ class TasksControllerTest < ActionController::TestCase
 
   test 'should update task' do
     patch :update, params: { id: @task, task: @params }
-    assert_redirected_to tasks_path(assigns(:tasks))
+    assert_redirected_to tasks_path
     @task.reload
     assert_equal @params[:priority], @task.priority
   end
@@ -69,12 +68,5 @@ class TasksControllerTest < ActionController::TestCase
     end
 
     assert_redirected_to tasks_path
-  end
-
-  test "should not see others' tasks" do
-    get :index
-
-    assert_equal(@user.tasks.active.count, assigns(:active).count)
-    assert_equal(@user.tasks.archived.count, assigns(:archived).count)
   end
 end

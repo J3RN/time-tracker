@@ -28,7 +28,6 @@ class TimeEntriesControllerTest < ActionController::TestCase
   test 'should get index' do
     get :index
     assert_response :success
-    assert_not_nil assigns(:time_entries)
   end
 
   test 'should get new' do
@@ -41,7 +40,7 @@ class TimeEntriesControllerTest < ActionController::TestCase
       post :create, params: { time_entry: @params }
     end
 
-    start_date = assigns(:time_entry).start_time.to_date
+    start_date = Time.american_date(@params[:start_time]).to_date
     assert_redirected_to time_entries_path(date: start_date)
   end
 

@@ -18,7 +18,6 @@ class TagsControllerTest < ActionController::TestCase
   test 'should get index' do
     get :index
     assert_response :success
-    assert_not_nil assigns(:tags)
   end
 
   test 'should get new' do
@@ -31,7 +30,7 @@ class TagsControllerTest < ActionController::TestCase
       post :create, params: { tag: @params }
     end
 
-    assert_redirected_to tags_path(assigns(:tags))
+    assert_redirected_to tags_path
   end
 
   test "render 'new' on fail to create" do
@@ -49,7 +48,7 @@ class TagsControllerTest < ActionController::TestCase
 
   test 'should update tag' do
     patch :update, params: { id: @tag, tag: @params }
-    assert_redirected_to tags_path(assigns(:tags))
+    assert_redirected_to tags_path
     @tag.reload
     assert_equal @params[:name], @tag.name
   end
