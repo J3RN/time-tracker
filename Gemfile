@@ -1,15 +1,17 @@
 source 'https://rubygems.org'
 
-gem 'rails', '4.2.0'
-gem 'pg'
+ruby '2.3.1'
+
+gem 'rails', '~> 5.0.0'
+gem 'pg', '~> 0.19.0'
+gem 'passenger', '>= 5.0.25', require: 'phusion_passenger/rack_handler'
 gem 'sass-rails', '~> 5.0'
 gem 'uglifier', '>= 1.3.0'
-gem 'coffee-rails', '~> 4.1.0'
+gem 'coffee-rails', '~> 4.2'
 
 gem 'jquery-rails'
-gem 'turbolinks'
-gem 'jbuilder', '~> 2.0'
-gem 'sdoc', '~> 0.4.0', group: :doc
+gem 'turbolinks', '~> 5'
+gem 'jbuilder', '~> 2.5'
 
 # Devise for user authentication
 gem 'devise'
@@ -22,43 +24,44 @@ gem 'autoprefixer-rails'
 gem 'momentjs-rails', '>= 2.9.0'
 gem 'bootstrap3-datetimepicker-rails', '~> 4.17'
 
-# Use passenger for server
-gem 'passenger'
+# JavaScript runtime
+gem 'therubyracer'
 
 # Use Dotenv for env vars
 gem 'dotenv-rails'
 
 group :development do
   # Access an IRB console on exception pages or by using <%= console %> in views
-  gem 'web-console', '~> 2.0'
+  gem 'web-console'
+  gem 'listen', '~> 3.0.5'
+
+  # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
+  gem 'spring'
+  gem 'spring-watcher-listen', '~> 2.0.0'
+
+  # Capistrano for deployment
+  gem 'capistrano', '~> 3.6'
+  gem 'capistrano-rails', '~> 1.2'
+  gem 'capistrano-rvm'
+  gem 'capistrano-passenger'
+
+  # Guard for automation goodies
+  gem 'guard'
+  gem 'guard-process'
 end
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
 
-  # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
-  gem 'spring'
-
-  # Awesome print
+  # Awesome print prints Ruby objects awesomely
   gem 'awesome_print'
-
-  # Guard for automation goodies
-  gem 'guard'
-  gem 'guard-process'
-
-  # Capistrano for deployment
-  gem 'capistrano', '~> 3.1'
-  gem 'capistrano-rails', '~> 1.1'
-  gem 'capistrano-rvm'
-  gem 'capistrano-passenger'
 
   # Pry-rails for better console
   gem 'pry-rails'
+end
 
-  # JavaScript runtime for those Linux users out there
-  gem 'therubyracer'
-
+group :test do
   # SimpleCov for test coverage
   gem 'simplecov', require: false
 end

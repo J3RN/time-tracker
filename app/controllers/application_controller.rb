@@ -6,24 +6,25 @@ class ApplicationController < ActionController::Base
   before_action :authenticate_user!
   before_action :configure_permitted_parameters, if: :devise_controller?
 
-  def after_sign_in_path_for(user)
+  def after_sign_in_path_for(_)
     tasks_path
   end
 
   protected
 
   def configure_permitted_parameters
-    devise_parameter_sanitizer.for(:sign_up) << [ :username, :display_name ]
-    devise_parameter_sanitizer.for(:account_update) << [ :username, :display_name ]
+    additional_fields = User::ADDITIONAL_FIELDS
+    devise_parameter_sanitizer.permit(:sign_up, keys: additional_fields)
+    devise_parameter_sanitizer.permit(:account_update, keys: additional_fields)
 
-    if user_signed_in? && current_user.admin?
-      devise_parameter_sanitizer.for(:account_update) << [ :admin ]
-    end
+    return unless user_signed_in? && current_user.admin?
+
+    devise_parameter_sanitizer.for(:account_update, keys: [:admin])
   end
 
   def ensure_ownership(item)
-    unless item.user == current_user || current_user.admin?
-      redirect_to({action: 'index'}, alert: "That's not yours!")
-    end
+    return if item.user == current_user || current_user.admin?
+
+    redirect_to({ action: 'index' }, alert: "That's not yours!")
   end
 end

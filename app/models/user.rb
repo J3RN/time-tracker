@@ -1,4 +1,4 @@
-class User < ActiveRecord::Base
+class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
@@ -7,4 +7,6 @@ class User < ActiveRecord::Base
   has_many :time_entries, dependent: :destroy
   has_many :tags, dependent: :destroy
   has_many :tasks, dependent: :destroy
+
+  ADDITIONAL_FIELDS = [:username, :display_name].freeze
 end

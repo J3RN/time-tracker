@@ -36,7 +36,7 @@ $(function() {
 	});
     }
 
-    $(document).on("page:change", function() {
+    $(document).on("turbolinks:load", function() {
         $("#archive-toggle").click(toggleArchived);
 	$("#task_datetimepicker").datetimepicker({ format: "L" });
 	setupCompleteHandlers();

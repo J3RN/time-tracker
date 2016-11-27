@@ -15,55 +15,54 @@ class TagsControllerTest < ActionController::TestCase
     @bad_params = @params.dup.tap { |p| p[:name] = nil }
   end
 
-  test "should get index" do
+  test 'should get index' do
     get :index
     assert_response :success
-    assert_not_nil assigns(:tags)
   end
 
-  test "should get new" do
+  test 'should get new' do
     get :new
     assert_response :success
   end
 
-  test "should create tag" do
+  test 'should create tag' do
     assert_difference('Tag.count') do
-      post :create, tag: @params
+      post :create, params: { tag: @params }
     end
 
-    assert_redirected_to tags_path(assigns(:tags))
+    assert_redirected_to tags_path
   end
 
   test "render 'new' on fail to create" do
     assert_no_difference('Tag.count') do
-      post :create, tag: @bad_params
+      post :create, params: { tag: @bad_params }
     end
 
     assert_response :success
   end
 
-  test "should get edit" do
-    get :edit, id: @tag
+  test 'should get edit' do
+    get :edit, params: { id: @tag }
     assert_response :success
   end
 
-  test "should update tag" do
-    patch :update, id: @tag, tag: @params
-    assert_redirected_to tags_path(assigns(:tags))
+  test 'should update tag' do
+    patch :update, params: { id: @tag, tag: @params }
+    assert_redirected_to tags_path
     @tag.reload
     assert_equal @params[:name], @tag.name
   end
 
   test "render 'edit' on fail to update" do
-    patch :update, id: @tag, tag: @bad_params
+    patch :update, params: { id: @tag, tag: @bad_params }
     assert_response :success
     @tag.reload
     refute_equal @bad_params[:name], @tag.name
   end
 
-  test "should destroy tag" do
+  test 'should destroy tag' do
     assert_difference('Tag.count', -1) do
-      delete :destroy, id: @tag
+      delete :destroy, params: { id: @tag }
     end
 
     assert_redirected_to tags_path
