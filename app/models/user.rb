@@ -7,4 +7,6 @@ class User < ApplicationRecord
   has_many :time_entries, dependent: :destroy
   has_many :tags, dependent: :destroy
   has_many :tasks, dependent: :destroy
+
+  ADDITIONAL_FIELDS = [:username, :display_name].freeze
 end
