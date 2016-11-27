@@ -17,7 +17,7 @@ $(function() {
     }
   }
 
-  $(document).on("page:change", function() {
+  $(document).on("turbolinks:load", function() {
     hideOrShowFields();
     $('#te_datetimepicker').datetimepicker();
     $('input[name="time_entry[running]"]').change(hideOrShowFields);
