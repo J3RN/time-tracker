@@ -24,12 +24,11 @@ gem 'autoprefixer-rails'
 gem 'momentjs-rails', '>= 2.9.0'
 gem 'bootstrap3-datetimepicker-rails', '~> 4.17'
 
+# JavaScript runtime
 gem 'therubyracer'
 
-group :production do
-  # Use Dotenv for env vars
-  gem 'dotenv-rails'
-end
+# Use Dotenv for env vars
+gem 'dotenv-rails'
 
 group :development do
   # Access an IRB console on exception pages or by using <%= console %> in views
