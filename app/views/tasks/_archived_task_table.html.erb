@@ -1,0 +1,50 @@
+<table class="table task-table">
+  <thead>
+    <tr>
+      <th></th>
+      <th></th>
+      <th>Task name</th>
+      <th>Time spent</th>
+      <% if current_user.admin? %>
+        <th>User</th>
+      <% end %>
+      <th class="col-md-3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% tasks.each do |task| %>
+      <tr class="<%= "priority#{task.priority} overdue" if task.overdue? %>">
+        <td class="swatch priority<%= task.priority %>"></td>
+        <td>
+          <% if task.archived? %>
+            <input type="checkbox" id="task-<%= task.id %>" checked />
+          <% else %>
+            <input type="checkbox" id="task-<%= task.id %>" />
+          <% end %>
+        </td>
+        <td><%= task.explicit_name %></td>
+	<td><%= duration_display(task.time_spent) %></td>
+        <% if current_user.admin? %>
+          <td><%= task.user.username %></td>
+        <% end %>
+        <td>
+          <div class="btn-container">
+            <%= edit_btn edit_task_path(task) %>
+            <%= delete_btn task %>
+          </div>
+        </td>
+      </tr>
+    <% end %>
+    <tr>
+      <td></td>
+      <td></td>
+      <td class="total">Total</td>
+      <td><%= duration_display(tasks.to_a.sum(&:time_spent).round) %></td>
+      <% if current_user.admin? %>
+	<td></td>
+      <% end %>
+      <td></td>
+    </tr>
+  </tbody>
+</table>
