@@ -22,6 +22,6 @@ module ApplicationHelper
     tag_spans = task.tags.map do |tag|
       content_tag(:span, tag.name, class: ['label', 'label-info'])
     end
-    task_div + tag_spans.reduce(:+)
+    task_div + tag_spans.join.html_safe
   end
 end
