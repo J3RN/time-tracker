@@ -82,4 +82,9 @@ class TaskTest < ActiveSupport::TestCase
     @task.update!(estimate: nil, due_date: Date.today)
     assert_equal(@task.due_today, 0)
   end
+
+  test 'due today not started' do
+    @task.update!(start_date: Date.today + 1)
+    assert_equal(@task.due_today, 0)
+  end
 end
