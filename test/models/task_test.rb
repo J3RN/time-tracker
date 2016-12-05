@@ -2,7 +2,7 @@ require 'test_helper'
 
 class TaskTest < ActiveSupport::TestCase
   setup do
-    @task = tasks(:one)
+    @task = tasks(:unarchived_full)
     @tag = tags(:one)
     @time_entry = time_entries(:one)
   end
