@@ -1,4 +1,3 @@
-# encoding: UTF-8
 # This file is auto-generated from the current state of the database. Instead
 # of editing this file, please use the migrations feature of Active Record to
 # incrementally modify your database, and then regenerate this schema definition.
@@ -21,10 +20,9 @@ ActiveRecord::Schema.define(version: 20161116200213) do
     t.integer  "task_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["tag_id"], name: "index_taggings_on_tag_id", using: :btree
+    t.index ["task_id"], name: "index_taggings_on_task_id", using: :btree
   end
-
-  add_index "taggings", ["tag_id"], name: "index_taggings_on_tag_id", using: :btree
-  add_index "taggings", ["task_id"], name: "index_taggings_on_task_id", using: :btree
 
   create_table "tags", force: :cascade do |t|
     t.string   "name",       null: false
@@ -74,9 +72,8 @@ ActiveRecord::Schema.define(version: 20161116200213) do
     t.text     "username"
     t.text     "display_name"
     t.boolean  "admin",                  default: false
+    t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
+    t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   end
-
-  add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
-  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
 end
