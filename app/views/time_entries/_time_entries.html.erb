@@ -3,7 +3,7 @@
       <% time_entries.each do |entry| %>
         <tr>
           <td><%= entry.start_time.strftime("%H:%M") %></td>
-          <td><b><%= entry.task.explicit_name %></b></td>
+          <td><b><%= task_with_tag_labels(entry.task) %></b></td>
           <td><div class="only-desktop"><%= entry.goal %></div></td>
           <td><div class="only-desktop"><%= entry.result %></div></td>
           <td>

@@ -25,7 +25,7 @@
             <input type="checkbox" id="task-<%= task.id %>" />
           <% end %>
         </td>
-        <td><%= task.explicit_name %></td>
+        <td><%= task_with_tag_labels(task) %></td>
         <% if task.time_remaining_today > 0 %>
           <td><%= duration_display(task.time_remaining_today.round) %></td>
         <% else %>

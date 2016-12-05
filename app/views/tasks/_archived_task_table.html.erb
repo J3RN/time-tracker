@@ -23,7 +23,7 @@
             <input type="checkbox" id="task-<%= task.id %>" />
           <% end %>
         </td>
-        <td><%= task.explicit_name %></td>
+        <td><%= task_with_tag_labels(task) %></td>
 	<td><%= duration_display(task.time_spent) %></td>
         <% if current_user.admin? %>
           <td><%= task.user.username %></td>
