@@ -53,6 +53,7 @@ class TasksController < ApplicationController
   end
 
   private
+
     def set_task
       @task = Task.find(params[:id])
     end
@@ -70,11 +71,17 @@ class TasksController < ApplicationController
       new_params = params.require(:task).permit(:task_name, :estimate,
                                                 :archived_at, :priority,
                                                 :user_id, :due_date,
-                                                tag_ids: [])
+                                                :start_date, tag_ids: [])
       new_params[:user_id] = current_user.id unless current_user.admin?
-      unless new_params[:due_date].blank?
+
+      if new_params[:due_date].present?
         new_params[:due_date] = Date.american_date(new_params[:due_date])
       end
+
+      if new_params[:start_date].present?
+        new_params[:start_date] = Date.american_date(new_params[:start_date])
+      end
+
       new_params
     end
 end

@@ -33,8 +33,17 @@
       <%= f.number_field :estimate, class: "form-control" %>
     </div>
     <div class="form-group col-md-4">
+	<%= f.label :start_date %>
+	<div class='input-group date' id='task_start_datetimepicker'>
+	    <%= f.text_field :start_date, value: (@task.start_date.try(:american_date) || Date.today.american_date), class: "form-control" %>
+	    <span class="input-group-addon">
+		<span class="glyphicon glyphicon-calendar"></span>
+	    </span>
+	</div>
+    </div>
+    <div class="form-group col-md-4">
       <%= f.label :due_date %><br>
-      <div class='input-group date' id='task_datetimepicker'>
+      <div class='input-group date' id='task_due_datetimepicker'>
 	<%= f.text_field :due_date, value: @task.due_date.try(:american_date), class: "form-control" %>
 	<span class="input-group-addon">
 	  <span class="glyphicon glyphicon-calendar"></span>

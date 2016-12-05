@@ -2,7 +2,7 @@ require 'test_helper'
 
 class TaskTest < ActiveSupport::TestCase
   setup do
-    @task = tasks(:one)
+    @task = tasks(:unarchived_full)
     @tag = tags(:one)
     @time_entry = time_entries(:one)
   end
@@ -80,6 +80,11 @@ class TaskTest < ActiveSupport::TestCase
 
   test 'due today no estimate case' do
     @task.update!(estimate: nil, due_date: Date.today)
+    assert_equal(@task.due_today, 0)
+  end
+
+  test 'due today not started' do
+    @task.update!(start_date: Date.today + 1)
     assert_equal(@task.due_today, 0)
   end
 end

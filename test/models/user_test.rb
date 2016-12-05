@@ -4,7 +4,7 @@ class UserTest < ActiveSupport::TestCase
   setup do
     @user = users(:one)
     @tag = tags(:one)
-    @task = tasks(:one)
+    @task = tasks(:unarchived_full)
     @time_entry = time_entries(:one)
   end
 

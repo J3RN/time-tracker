@@ -24,22 +24,23 @@ $(function() {
     }
 
     var setupCompleteHandlers = function() {
-	$(".task-table input[type=checkbox]").change(function(event) {
-	    var id = event.target.id.substr(5);
-	    var target = $(event.target);
+        $(".task-table input[type=checkbox]").change(function(event) {
+            var id = event.target.id.substr(5);
+            var target = $(event.target);
 
-	    if (target.prop("checked")) {
-		window.location = "/tasks/" + id + "/archive"
-	    } else {
-		window.location = "/tasks/" + id + "/unarchive"
-	    }
-	});
+            if (target.prop("checked")) {
+                window.location = "/tasks/" + id + "/archive"
+            } else {
+                window.location = "/tasks/" + id + "/unarchive"
+            }
+        });
     }
 
     $(document).on("turbolinks:load", function() {
         $("#archive-toggle").click(toggleArchived);
-	$("#task_datetimepicker").datetimepicker({ format: "L" });
-	setupCompleteHandlers();
+        $("#task_start_datetimepicker").datetimepicker({ format: "L" });
+        $("#task_due_datetimepicker").datetimepicker({ format: "L" });
+        setupCompleteHandlers();
         loadSelect2();
     });
 });

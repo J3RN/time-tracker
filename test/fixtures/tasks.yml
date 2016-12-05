@@ -1,25 +1,46 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
+unarchived_full:
+  user: one
+  task_name: Homework 1000
+  priority: 4
+  estimate: 60
+  start_date: <%= Date.today %>
+  due_date: <%= Date.today + 1 %>
+
+unarchived_no_start:
   user: one
   task_name: Task One
   priority: 4
   due_date: <%= Date.today + 1 %>
   estimate: 60
 
-two:
+unarchived_no_start_no_estimate:
+  user: two
+  task_name: Task Three
+  priority: 2
+  due_date: <%= Date.today + 1 %>
+
+unarchived_empty:
+  user: two
+  task_name: 1234
+
+archived_full:
+  user: one
+  task_name: Archived Full
+  priority: 5
+  estimate: 54
+  start_date: <%= Date.today %>
+  due_date: <%= Date.today + 1 %>
+  archived_at: <%= Date.today %>
+
+archived_no_start_no_estimate_no_priority:
+  user: two
+  task_name: Task Four
+  due_date: <%= Date.today + 1 %>
+  archived_at: <%= DateTime.now - 1.days %>
+
+archived_empty:
   user: one
   task_name: Task Two
   archived_at: <%= DateTime.now - 1.days %>
-
-three:
-  user: two
-  priority: 2
-  task_name: Task Three
-  due_date: <%= Date.today + 1 %>
-
-four:
-  user: two
-  task_name: Task Four
-  archived_at: <%= DateTime.now - 1.days %>
-  due_date: <%= Date.today + 1 %>
