@@ -147,17 +147,18 @@ form.button_to {
   margin-bottom: 20px;
 }
 
-.time-container {
-  margin-top: .5em;
-  font-size: medium;
-  //float: right;
-  text-align: right;
-}
-
 .cursor-tooltip {
-	cursor: pointer;
+  cursor: pointer;
 }
 
 .label {
   margin-right: 5px;
+}
+
+.panel-heading {
+  font-weight: bold;
+}
+
+.panel.overrun .panel-heading {
+  background: lighten($red, 40%);
 }

@@ -1,7 +1,6 @@
 <h1 class="time-title">
   Time Entries <%= link_to '+', new_time_entry_path, data: { keybinding: 'n' } %>
-  <div class="time-container">
-    <time style="padding: 15px; font-weight: bold"><%= std_date(@date) %></time>
+  <div class="pull-right">
     <br class="visible-sm visible-xs">
     <div class="btn-group time-nav">
       <%= link_to "<<", time_entries_path(date: @date - 1.day), class: 'btn btn-default' %>
@@ -27,5 +26,10 @@
 </div>
 
 <div class="col-md-10 js-update-entries" data-filter-date="<%= @date %>">
-  <%= render 'time_entries', time_entries: @time_entries, total: @total %>
+  <% if @overrun_entries.present? %>
+    <% @overrun_entries.each do |date, entries| %>
+      <%= render 'entries_table', entries: entries, total: nil, date: date, overrun: true %>
+    <% end %>
+  <% end %>
+  <%= render 'entries_table', entries: @time_entries, total: @total, date: @date, overrun: false %>
 </div>

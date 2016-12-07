@@ -5,8 +5,9 @@ class TimeEntriesController < ApplicationController
                                         :stop_time, :start_time]
   before_action :set_tasks, only: [:new, :edit, :create, :update]
   before_action :set_tag, only: [:report]
+  before_action :set_date, only: [:index, :updates_all_time_entries]
   before_action :set_time_entries, only: [:index, :updates_all_time_entries]
-  before_action :set_total, only: [:index, :updates_all_time_entries]
+  before_action :set_overrun_entries, only: [:index], if: -> { @date == Date.today }
   before_action -> { ensure_ownership(@tag) }, only: [:report]
   respond_to :html, :js
 
@@ -107,25 +108,28 @@ class TimeEntriesController < ApplicationController
       @time_entry = TimeEntry.find(params[:id])
     end
 
-    def set_time_entries
-      @time_entries = TimeEntry.all
-
-      # Only my entries if not admin
-      @time_entries = @time_entries.where(user: current_user) unless @admin
-
+    def set_date
       # If there's a date, make sure all time entries are from that date
+      # Default to today
       @date = params[:date] ? Date.parse(params[:date]) : Date.today
-      @time_entries = @time_entries.filter_by_date(@date)
-
-      # Include tasks and tags
-      @time_entries.includes(task: :tags)
-
-      # Most recent first
-      @time_entries = @time_entries.order(start_time: :desc)
     end
 
-    def set_total
+    def set_time_entries
+      @time_entries = TimeEntry.filter_by_date(@date)
+                               .includes(task: :tags)
+                               .order(start_time: :desc)
+      @time_entries = @time_entries.where(user: current_user) unless @admin
       @total = @time_entries.total_real_duration
+    end
+
+    def set_overrun_entries
+      entries = TimeEntry.overrun
+                         .includes(task: :tags)
+                         .order(start_time: :desc)
+      entries = entries.where(user: current_user) unless @admin
+      @overrun_entries = entries.group_by { |e| e.start_time.to_date }
+                                .sort_by { |date, _entries| date }
+                                .to_h
     end
 
     def time_entry_params
