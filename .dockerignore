@@ -1,0 +1,8 @@
+.git
+.git*
+.dockerignore
+.*.yml
+*.yml
+*.js
+*.md
+*.sh
