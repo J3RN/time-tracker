@@ -8,8 +8,6 @@ services:
     command: bundle exec passenger start -p 3000
     environment:
       RAILS_ENV: development
-    volumes:
-      - ".:/srv/http/timesheet"
     ports:
       - "3000:3000"
     depends_on:
