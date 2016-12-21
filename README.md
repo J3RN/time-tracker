@@ -42,3 +42,17 @@ This is an application that I wrote long ago, but have since repurposed to play 
 
 - Tests can be run using `rake test`
 - For test coverage, run your tests, open up `coverage/index.html` in your browser
+
+## Docker Deploy
+
+[Install docker](https://docs.docker.com/engine/installation/). If there are additional steps to install docker-compose, take them as well.
+
+Run the following three commands in the project's root directory:
+
+```
+docker-compose build
+docker-compose run web rake db:setup
+docker-compose up
+```
+
+The application will now be accessible on `localhost:8000` with any supported web browser.
