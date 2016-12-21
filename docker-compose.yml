@@ -5,10 +5,10 @@ services:
 
   web:
     build: .
-    command: bundle exec passenger start -p 3000
+    command: bundle exec passenger start -p 8000
     environment:
       RAILS_ENV: development
     ports:
-      - "3000:3000"
+      - "8000:8000"
     depends_on:
       - db
