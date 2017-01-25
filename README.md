@@ -45,7 +45,8 @@ This is an application that I wrote long ago, but have since repurposed to play 
 
 ## Docker Deploy
 
-[Install docker](https://docs.docker.com/engine/installation/). If there are additional steps to install docker-compose, take them as well.
+* [Install docker](https://docs.docker.com/engine/installation/)
+* [Install docker-compose](https://docs.docker.com/compose/install/)
 
 Run the following three commands in the project's root directory:
 
