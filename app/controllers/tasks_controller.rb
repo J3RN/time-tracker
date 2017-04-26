@@ -72,6 +72,10 @@ class TasksController < ApplicationController
                                                 :archived_at, :priority,
                                                 :user_id, :due_date,
                                                 :start_date, tag_ids: [])
+      format_params(new_params)
+    end
+
+    def format_params new_params
       new_params[:user_id] = current_user.id unless current_user.admin?
 
       if new_params[:due_date].present?
