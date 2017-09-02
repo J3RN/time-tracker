@@ -15,10 +15,8 @@ class Task < ApplicationRecord
   def self.order_todo
     tasks = all.sort_by { |x| -x.due_today }
 
-    today = tasks.reject { |x| x.time_remaining_today.zero? }
+    not_today, today = tasks.partition { |x| x.time_remaining_today.zero? }
     today.sort_by! { |x| -x.priority }
-
-    not_today = tasks.select { |x| x.time_remaining_today.zero? }
     not_today.sort_by! { |x| -x.priority }
 
     today + not_today
