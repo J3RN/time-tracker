@@ -1,7 +1,7 @@
 # Time Tracker
 
 [![Join the chat at https://gitter.im/J3RN/timesheet](https://badges.gitter.im/J3RN/timesheet.svg)](https://gitter.im/J3RN/timesheet?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
-![Travis CI badge](https://travis-ci.org/J3RN/time-tracker.svg)
+[![Travis CI badge](https://travis-ci.org/J3RN/time-tracker.svg)](https://travis-ci.org/J3RN/time-tracker)
 
 This is an application that I wrote long ago, but have since repurposed to play a critical role as my To-Do List and time tracker. I have found it to be exceptionally useful, and I hope you will as well.
 
