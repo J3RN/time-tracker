@@ -1,6 +1,6 @@
 sudo: false
 language: ruby
-rvm: 2.3.4
+rvm: 2.3.5
 env:
 - DB: postgresql
 before_script:
