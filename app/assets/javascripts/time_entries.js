@@ -28,7 +28,9 @@ $(function() {
   setTimeout(function() {
     var filterDate = $('.js-update-entries').data('filterDate')
 
-    $.ajax({ url: '/time_entries/updates_all_time_entries?date=' + filterDate, complete: poll, timeout: 60000 });
+    if (filterDate) {
+      $.ajax({ url: '/time_entries/updates_all_time_entries?date=' + filterDate, complete: poll, timeout: 60000 });
+    }
   }, 60000);
 })();
 
