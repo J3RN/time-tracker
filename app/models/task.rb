@@ -6,9 +6,9 @@ class Task < ApplicationRecord
 
   validates_presence_of :user_id, :task_name
 
-  scope :order_last_touched, -> do
+  scope :order_last_touched, lambda {
     includes(:time_entries).order('time_entries.start_time DESC')
-  end
+  }
   scope :active, -> { where(archived_at: nil) }
   scope :archived, -> { where.not(archived_at: nil) }
 
@@ -27,9 +27,7 @@ class Task < ApplicationRecord
   end
 
   def percent_time_used
-    if self.estimate.nil? || self.estimate.zero?
-      return 0
-    end
+    return 0 if self.estimate.nil? || self.estimate.zero?
 
     (self.time_spent.to_f / self.estimate) * 100
   end
