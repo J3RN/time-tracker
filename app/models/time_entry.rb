@@ -8,9 +8,24 @@ class TimeEntry < ApplicationRecord
   validates_presence_of :task_id
   validates_presence_of :user_id
 
+  scope :filter_by_date, lambda { |date|
+    today = date.to_time
+    tomorrow = (date + 1.day).to_time
+
+    where('start_time >= ?', today).where('start_time < ?', tomorrow)
+  }
+
+  scope :running, lambda {
+    where(running: true)
+  }
+
+  scope :overrun, lambda {
+    running.where('start_time < ?', Date.today.to_time)
+  }
+
   def real_duration
     if running?
-      ((DateTime.now.to_i - start_time.to_i) / 60.0).round
+      ((Time.now.to_i - start_time.to_i) / 60.0).round
     else
       duration
     end
@@ -23,11 +38,6 @@ class TimeEntry < ApplicationRecord
         csv << item.attributes.values_at(*column_names)
       end
     end
-  end
-
-  def self.filter_by_date(date)
-    entries = self.where("start_time >= ?", date.to_time)
-    entries.where("start_time < ?", (date + 1.day).to_time)
   end
 
   def self.total_real_duration

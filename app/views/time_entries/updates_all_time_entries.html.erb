@@ -1,0 +1,6 @@
+<% if @overrun_entries.present? %>
+  <% @overrun_entries.each do |date, entries| %>
+    <%= render 'entries_table', entries: entries, total: nil, date: date, overrun: true %>
+  <% end %>
+<% end %>
+<%= render 'entries_table', entries: @time_entries, total: @total, date: @date, overrun: false %>

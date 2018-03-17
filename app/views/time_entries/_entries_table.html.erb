@@ -1,18 +1,16 @@
-<table class="table">
+<div class="panel panel-default <%= 'overrun' if overrun %>" >
+  <div class="panel-heading"><%= std_date(date) %></div>
+  <table class="table">
     <tbody>
-      <% time_entries.each do |entry| %>
+      <% entries.each do |entry| %>
         <tr>
           <td><%= entry.start_time.strftime("%H:%M") %></td>
           <td><b><%= task_with_tag_labels(entry.task) %></b></td>
           <td><div class="only-desktop"><%= entry.goal %></div></td>
           <td><div class="only-desktop"><%= entry.result %></div></td>
-          <td>
-            <%= duration_display(entry.real_duration) %>
-          </td>
+          <td><%= duration_display(entry.real_duration) %></td>
           <% if @admin %>
-            <td>
-              <%= entry.user.username %>
-            </td>
+            <td><%= entry.user.username %></td>
           <% end %>
           <td class="col-md-3 btn-col">
             <div class="btn-container">
@@ -25,10 +23,12 @@
           </td>
         </tr>
       <% end %>
-      <tr>
-        <td colspan='4'><b>Total</b></td>
-        <td colspan='5'><%= duration_display(total) %></td>
-      </tr>
+      <% if total.present? %>
+        <tr>
+          <td colspan='4'><b>Total</b></td>
+          <td colspan='5'><%= duration_display(total) %></td>
+        </tr>
+      <% end %>
     </tbody>
   </table>
-
+</div>
