@@ -7,7 +7,9 @@ class TimeEntriesController < ApplicationController
   before_action :set_tag, only: [:report]
   before_action :set_date, only: [:index, :updates_all_time_entries]
   before_action :set_time_entries, only: [:index, :updates_all_time_entries]
-  before_action :set_overrun_entries, only: [:index], if: -> { @date == Date.today }
+  before_action :set_overrun_entries,
+                only: [:index, :updates_all_time_entries],
+                if: -> { @date == Date.today }
   before_action -> { ensure_ownership(@tag) }, only: [:report]
   respond_to :html, :js
 
@@ -86,6 +88,7 @@ class TimeEntriesController < ApplicationController
   end
 
   def updates_all_time_entries
+    render action: 'updates_all_time_entries', layout: nil
   end
 
   private

@@ -26,11 +26,17 @@ $(function() {
 
 (function poll(){
   setTimeout(function() {
-    var filterDate = $('.js-update-entries').data('filterDate')
+    var filterDate = $('.js-update-entries').data('filterDate');
 
     if (filterDate) {
-      $.ajax({ url: '/time_entries/updates_all_time_entries?date=' + filterDate, complete: poll, timeout: 60000 });
+      $.get({
+        url: '/time_entries/updates_all_time_entries',
+        data: { date: filterDate },
+        complete: function(data) {
+          $('.js-update-entries').html(data.responseText);
+          poll();
+        },
+        timeout: 60000 });
     }
   }, 60000);
 })();
-
