@@ -10,6 +10,5 @@ one:
 two:
   user_id: two
   task_id: three
-  duration: 20
   start_time: 2015-01-08 09:52:58
   note: Other text
