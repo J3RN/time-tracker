@@ -5,6 +5,7 @@ class ApplicationController < ActionController::Base
 
   before_action :authenticate_user!
   before_action :configure_permitted_parameters, if: :devise_controller?
+  before_action :set_raven_context
 
   def after_sign_in_path_for(_)
     tasks_path
@@ -26,5 +27,13 @@ class ApplicationController < ActionController::Base
     return if item.user == current_user || current_user.admin?
 
     redirect_to({ action: 'index' }, alert: "That's not yours!")
+  end
+
+  def set_raven_context
+    return unless current_user
+    Raven.user_context(id: current_user.id,
+                       email: current_user.email,
+                       username: current_user.username)
+    Raven.extra_context(params: params.to_unsafe_h, url: request.url)
   end
 end
