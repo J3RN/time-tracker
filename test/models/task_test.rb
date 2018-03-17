@@ -7,7 +7,7 @@ class TaskTest < ActiveSupport::TestCase
     @time_entry = time_entries(:one)
   end
 
-  test "does not orphan taggings" do
+  test 'does not orphan taggings' do
     before_taggings = Tagging.count
 
     @task.save!
@@ -22,7 +22,7 @@ class TaskTest < ActiveSupport::TestCase
     assert_equal(Tagging.count, before_taggings)
   end
 
-  test "does not orphan time entries" do
+  test 'does not orphan time entries' do
     before_count = TimeEntry.count
 
     @task.save!
@@ -36,22 +36,22 @@ class TaskTest < ActiveSupport::TestCase
     assert_equal(TimeEntry.count, before_count - 1)
   end
 
-  test "time remaining base case" do
+  test 'time remaining base case' do
     @task.update(due_date: Date.today + 1.days)
     assert_equal(60, @task.time_remaining_today)
   end
 
-  test "time remaining handles zero days case" do
+  test 'time remaining handles zero days case' do
     @task.update(due_date: Date.today)
     assert_equal(60, @task.time_remaining_today)
   end
 
-  test "time remaining handles negative days case" do
+  test 'time remaining handles negative days case' do
     @task.update(due_date: Date.today - 1.days)
     assert_equal(60, @task.time_remaining_today)
   end
 
-  test "time remaining handles timezones at least sort of" do
+  test 'time remaining handles timezones at least sort of' do
     initial_time_remaining = @task.time_remaining_today
     @task.time_entries.create!(user: users(:one), duration: 30, start_time: Date.today.to_time + 22.hours)
     assert_equal(initial_time_remaining - 30, @task.time_remaining_today)
