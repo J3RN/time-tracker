@@ -22,5 +22,8 @@ Rails.application.routes.draw do
       get 'unarchive'
     end
   end
+
   resources :tags, except: :show
+
+  get 'analytics', to: 'analytics#index'
 end
