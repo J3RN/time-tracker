@@ -1,5 +1,5 @@
 # config valid only for current version of Capistrano
-lock '3.6.1'
+lock '3.10.1'
 
 set :application, 'timesheet'
 set :repo_url, 'git@github.com:J3RN/timesheet.git'
@@ -9,9 +9,6 @@ set :repo_url, 'git@github.com:J3RN/timesheet.git'
 
 # Default deploy_to directory is /var/www/<application>
 # set :deploy_to, '/var/www/my_app_name'
-
-# Default value for :scm is :git
-# set :scm, :git
 
 # Default value for :format is :pretty
 # set :format, :pretty
@@ -39,7 +36,6 @@ set :linked_dirs, fetch(:linked_dirs, []).push('log', 'tmp/pids', 'tmp/cache', '
 # set :keep_releases, 5
 
 namespace :deploy do
-
   after :restart, :clear_cache do
     on roles(:web), in: :groups, limit: 3, wait: 10 do
       # Here we can do anything such as:
@@ -48,5 +44,4 @@ namespace :deploy do
       # end
     end
   end
-
 end
