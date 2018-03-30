@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 
 ruby '2.5.0'
 
-gem 'rails', '~> 5.0.0'
+gem 'rails', '< 5.1'
 gem 'pg', '~> 0.19.0'
 gem 'passenger', '>= 5.0.25', require: 'phusion_passenger/rack_handler'
 gem 'sass-rails', '~> 5.0'
