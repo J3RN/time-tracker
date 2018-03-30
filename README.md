@@ -12,32 +12,28 @@ This is an application that I wrote long ago, but have since repurposed to play 
 - PostgreSQL. If you are on a Mac, I recommend [Postgres.app](http://postgresapp.com/).
 
 ## Setup
-1. Install the prerequisites.
 
-2. Clone this repository.
+1. Clone this repository.
   ```
   git clone https://github.com/J3RN/timesheet.git
   ```
 
-3. Enter the directory.
+2. Enter the directory.
   ```
   cd timesheet
   ```
 
-4. Pull the dependencies. This may take a while if this is the first Rails app you've worked with.
+3. Run the setup script.
   ```
-  bundle
-  ```
-
-5. Setup the database.
-  ```
-  rake db:setup
+  ./bin/setup
   ```
 
-6. Start the server.
+5. Start the server.
   ```
-  bundle exec passenger start
+  bundle exec rails server
   ```
+
+  You can now see the application running on your machine by visiting [http://localhost:3000](http://localhost:3000).
 
 ## Testing
 
