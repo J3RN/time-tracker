@@ -7,7 +7,7 @@ class Task < ApplicationRecord
   validates_presence_of :user_id, :task_name
 
   scope :order_last_touched, lambda {
-    includes(:time_entries).order('time_entries.start_time DESC')
+    includes(:time_entries).order("time_entries.start_time DESC")
   }
   scope :active, -> { where(completed_at: nil) }
   scope :completed, -> { where.not(completed_at: nil) }
@@ -75,13 +75,13 @@ class Task < ApplicationRecord
 
   def done_before_today
     today = Date.today.to_time
-    entries_before_today = time_entries.where('start_time < ?', today)
+    entries_before_today = time_entries.where("start_time < ?", today)
     entries_before_today.total_real_duration
   end
 
   def done_today
     today = Date.today.to_time
-    todays_entries = time_entries.where('start_time >= ?', today)
+    todays_entries = time_entries.where("start_time >= ?", today)
     todays_entries.total_real_duration
   end
 end

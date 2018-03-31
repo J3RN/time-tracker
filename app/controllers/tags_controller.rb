@@ -21,7 +21,7 @@ class TagsController < ApplicationController
     if @tag.save
       redirect_to tags_path
     else
-      render 'new'
+      render "new"
     end
   end
 
@@ -29,7 +29,7 @@ class TagsController < ApplicationController
     if @tag.update(tag_params)
       redirect_to tags_path
     else
-      render 'edit'
+      render "edit"
     end
   end
 
@@ -40,13 +40,13 @@ class TagsController < ApplicationController
 
   private
 
-    def set_tag
-      @tag = Tag.find(params[:id])
-    end
+  def set_tag
+    @tag = Tag.find(params[:id])
+  end
 
-    def tag_params
-      new_params = params.require(:tag).permit(:name, :user_id)
-      new_params[:user_id] = current_user.id unless current_user.admin?
-      new_params
-    end
+  def tag_params
+    new_params = params.require(:tag).permit(:name, :user_id)
+    new_params[:user_id] = current_user.id unless current_user.admin?
+    new_params
+  end
 end

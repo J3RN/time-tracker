@@ -1,15 +1,15 @@
 # config valid only for current version of Capistrano
-lock '3.10.1'
+lock "3.10.1"
 
-set :application, 'timesheet'
-set :repo_url, 'git@github.com:J3RN/timesheet.git'
+set :application, "timesheet"
+set :repo_url, "git@github.com:J3RN/timesheet.git"
 
 # Set RVM as system
 set :rvm_type, :system
-set :rvm_ruby_version, '2.5.0'
+set :rvm_ruby_version, "2.5.0"
 
 # Use Dotenv for all secrets
-set :linked_files, fetch(:linked_files, []).push('.env')
+set :linked_files, fetch(:linked_files, []).push(".env")
 
 # Share these directories between deploys
-set :linked_dirs, fetch(:linked_dirs, []).push('log', 'tmp/pids', 'tmp/cache', 'tmp/sockets', 'vendor/bundle', 'public/system')
+set :linked_dirs, fetch(:linked_dirs, []).push("log", "tmp/pids", "tmp/cache", "tmp/sockets", "vendor/bundle", "public/system")

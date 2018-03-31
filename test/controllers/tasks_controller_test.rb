@@ -1,4 +1,4 @@
-require 'test_helper'
+require "test_helper"
 
 class TasksControllerTest < ActionController::TestCase
   setup do
@@ -8,28 +8,28 @@ class TasksControllerTest < ActionController::TestCase
     @task = tasks(:uncompleted_full)
 
     @params = {
-      task_name: 'Foobar',
+      task_name: "Foobar",
       tags: tags(:one),
       priority: 1,
       estimate: 60,
-      due_date: '08/05/2016'
+      due_date: "08/05/2016"
     }
 
     @bad_params = @params.dup.tap { |p| p[:task_name] = nil }
   end
 
-  test 'should get index' do
+  test "should get index" do
     get :index
     assert_response :success
   end
 
-  test 'should get new' do
+  test "should get new" do
     get :new
     assert_response :success
   end
 
-  test 'should create task' do
-    assert_difference('Task.count') do
+  test "should create task" do
+    assert_difference("Task.count") do
       post :create, params: { task: @params }
     end
 
@@ -37,18 +37,18 @@ class TasksControllerTest < ActionController::TestCase
   end
 
   test "render 'new' on fail to create" do
-    assert_no_difference('Task.count') do
+    assert_no_difference("Task.count") do
       post :create, params: { task: @bad_params }
     end
     assert_response :success
   end
 
-  test 'should get edit' do
+  test "should get edit" do
     get :edit, params: { id: @task }
     assert_response :success
   end
 
-  test 'should update task' do
+  test "should update task" do
     patch :update, params: { id: @task, task: @params }
     assert_redirected_to tasks_path
     @task.reload
@@ -62,8 +62,8 @@ class TasksControllerTest < ActionController::TestCase
     refute_equal @bad_params[:priority], @task.priority
   end
 
-  test 'should destroy task' do
-    assert_difference('Task.count', -1) do
+  test "should destroy task" do
+    assert_difference("Task.count", -1) do
       delete :destroy, params: { id: @task }
     end
 

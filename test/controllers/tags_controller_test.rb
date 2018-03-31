@@ -1,4 +1,4 @@
-require 'test_helper'
+require "test_helper"
 
 class TagsControllerTest < ActionController::TestCase
   setup do
@@ -15,18 +15,18 @@ class TagsControllerTest < ActionController::TestCase
     @bad_params = @params.dup.tap { |p| p[:name] = nil }
   end
 
-  test 'should get index' do
+  test "should get index" do
     get :index
     assert_response :success
   end
 
-  test 'should get new' do
+  test "should get new" do
     get :new
     assert_response :success
   end
 
-  test 'should create tag' do
-    assert_difference('Tag.count') do
+  test "should create tag" do
+    assert_difference("Tag.count") do
       post :create, params: { tag: @params }
     end
 
@@ -34,19 +34,19 @@ class TagsControllerTest < ActionController::TestCase
   end
 
   test "render 'new' on fail to create" do
-    assert_no_difference('Tag.count') do
+    assert_no_difference("Tag.count") do
       post :create, params: { tag: @bad_params }
     end
 
     assert_response :success
   end
 
-  test 'should get edit' do
+  test "should get edit" do
     get :edit, params: { id: @tag }
     assert_response :success
   end
 
-  test 'should update tag' do
+  test "should update tag" do
     patch :update, params: { id: @tag, tag: @params }
     assert_redirected_to tags_path
     @tag.reload
@@ -60,8 +60,8 @@ class TagsControllerTest < ActionController::TestCase
     refute_equal @bad_params[:name], @tag.name
   end
 
-  test 'should destroy tag' do
-    assert_difference('Tag.count', -1) do
+  test "should destroy tag" do
+    assert_difference("Tag.count", -1) do
       delete :destroy, params: { id: @tag }
     end
 
