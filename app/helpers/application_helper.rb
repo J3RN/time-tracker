@@ -8,7 +8,7 @@ module ApplicationHelper
   end
 
   def delete_btn(path)
-    link_to "\ue020", path, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn-delete"
+    link_to "\ue020", path, method: :delete, data: { confirm: "Are you sure?" }, class: "btn-delete"
   end
 
   def duration_display(minutes)
@@ -20,7 +20,7 @@ module ApplicationHelper
   def task_with_tag_labels(task)
     task_div = content_tag(:div, task.task_name)
     tag_spans = task.tags.map do |tag|
-      content_tag(:span, tag.name, class: ['label', 'label-info'])
+      content_tag(:span, tag.name, class: ["label", "label-info"])
     end
     task_div + tag_spans.join.html_safe
   end

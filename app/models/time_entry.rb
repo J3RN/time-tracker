@@ -1,4 +1,4 @@
-require 'csv'
+require "csv"
 
 class TimeEntry < ApplicationRecord
   belongs_to :user
@@ -12,7 +12,7 @@ class TimeEntry < ApplicationRecord
     today = date.to_time
     tomorrow = (date + 1.day).to_time
 
-    where('start_time >= ?', today).where('start_time < ?', tomorrow)
+    where("start_time >= ?", today).where("start_time < ?", tomorrow)
   }
 
   scope :running, lambda {
@@ -20,7 +20,7 @@ class TimeEntry < ApplicationRecord
   }
 
   scope :overrun, lambda {
-    running.where('start_time < ?', Date.today.to_time)
+    running.where("start_time < ?", Date.today.to_time)
   }
 
   def real_duration

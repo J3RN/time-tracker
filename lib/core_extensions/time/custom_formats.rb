@@ -1,7 +1,7 @@
 module CoreExtensions
   module Time
     module CustomFormats
-      AMERICAN_DATE_TIME_FORMAT = "%m/%d/%Y %H:%M %p"
+      AMERICAN_DATE_TIME_FORMAT = "%m/%d/%Y %H:%M %p".freeze
 
       module InstanceMethods
         def american_date
@@ -10,7 +10,7 @@ module CoreExtensions
       end
 
       module ClassMethods
-        def american_date str
+        def american_date(str)
           strptime(str, AMERICAN_DATE_TIME_FORMAT)
         end
       end

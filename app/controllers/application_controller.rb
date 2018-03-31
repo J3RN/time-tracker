@@ -7,7 +7,7 @@ class ApplicationController < ActionController::Base
   before_action :configure_permitted_parameters, if: :devise_controller?
   before_action :set_raven_context
 
-  def after_sign_in_path_for(_)
+  def after_sign_in_path_for(_user)
     tasks_path
   end
 
@@ -26,7 +26,7 @@ class ApplicationController < ActionController::Base
   def ensure_ownership(item)
     return if item.user == current_user || current_user.admin?
 
-    redirect_to({ action: 'index' }, alert: "That's not yours!")
+    redirect_to({ action: "index" }, alert: "That's not yours!")
   end
 
   def set_raven_context
