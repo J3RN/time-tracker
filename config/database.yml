@@ -5,7 +5,7 @@ default: &default
 
 development:
   <<: *default
-  database: timesheet-dev
+  database: timesheet_dev
 
 test:
   <<: *default
