@@ -19,7 +19,7 @@
       <tr class="<%= "priority#{task.priority} overdue" if task.overdue? %>">
         <td class="swatch priority<%= task.priority %>"></td>
         <td>
-          <% if task.archived? %>
+          <% if task.completed? %>
             <input type="checkbox" id="task-<%= task.id %>" checked />
           <% else %>
             <input type="checkbox" id="task-<%= task.id %>" />

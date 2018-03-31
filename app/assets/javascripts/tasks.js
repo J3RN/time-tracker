@@ -7,20 +7,20 @@ $(function() {
         $("#task_tag_ids").select2();
     }
 
-    var archivedShown = false;
-    var toggleArchived = function(e) {
+    var completedShown = false;
+    var toggleCompleted = function(e) {
         var archiveToggle = e.currentTarget;
-        var archived = $("#archived-tasks");
+        var completed = $("#completed-tasks");
 
-        if (archivedShown) {
-            $(archived).hide();
-            $(archiveToggle).html("Show archived");
+        if (completedShown) {
+            $(completed).hide();
+            $(archiveToggle).html("Show completed");
         } else {
-            $(archived).show();
-            $(archiveToggle).html("Hide archived");
+            $(completed).show();
+            $(archiveToggle).html("Hide completed");
         }
 
-        archivedShown = !archivedShown;
+        completedShown = !completedShown;
     }
 
     var setupCompleteHandlers = function() {
@@ -37,7 +37,7 @@ $(function() {
     }
 
     $(document).on("turbolinks:load", function() {
-        $("#archive-toggle").click(toggleArchived);
+        $("#archive-toggle").click(toggleCompleted);
         $("#task_start_datetimepicker").datetimepicker({ format: "L" });
         $("#task_due_datetimepicker").datetimepicker({ format: "L" });
         setupCompleteHandlers();

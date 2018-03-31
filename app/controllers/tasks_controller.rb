@@ -10,15 +10,14 @@ class TasksController < ApplicationController
     @tasks = @tasks.where(user: current_user) unless current_user.admin?
 
     @active = @tasks.active.order_todo
-    @archived = @tasks.archived.order(archived_at: :desc)
+    @completed = @tasks.completed.order(completed_at: :desc)
   end
 
   def new
     @task = Task.new
   end
 
-  def edit
-  end
+  def edit; end
 
   def create
     @task = Task.new(task_params)
@@ -38,12 +37,12 @@ class TasksController < ApplicationController
   end
 
   def archive
-    @task.update(archived_at: DateTime.now)
+    @task.update(completed_at: DateTime.now)
     redirect_to tasks_path
   end
 
   def unarchive
-    @task.update(archived_at: nil)
+    @task.update(completed_at: nil)
     redirect_to tasks_path
   end
 
@@ -69,7 +68,7 @@ class TasksController < ApplicationController
 
     def task_params
       new_params = params.require(:task).permit(:task_name, :estimate,
-                                                :archived_at, :priority,
+                                                :completed_at, :priority,
                                                 :user_id, :due_date,
                                                 :start_date, tag_ids: [])
       format_params(new_params)

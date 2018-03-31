@@ -1,10 +1,10 @@
 <h1>Tasks <%= link_to '+', new_task_path, data: { keybinding: 'n' } %></h1>
 <%= render 'task_table', tasks: @active %>
 
-<% if @archived.any? %>
-  <a id="archive-toggle">Show archived</a>
-  <div id="archived-tasks">
-    <h2>Archived</h2>
-    <%= render 'archived_task_table', tasks: @archived  %>
+<% if @completed.any? %>
+  <a id="archive-toggle">Show completed</a>
+  <div id="completed-tasks">
+    <h2>Completed</h2>
+    <%= render 'completed_task_table', tasks: @completed  %>
   </div>
 <% end %>

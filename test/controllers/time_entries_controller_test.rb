@@ -16,7 +16,7 @@ class TimeEntriesControllerTest < ActionController::TestCase
       duration: 30,
       note: 'note',
       start_time: Time.new(2016, 8, 28, 10, 30).american_date,
-      task_id: tasks(:unarchived_full).id,
+      task_id: tasks(:uncompleted_full).id,
       user_id: users(:one).id
     }
 

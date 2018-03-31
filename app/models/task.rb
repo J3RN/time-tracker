@@ -9,8 +9,8 @@ class Task < ApplicationRecord
   scope :order_last_touched, lambda {
     includes(:time_entries).order('time_entries.start_time DESC')
   }
-  scope :active, -> { where(archived_at: nil) }
-  scope :archived, -> { where.not(archived_at: nil) }
+  scope :active, -> { where(completed_at: nil) }
+  scope :completed, -> { where.not(completed_at: nil) }
 
   def self.order_todo
     tasks = all.sort_by { |x| -x.due_today }
@@ -36,8 +36,8 @@ class Task < ApplicationRecord
     "#{self.task_name} - #{self.tags.pluck(:name).join(", ")}"
   end
 
-  def archived?
-    self.archived_at.present?
+  def completed?
+    self.completed_at.present?
   end
 
   def days_left
@@ -45,7 +45,7 @@ class Task < ApplicationRecord
   end
 
   def overdue?
-    !archived? && days_left.present? && days_left < 0
+    !completed? && days_left.present? && days_left < 0
   end
 
   def time_remaining_today

@@ -5,7 +5,7 @@ class TasksControllerTest < ActionController::TestCase
     @user = users(:one)
     sign_in @user
 
-    @task = tasks(:unarchived_full)
+    @task = tasks(:uncompleted_full)
 
     @params = {
       task_name: 'Foobar',
