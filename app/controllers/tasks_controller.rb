@@ -1,8 +1,8 @@
 class TasksController < ApplicationController
-  before_action :set_task, only: [:edit, :update, :destroy, :archive,
-                                  :unarchive]
-  before_action :set_tags, except: [:archive, :unarchive, :destroy]
-  before_action :set_users, except: [:archive, :unarchive, :destroy]
+  before_action :set_task, only: [:edit, :update, :destroy, :complete,
+                                  :uncomplete]
+  before_action :set_tags, except: [:complete, :uncomplete, :destroy]
+  before_action :set_users, except: [:complete, :uncomplete, :destroy]
   before_action -> { ensure_ownership(@task) }, only: [:edit, :update, :destroy]
 
   def index
@@ -37,12 +37,12 @@ class TasksController < ApplicationController
     end
   end
 
-  def archive
+  def complete
     @task.update(completed_at: Time.now)
     redirect_to tasks_path
   end
 
-  def unarchive
+  def uncomplete
     @task.update(completed_at: nil)
     redirect_to tasks_path
   end

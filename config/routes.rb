@@ -18,8 +18,8 @@ Rails.application.routes.draw do
 
   resources :tasks, except: :show do
     member do
-      get "archive"
-      get "unarchive"
+      get "complete"
+      get "uncomplete"
     end
   end
   resources :tags, except: :show

@@ -93,7 +93,7 @@ $red:    red;
 }
 
 // Hide completed tasks by default
-#archive-toggle {
+#complete-toggle {
   cursor: pointer;
 }
 
@@ -132,12 +132,12 @@ form.button_to {
   @extend .btn-danger;
 }
 
-.btn-archive {
+.btn-complete {
   @include custom-button;
   @extend .btn-default;
 }
 
-.btn-unarchive {
+.btn-uncomplete {
   @include custom-button;
   @extend .btn-default;
 }

@@ -9,15 +9,15 @@ $(function() {
 
     var completedShown = false;
     var toggleCompleted = function(e) {
-        var archiveToggle = e.currentTarget;
+        var completeToggle = e.currentTarget;
         var completed = $("#completed-tasks");
 
         if (completedShown) {
             $(completed).hide();
-            $(archiveToggle).html("Show completed");
+            $(completeToggle).html("Show completed");
         } else {
             $(completed).show();
-            $(archiveToggle).html("Hide completed");
+            $(completeToggle).html("Hide completed");
         }
 
         completedShown = !completedShown;
@@ -29,15 +29,15 @@ $(function() {
             var target = $(event.target);
 
             if (target.prop("checked")) {
-                window.location = "/tasks/" + id + "/archive"
+                window.location = "/tasks/" + id + "/complete"
             } else {
-                window.location = "/tasks/" + id + "/unarchive"
+                window.location = "/tasks/" + id + "/uncomplete"
             }
         });
     }
 
     $(document).on("turbolinks:load", function() {
-        $("#archive-toggle").click(toggleCompleted);
+        $("#complete-toggle").click(toggleCompleted);
         $("#task_start_datetimepicker").datetimepicker({ format: "L" });
         $("#task_due_datetimepicker").datetimepicker({ format: "L" });
         setupCompleteHandlers();
