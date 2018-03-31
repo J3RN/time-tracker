@@ -9,15 +9,18 @@ one:
   username: J3RN
   display_name: J3RN
   encrypted_password: blargblarg
+  confirmed_at: 2018-01-01
 
 two:
   email: example@example.com
   username: Test
   display_name: Test
   encrypted_password: foobarbar
+  confirmed_at: 2018-01-10
 
 admin:
   email: admin@example.com
   username: admin
   display_name: admin
   encrypted_password: admin
+  confirmed_at: 2018-10-01
