@@ -92,12 +92,12 @@ $red:    red;
   padding: 10px;
 }
 
-// Hide archived tasks by default
+// Hide completed tasks by default
 #archive-toggle {
   cursor: pointer;
 }
 
-#archived-tasks {
+#completed-tasks {
   display: none;
 }
 
