@@ -2,7 +2,7 @@
 <%= render 'task_table', tasks: @active %>
 
 <% if @completed.any? %>
-  <a id="archive-toggle">Show completed</a>
+  <a id="complete-toggle">Show completed</a>
   <div id="completed-tasks">
     <h2>Completed</h2>
     <%= render 'completed_task_table', tasks: @completed  %>

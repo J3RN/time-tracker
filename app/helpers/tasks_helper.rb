@@ -3,11 +3,11 @@ module TasksHelper
     days || "???"
   end
 
-  def archive_btn(path)
-    link_to "\ue117", path, class: "btn-archive"
+  def complete_btn(path)
+    link_to "\ue117", path, class: "btn-complete"
   end
 
-  def unarchive_btn(path)
-    link_to "\ue118", path, class: "btn-unarchive"
+  def uncomplete_btn(path)
+    link_to "\ue118", path, class: "btn-uncomplete"
   end
 end
