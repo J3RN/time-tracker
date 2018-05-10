@@ -2,13 +2,21 @@ sudo: false
 language: ruby
 rvm: 2.5.0
 env:
-- DB: postgresql
+  global:
+    - CC_TEST_REPORTER_ID=d95bdddd88045d531b3ff27d9d602ed6c1cfe4f61f96ff76537fa9d028e64f2e
+services:
+  - postgresql
 before_install:
   # This is necessary for Travis to build with Ruby 2.5.0 (https://github.com/travis-ci/travis-ci/issues/8978#issuecomment-354036443)
   - gem update --system
 before_script:
-- psql -c 'create database timesheet_test;' -U postgres
+  - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
+  - chmod +x ./cc-test-reporter
+  - ./cc-test-reporter before-build
+  - psql -c 'create database timesheet_test;' -U postgres
 script:
-- bundle exec rake test
+  - bundle exec rake test
+after_script:
+  - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
 notifications:
   email: jonarnett90@gmail.com
