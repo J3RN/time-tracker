@@ -3,6 +3,7 @@
 [![Join the chat at https://gitter.im/J3RN/timesheet](https://badges.gitter.im/J3RN/timesheet.svg)](https://gitter.im/J3RN/timesheet?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 [![Travis CI badge](https://travis-ci.org/J3RN/time-tracker.svg)](https://travis-ci.org/J3RN/time-tracker)
 [![Maintainability](https://api.codeclimate.com/v1/badges/ada77e7c2f9d31eaf6aa/maintainability)](https://codeclimate.com/github/J3RN/time-tracker/maintainability)
+[![Test Coverage](https://api.codeclimate.com/v1/badges/ada77e7c2f9d31eaf6aa/test_coverage)](https://codeclimate.com/github/J3RN/time-tracker/test_coverage)
 
 This is an application that I wrote long ago, but have since repurposed to play a critical role as my To-Do List and time tracker. I have found it to be exceptionally useful, and I hope you will as well.
 
