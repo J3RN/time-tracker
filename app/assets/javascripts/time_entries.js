@@ -1,19 +1,17 @@
-// Place all the behaviors and hooks related to the matching controller here.
-// All this logic will automatically be available in application.js.
-// You can use CoffeeScript in this file: http://coffeescript.org/
-
 $(function() {
   var hideOrShowFields = function() {
     const checked = $("#time_entry_running").is(':checked');
 
+    const elements_to_update = [
+      $('#time_entry_duration').parent(),
+      $('#time_entry_result').parent(),
+      $('#time_entry_start_time').parents(".form-group")
+    ];
+
     if (checked) {
-      $('#time_entry_duration').parent().hide();
-      $('#time_entry_result').parent().hide();
-      $('#time_entry_start_time').parents(".form-group").hide();
+      elements_to_update.forEach(element => element.hide());
     } else {
-      $('#time_entry_duration').parent().show();
-      $('#time_entry_result').parent().show();
-      $('#time_entry_start_time').parents(".form-group").show();
+      elements_to_update.forEach(element => element.show());
     }
   }
 
