@@ -22,8 +22,5 @@ module Timesheet
 
     # Load lib files
     config.autoload_paths << Rails.root.join("lib")
-
-    # New Rails 5 behavior: Returning false does not halt callback chain
-    ActiveSupport.halt_callback_chains_on_return_false = false
   end
 end
