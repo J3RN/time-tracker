@@ -2,7 +2,7 @@
 lock "3.10.1"
 
 set :application, "timesheet"
-set :repo_url, "git@github.com:J3RN/timesheet.git"
+set :repo_url, "https://github.com/J3RN/timesheet.git"
 
 # Set RVM as system
 set :rvm_type, :system
