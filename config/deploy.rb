@@ -6,7 +6,7 @@ set :repo_url, "git@github.com:J3RN/timesheet.git"
 
 # Set RVM as system
 set :rvm_type, :system
-set :rvm_ruby_version, "2.5.0"
+set :rvm_ruby_version, "2.5.1"
 
 # Use Dotenv for all secrets
 set :linked_files, fetch(:linked_files, []).push(".env")
