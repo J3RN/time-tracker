@@ -9,7 +9,7 @@ This is an application that I wrote long ago, but have since repurposed to play 
 
 ## Prerequisites
 
-- Ruby v2.5.0. If you do not have Ruby installed, I would recommend [installing it through RVM](http://rvm.io/rvm/install).
+- Ruby v2.5.1. If you do not have Ruby installed, I would recommend [installing it through RVM](http://rvm.io/rvm/install).
 - PostgreSQL. If you are on a Mac, I recommend [Postgres.app](http://postgresapp.com/).
 
 ## Setup
