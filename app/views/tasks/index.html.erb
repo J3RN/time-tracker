@@ -1,10 +1,11 @@
 <h1>Tasks <%= link_to '+', new_task_path, data: { keybinding: 'n' } %></h1>
+<h2 style="text-align: center"><%= long_duration_display(@active.to_a.sum(&:time_remaining_today).round) %> due today</h2>
 <%= render 'task_table', tasks: @active %>
 
 <% if @completed.any? %>
   <a id="complete-toggle">Show completed</a>
   <div id="completed-tasks">
     <h2>Completed</h2>
-    <%= render 'completed_task_table', tasks: @completed  %>
+    <%= render 'task_table', tasks: @completed  %>
   </div>
 <% end %>

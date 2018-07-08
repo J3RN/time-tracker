@@ -1,57 +1,37 @@
-<table class="table task-table">
-  <thead>
-    <tr>
-      <th></th>
-      <th></th>
-      <th>Task name</th>
-      <th>Time due today</th>
-      <th>Time used</th>
-      <th>Days Left</th>
-      <% if current_user.admin? %>
-        <th>User</th>
+<% tasks.each do |task| %>
+  <div class="task-item row priority<%= task.priority %> <%= "overdue" if task.overdue? %>">
+    <div class="col-md-10">
+      <% if task.completed? %>
+        <input type="checkbox" id="task-<%= task.id %>" checked />
+      <% else %>
+        <input type="checkbox" id="task-<%= task.id %>" />
       <% end %>
-      <th colspan="3" class="col-md-3"></th>
-    </tr>
-  </thead>
 
-  <tbody>
-    <% tasks.each do |task| %>
-      <tr class="<%= "priority#{task.priority} overdue" if task.overdue? %>">
-        <td class="swatch priority<%= task.priority %>"></td>
-        <td>
-          <% if task.completed? %>
-            <input type="checkbox" id="task-<%= task.id %>" checked />
-          <% else %>
-            <input type="checkbox" id="task-<%= task.id %>" />
-          <% end %>
-        </td>
-        <td><%= task_with_tag_labels(task) %></td>
-        <% if task.time_remaining_today > 0 %>
-          <td><%= duration_display(task.time_remaining_today.round) %></td>
-        <% else %>
-          <td></td>
-        <% end %>
-        <td><%= task.percent_time_used.round %>%</td>
-        <td><%= days_left(task.days_left) %></td>
-        <% if current_user.admin? %>
-          <td><%= task.user.username %></td>
-        <% end %>
-        <td>
-          <div class="btn-container">
-            <%= edit_btn edit_task_path(task) %>
-            <%= delete_btn task %>
-          </div>
-        </td>
-      </tr>
-    <% end %>
-    <tr>
-      <td></td>
-      <td></td>
-      <td class="total">Total</td>
-      <td><%= duration_display(tasks.to_a.sum(&:time_remaining_today).round) %></td>
-      <td></td>
-      <td></td>
-      <td></td>
-    </tr>
-  </tbody>
-</table>
+      <%= span_task_with_tag_labels(task) %>
+    </div>
+    <div class="right-align col-md-2">
+      <%= duration_display(task.time_remaining_today.round) %>
+      <button class="expander btn btn-primary collapsed" data-toggle="collapse" data-target="#task-<%= task.id %>-details">
+        <span></span>
+      </button>
+    </div>
+
+
+    <div class="collapse" id="task-<%= task.id %>-details">
+      <dl>
+        <dt>Time usage</dt>
+        <dd>
+          <%= duration_display(task.time_spent) %> / <%= duration_display(task.estimate || 0) %>
+          (<%= task.percent_time_used.round %>%)
+        </dd>
+        <dt>Days remaining</dt>
+        <dd><%= days_left(task.days_left) %></dd>
+      </dl>
+
+      <span class="btn-group">
+        <%= edit_btn edit_task_path(task) %>
+        <%= delete_btn task %>
+      </span>
+    </div>
+  </div>
+<% end %>

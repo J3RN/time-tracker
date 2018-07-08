@@ -24,7 +24,7 @@ $(function() {
     }
 
     var setupCompleteHandlers = function() {
-        $(".task-table input[type=checkbox]").change(function(event) {
+        $(".task-item input[type=checkbox]").change(function(event) {
             var id = event.target.id.substr(5);
             var target = $(event.target);
 
