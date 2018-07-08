@@ -21,10 +21,11 @@ module ApplicationHelper
     hours = minutes / 60
     minutes = minutes % 60
 
-    hour_string = "hour".pluralize(hours)
-    minute_string = "minute".pluralize(minutes)
+    hour_string = "#{hours} hour".pluralize(hours)
+    return hour_string if minutes.zero?
 
-    "#{hours} #{hour_string} and #{minutes} #{minute_string}"
+    minute_string = "#{minutes} minute".pluralize(minutes)
+    "#{hour_string} and #{minute_string}"
   end
 
   def task_with_tag_labels(task)
