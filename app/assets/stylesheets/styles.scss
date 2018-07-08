@@ -32,14 +32,33 @@ $yellow: yellow;
 $orange: orange;
 $red:    red;
 
+.task-item {
+  padding: 15px;
+  font-size: 1.5em;
+  border-left: 1px solid #ccc;
 
-.swatch {
-  width: 15px;
-  border-right: 1px solid #ccc;
+  .task-title {
+    font-weight: bold;
+    margin: 0 15px;
+  }
+}
+
+.expander.collapsed span {
+    @extend .glyphicon;
+    @extend .glyphicon-chevron-down;
+}
+
+.expander span {
+    @extend .glyphicon;
+    @extend .glyphicon-chevron-up;
+}
+
+.right-align {
+  text-align: right;
 }
 
 .priority1 {
-  background: $gray;
+  border-left: 15px solid $gray;
 
   &.overdue {
     background: lighten($gray, 40%);
@@ -47,16 +66,15 @@ $red:    red;
 }
 
 .priority2 {
-  background: $green;
+  border-left: 15px solid $green;
 
   &.overdue {
     background: lighten($green, 70%);
   }
-
 }
 
 .priority3 {
-  background: $yellow;
+  border-left: 15px solid $yellow;
 
   &.overdue {
     background: lighten($yellow, 40%);
@@ -64,7 +82,7 @@ $red:    red;
 }
 
 .priority4 {
-  background: $orange;
+  border-left: 15px solid $orange;
 
   &.overdue {
     background: lighten($orange, 30%);
@@ -72,7 +90,7 @@ $red:    red;
 }
 
 .priority5 {
-  background: $red;
+  border-left: 15px solid $red;
 
   &.overdue {
     background: lighten($red, 40%);
