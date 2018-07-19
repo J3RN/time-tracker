@@ -1,0 +1,18 @@
+version: "3"
+services:
+  web:
+    image: j3rn/time-tracker:20180717
+    deploy:
+      replicas: 1
+      resources:
+        limits:
+          cpus: "0.1"
+          memory: 50M
+      restart_policy:
+        condition: on-failure
+    ports:
+      - "3000:3000"
+    networks:
+      - webnet
+networks:
+  webnet:
