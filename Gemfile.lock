@@ -154,7 +154,7 @@ GEM
     parallel (1.12.1)
     parser (2.5.0.5)
       ast (~> 2.4.0)
-    passenger (5.2.2)
+    passenger (5.3.3)
       rack
       rake (>= 0.8.1)
     pg (0.19.0)
