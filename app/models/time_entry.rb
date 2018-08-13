@@ -31,6 +31,10 @@ class TimeEntry < ApplicationRecord
     end
   end
 
+  def end_time
+      start_time + (duration * 60)
+  end
+
   def self.to_csv
     CSV.generate do |csv|
       csv << column_names
