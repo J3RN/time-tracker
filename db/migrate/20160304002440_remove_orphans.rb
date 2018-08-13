@@ -1,4 +1,4 @@
-class RemoveOrphans < ActiveRecord::Migration
+class RemoveOrphans < ActiveRecord::Migration[4.2]
   def change
     Tagging.all.each do |tagging|
       tagging.destroy if tagging.tag.nil? || tagging.task.nil?

@@ -1,4 +1,4 @@
-class CreateWickets < ActiveRecord::Migration
+class CreateWickets < ActiveRecord::Migration[4.2]
   def change
     create_table :wickets do |t|
       t.string :name

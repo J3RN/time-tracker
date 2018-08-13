@@ -1,4 +1,4 @@
-class ChangeApprovedToDatetimeForTasks < ActiveRecord::Migration
+class ChangeApprovedToDatetimeForTasks < ActiveRecord::Migration[4.2]
   def up
     add_column :tasks, :archived_at, :datetime, default: nil
 

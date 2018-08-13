@@ -4,7 +4,7 @@ end
 class Project < ActiveRecord::Base
 end
 
-class UpdateCustomersAndProjectsToTags < ActiveRecord::Migration
+class UpdateCustomersAndProjectsToTags < ActiveRecord::Migration[4.2]
   def up
     # Convert all Customers and Projects to Tags
     Customer.all.each do |customer|

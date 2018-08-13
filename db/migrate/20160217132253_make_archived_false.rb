@@ -1,4 +1,4 @@
-class MakeArchivedFalse < ActiveRecord::Migration
+class MakeArchivedFalse < ActiveRecord::Migration[4.2]
   def up
     change_column :tasks, :archived, :boolean, null: false, default: false
 
