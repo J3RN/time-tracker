@@ -135,6 +135,11 @@ form.button_to {
   float: right;
 }
 
+.btn-start {
+  @include custom-button;
+  @extend .btn-default;
+}
+
 .btn-stop {
   @include custom-button;
   @extend .btn-default;

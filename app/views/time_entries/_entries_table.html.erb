@@ -16,6 +16,8 @@
             <div class="btn-container">
               <% if entry.running? %>
                 <%= stop_btn stop_time_time_entry_path(entry) %>
+              <% else %>
+                <%= start_btn continue_time_time_entry_path(entry) %>
               <% end %>
               <%= edit_btn edit_time_entry_path(entry) %>
               <%= delete_btn time_entry_path(entry) %>

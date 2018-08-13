@@ -13,6 +13,7 @@ Rails.application.routes.draw do
     member do
       get "stop_time"
       get "start_time"
+      get "continue_time"
     end
   end
 

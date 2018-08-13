@@ -2,7 +2,7 @@ require "csv"
 
 class TimeEntriesController < ApplicationController
   before_action :set_time_entry, only: [:show, :edit, :update, :destroy,
-                                        :stop_time, :start_time]
+                                        :stop_time, :start_time, :continue_time]
   before_action :set_tasks, only: [:new, :edit, :create, :update]
   before_action :set_tag, only: [:report]
   before_action :set_date, only: [:index, :updates_all_time_entries]
@@ -38,6 +38,27 @@ class TimeEntriesController < ApplicationController
       redirect_to time_entries_path(date: @time_entry.start_time.to_date)
     else
       render "new"
+    end
+  end
+
+  def continue_time
+    prev_entry = @time_entry
+
+    @time_entry = TimeEntry.new({
+        :duration => 0,
+        :start_time => Time.now,
+        :running => true,
+        :goal => prev_entry.goal,
+        :result => prev_entry.result,
+        :note => prev_entry.note,
+        :task_id => prev_entry.task_id,
+        :user_id => current_user.id
+    })
+
+    if @time_entry.save
+      redirect_to time_entries_path
+    else
+      redirect_to time_entries_path, alert: "Failed to continue time entry"
     end
   end
 
