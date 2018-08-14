@@ -10,22 +10,7 @@
   </div>
 </h1>
 
-<div class="col-md-2">
-  <div class="row only-desktop">
-    <%= button_to "Export CSV", export_time_entries_path(format: :csv), method: :get, class: "btn btn-default col-md-12" %>
-  </div>
-  <br>
-  <% if @tags.any? %>
-    <div class="row only-desktop">
-      <%= form_tag '/time_entries/report', method: :get do %>
-        <%= select_tag "tag_id", options_from_collection_for_select(@tags, "id", "name"), class: "form-control" %>
-        <%= submit_tag "Generate Report", class: "btn btn-default form-control" %>
-      <% end %>
-    </div>
-  <% end %>
-</div>
-
-<div class="col-md-10 js-update-entries" data-filter-date="<%= @date %>">
+<div class="js-update-entries" data-filter-date="<%= @date %>">
   <% if @overrun_entries.present? %>
     <% @overrun_entries.each do |date, entries| %>
       <%= render 'entries_table', entries: entries, total: nil, date: date, overrun: true %>
