@@ -30,6 +30,7 @@ class TimeEntriesController < ApplicationController
   def edit; end
 
   def create
+    logger.debug "Params: #{time_entry_params}"
     @time_entry = TimeEntry.new(time_entry_params)
     @time_entry.user = current_user
     @time_entry.start_time ||= Time.now
@@ -161,19 +162,17 @@ class TimeEntriesController < ApplicationController
                                                     :note, :running, :goal,
                                                     :result)
 
-    if new_params[:running] == "1"
-      new_params = remove_stopped_elements(new_params)
-    else
-      start_time = Time.american_date(new_params[:start_time])
-      new_params[:start_time] = Time.zone.local_to_utc(start_time)
-    end
+    new_params = remove_stopped_elements(new_params) if new_params[:running] == "1"
+
+    start_time = Time.american_date(new_params[:start_time])
+    new_params[:start_time] = Time.zone.local_to_utc(start_time)
 
     new_params
   end
 
   def remove_stopped_elements(new_params)
     new_params.reject do |key, _|
-      [:duration, :start_time, :result].include? key.to_sym
+      [:duration, :result].include? key.to_sym
     end
   end
 end

@@ -4,8 +4,7 @@ $(function() {
 
     const elements_to_update = [
       $('#time_entry_duration').parent(),
-      $('#time_entry_result').parent(),
-      $('#time_entry_start_time').parents(".form-group")
+      $('#time_entry_result').parent()
     ];
 
     if (checked) {
