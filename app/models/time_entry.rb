@@ -32,7 +32,7 @@ class TimeEntry < ApplicationRecord
   end
 
   def end_time
-      start_time + (duration * 60)
+      start_time + (real_duration * 60)
   end
 
   def self.to_csv
