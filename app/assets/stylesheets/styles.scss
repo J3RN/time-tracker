@@ -185,3 +185,9 @@ form.button_to {
 .panel.overrun .panel-heading {
   background: lighten($red, 40%);
 }
+
+#time-entries-table_info,
+#time-entries-table_paginate { display: none; }
+#time-entries-table_length { margin: 10px 0px 0px 10px; }
+#time-entries-table_filter { margin: 10px 10px 0px 0px; }
+#time-entries-table { border-bottom: none; }

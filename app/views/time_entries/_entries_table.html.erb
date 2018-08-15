@@ -1,14 +1,24 @@
 <div class="panel panel-default <%= 'overrun' if overrun %>" >
-  <div class="panel-heading"><%= std_date(date) %></div>
-  <table class="table">
+    <table class="time-entries-table table" id="time-entries-table">
+    <thead>
+        <th>Date</th>
+        <th>Time</th>
+        <th>Task</th>
+        <th>Goal</th>
+        <th>Result</th>
+        <th>Duration</th>
+        <th></th>
+        <% if @admin %><th></th><% end %>
+    </thead>
     <tbody>
       <% entries.each do |entry| %>
         <tr>
+          <td><%= entry.start_time.to_date %></td>
           <td><%= entry.start_time.strftime("%H:%M") %> - <%= entry.end_time.strftime("%H:%M") %></td>
           <td><b><%= task_with_tag_labels(entry.task) %></b></td>
           <td><div class="only-desktop"><%= entry.goal %></div></td>
           <td><div class="only-desktop"><%= entry.result %></div></td>
-          <td><%= duration_display(entry.real_duration) %></td>
+          <td><center><%= duration_display(entry.real_duration) %></center></td>
           <% if @admin %>
             <td><%= entry.user.username %></td>
           <% end %>
@@ -23,12 +33,6 @@
               <%= delete_btn time_entry_path(entry) %>
             </div>
           </td>
-        </tr>
-      <% end %>
-      <% if total.present? %>
-        <tr>
-          <td colspan='4'><b>Total</b></td>
-          <td colspan='5'><%= duration_display(total) %></td>
         </tr>
       <% end %>
     </tbody>

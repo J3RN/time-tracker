@@ -1,15 +1,3 @@
-<h1 class="time-title">
-  Time Entries <%= link_to '+', new_time_entry_path, data: { keybinding: 'n' } %>
-  <div class="pull-right">
-    <br class="visible-sm visible-xs">
-    <div class="btn-group time-nav">
-      <%= link_to "<<", time_entries_path(date: @date - 1.day), class: 'btn btn-default' %>
-      <%= link_to "Today", time_entries_path, class: 'btn btn-default' %>
-      <%= link_to ">>", time_entries_path(date: @date + 1.day), class: 'btn btn-default' %>
-    </div>
-  </div>
-</h1>
-
 <div class="js-update-entries" data-filter-date="<%= @date %>">
   <% if @overrun_entries.present? %>
     <% @overrun_entries.each do |date, entries| %>
@@ -18,3 +6,9 @@
   <% end %>
   <%= render 'entries_table', entries: @time_entries, total: @total, date: @date, overrun: false %>
 </div>
+<script type="text/javascript">
+    if (document.dt != true) {
+        loadDataTable();
+        document.dt = true;
+    }
+</script>

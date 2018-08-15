@@ -139,11 +139,9 @@ class TimeEntriesController < ApplicationController
   end
 
   def set_time_entries
-    @time_entries = TimeEntry.filter_by_date(@date)
-                             .includes(task: :tags)
+    @time_entries = TimeEntry.includes(task: :tags)
                              .order(start_time: :desc)
     @time_entries = @time_entries.where(user: current_user) unless @admin
-    @total = @time_entries.total_real_duration
   end
 
   def set_overrun_entries
