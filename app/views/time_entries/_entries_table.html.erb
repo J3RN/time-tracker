@@ -1,7 +1,6 @@
 <div class="panel panel-default <%= 'overrun' if overrun %>" >
     <table class="time-entries-table table" id="time-entries-table">
     <thead>
-        <th>Date</th>
         <th>Time</th>
         <th>Task</th>
         <th>Goal</th>
@@ -13,8 +12,7 @@
     <tbody>
       <% entries.each do |entry| %>
         <tr>
-          <td><%= entry.start_time.to_date %></td>
-          <td><%= entry.start_time.strftime("%H:%M") %> - <%= entry.end_time.strftime("%H:%M") %></td>
+          <td><%= entry.start_time.to_date %>&nbsp;&nbsp;<%= entry.start_time.strftime("%H:%M") %> - <%= entry.end_time.strftime("%H:%M") %></td>
           <td><b><%= task_with_tag_labels(entry.task) %></b></td>
           <td><div class="only-desktop"><%= entry.goal %></div></td>
           <td><div class="only-desktop"><%= entry.result %></div></td>
