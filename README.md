@@ -5,11 +5,9 @@
 [![Maintainability](https://api.codeclimate.com/v1/badges/ada77e7c2f9d31eaf6aa/maintainability)](https://codeclimate.com/github/J3RN/time-tracker/maintainability)
 [![Test Coverage](https://api.codeclimate.com/v1/badges/ada77e7c2f9d31eaf6aa/test_coverage)](https://codeclimate.com/github/J3RN/time-tracker/test_coverage)
 
-This is an application that I wrote long ago, but have since repurposed to play a critical role as my To-Do List and time tracker. I have found it to be exceptionally useful, and I hope you will as well.
-
 ## Prerequisites
 
-- Ruby v2.5.1. If you do not have Ruby installed, I would recommend [installing it through RVM](http://rvm.io/rvm/install).
+- Ruby >= v2.3.3. If you do not have Ruby installed, I would recommend [installing it through RVM](http://rvm.io/rvm/install).
 - PostgreSQL. If you are on a Mac, I recommend [Postgres.app](http://postgresapp.com/).
 
 ## Setup
