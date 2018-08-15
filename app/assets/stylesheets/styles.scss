@@ -142,7 +142,7 @@ form.button_to {
 
 .btn-stop {
   @include custom-button;
-  @extend .btn-default;
+  @extend .btn-danger;
 }
 
 .btn-edit {
@@ -152,7 +152,7 @@ form.button_to {
 
 .btn-delete {
   @include custom-button;
-  @extend .btn-danger;
+  @extend .btn-default;
 }
 
 .btn-complete {
