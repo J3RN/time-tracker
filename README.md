@@ -1,4 +1,4 @@
-# Time Tracker
+# Free Open Source Time Tracker (Web based, Ruby on Rails)
 
 Open source time tracking software using Ruby on Rails. A project time tracking app you can self-host.
 
