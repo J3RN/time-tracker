@@ -1,7 +1,10 @@
 function loadDataTable () {
         $("#time-entries-table").dataTable({
             "pageLength": -1,
-            "order": [[ 0, "desc" ]]
+            "order": [[ 0, "desc" ]],
+            "columnDefs": [
+              { "orderable": false, "targets": [1,2,3,5] }
+            ]
         });
         document.getElementById("time-entries-table_length").innerHTML = "<a data-keybinding=\"n\" href=\"/time_entries/new\"><button type=\"button\" class=\"btn btn-success\">Add time entry</button></a>";
 }
