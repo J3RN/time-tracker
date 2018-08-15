@@ -41,8 +41,11 @@ $(function() {
         url: '/time_entries/updates_all_time_entries',
         data: { date: filterDate },
         complete: function(data) {
+          var search_text = document.getElementById("time-entries-table_filter").children[0].children[0].value;
           $('.js-update-entries').html(data.responseText);
           loadDataTable();
+          var tbl = $("#time-entries-table").DataTable();
+          tbl.search(search_text).draw();
           poll();
         },
         timeout: 60000 });
