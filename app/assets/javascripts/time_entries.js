@@ -1,6 +1,11 @@
+function setTableRows(rows) {
+    document.dataTable.clear();
+    document.dataTable.rows.add(rows).draw();
+}
+
 function loadDataTable () {
-        $("#time-entries-table").dataTable({
-            "pageLength": -1,
+        document.dataTable = $("#time-entries-table").DataTable({
+            "pageLength": 50,
             "order": [[ 0, "desc" ]],
             "columnDefs": [
               { "orderable": false, "targets": [1,2,3,5] }
@@ -33,22 +38,12 @@ $(function() {
 });
 
 (function poll(){
-  setTimeout(function() {
-    var filterDate = $('.js-update-entries').data('filterDate');
-
-    if (filterDate) {
-      $.get({
-        url: '/time_entries/updates_all_time_entries',
-        data: { date: filterDate },
-        complete: function(data) {
-          var search_text = document.getElementById("time-entries-table_filter").children[0].children[0].value;
-          $('.js-update-entries').html(data.responseText);
-          loadDataTable();
-          var tbl = $("#time-entries-table").DataTable();
-          tbl.search(search_text).draw();
-          poll();
-        },
-        timeout: 60000 });
-    }
-  }, 60000);
+  $.get({
+    url: '/time_entries/updates_all_time_entries',
+    data: {},
+    complete: function(data) {
+      setTableRows(JSON.parse(data.responseText));
+      setTimeout(poll, 50000);
+    },
+    timeout: 50000 });
 })();

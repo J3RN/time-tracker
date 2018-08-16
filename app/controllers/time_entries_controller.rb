@@ -1,12 +1,17 @@
 require "csv"
 
 class TimeEntriesController < ApplicationController
+  include ApplicationHelper
+  include ActionView::Helpers::TagHelper
+  include ActionView::Helpers::UrlHelper
+  include TimeEntriesHelper
+
   before_action :set_time_entry, only: [:show, :edit, :update, :destroy,
                                         :stop_time, :start_time, :continue_time]
   before_action :set_tasks, only: [:new, :edit, :create, :update]
   before_action :set_tag, only: [:report]
   before_action :set_date, only: [:index, :updates_all_time_entries]
-  before_action :set_time_entries, only: [:index, :updates_all_time_entries]
+  before_action :set_time_entries, only: [:index]
   before_action :set_overrun_entries,
                 only: [:index, :updates_all_time_entries],
                 if: -> { @date == Date.today }
@@ -109,7 +114,33 @@ class TimeEntriesController < ApplicationController
   end
 
   def updates_all_time_entries
-    render action: "updates_all_time_entries", layout: nil
+    @time_entries = TimeEntry.includes(task: :tags).order(start_time: :desc)
+    @time_entries = @time_entries.where(user: current_user) unless @admin
+
+    time_entries_arr = []
+    @time_entries.each do |t|
+        row = [
+            "#{t.start_time.to_date}&nbsp;&nbsp;#{t.start_time.strftime("%H:%M")} - #{t.end_time.strftime("%H:%M")}",
+            "<b>#{task_with_tag_labels(t.task)}",
+            t.goal,
+            t.result,
+            "<center>#{duration_display(t.real_duration)}</center>"
+        ]
+        row << entry.user.username if @admin
+        row << "
+            <div class=\"btn-container\">
+              #{if t.running?
+                stop_btn stop_time_time_entry_path(t)
+              else
+                start_btn continue_time_time_entry_path(t)
+              end}
+              #{ edit_btn edit_time_entry_path(t) }
+              #{ delete_btn time_entry_path(t) }
+            </div>
+            "
+        time_entries_arr << row
+    end
+    render :json => time_entries_arr
   end
 
   private
@@ -139,8 +170,7 @@ class TimeEntriesController < ApplicationController
   end
 
   def set_time_entries
-    @time_entries = TimeEntry.includes(task: :tags)
-                             .order(start_time: :desc)
+    @time_entries = TimeEntry.includes(task: :tags).order(start_time: :desc).limit(50)
     @time_entries = @time_entries.where(user: current_user) unless @admin
   end
 
