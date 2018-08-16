@@ -38,12 +38,18 @@ $(function() {
 });
 
 (function poll(){
+  var start = Date.now();
+
   $.get({
     url: '/time_entries/updates_all_time_entries',
     data: {},
     complete: function(data) {
       setTableRows(JSON.parse(data.responseText));
-      setTimeout(poll, 50000);
+      var elapsed = Date.now() - start;
+      if (elapsed < 60000)
+        setTimeout(poll, 60000 - elapsed);
+      else
+        setTimeout(poll, 60000);
     },
     timeout: 50000 });
 })();
