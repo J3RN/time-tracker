@@ -22,5 +22,7 @@ module Timesheet
 
     # Load lib files
     config.autoload_paths << Rails.root.join("lib")
+
+    config.middleware.use Rack::Deflater
   end
 end
