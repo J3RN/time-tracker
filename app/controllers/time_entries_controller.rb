@@ -98,7 +98,7 @@ class TimeEntriesController < ApplicationController
 
   def destroy
     @time_entry.destroy
-    respond_with(@time_entry)
+    redirect_to time_entries_path
   end
 
   def report
