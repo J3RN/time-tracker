@@ -7,8 +7,6 @@
   <%= render 'entries_table', entries: @time_entries, total: @total, date: @date, overrun: false %>
 </div>
 <script type="text/javascript">
-    if (document.dt != true) {
-        loadDataTable();
-        document.dt = true;
-    }
+    if (document.getElementById("time-entries-table_wrapper") == null)
+      loadDataTable();
 </script>
