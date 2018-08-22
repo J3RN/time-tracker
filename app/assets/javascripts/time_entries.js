@@ -4,6 +4,11 @@ function setTableRows(rows) {
 }
 
 function loadDataTable () {
+        if (document.dataTable)
+            var start_poll = false;
+        else
+            var start_poll = true;
+
         document.dataTable = $("#time-entries-table").DataTable({
             "pageLength": 50,
             "order": [[ 0, "desc" ]],
@@ -12,6 +17,9 @@ function loadDataTable () {
             ]
         });
         document.getElementById("time-entries-table_length").innerHTML = "<a data-keybinding=\"n\" href=\"/time_entries/new\"><button type=\"button\" class=\"btn btn-success\">Add time entry</button></a>";
+
+        if (start_poll)
+            poll();
 }
 
 $(function() {
@@ -37,7 +45,7 @@ $(function() {
   })
 });
 
-(function poll(){
+function poll() {
   var start = Date.now();
 
   $.get({
@@ -52,4 +60,4 @@ $(function() {
         setTimeout(poll, 60000);
     },
     timeout: 50000 });
-})();
+}
