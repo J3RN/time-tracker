@@ -4,19 +4,14 @@ class TimeEntriesController < ApplicationController
   before_action :set_time_entry, only: [:show, :edit, :update, :destroy,
                                         :stop_time, :start_time]
   before_action :set_tasks, only: [:new, :edit, :create, :update]
-  before_action :set_tag, only: [:report]
   before_action :set_date, only: [:index, :updates_all_time_entries]
   before_action :set_time_entries, only: [:index, :updates_all_time_entries]
   before_action :set_overrun_entries,
                 only: [:index, :updates_all_time_entries],
                 if: -> { @date == Date.today }
-  before_action -> { ensure_ownership(@tag) }, only: [:report]
   respond_to :html, :js
 
-  def index
-    # Tags for reporting
-    @tags = current_user.admin ? Tag.all : Tag.where(user: current_user)
-  end
+  def index; end
 
   def show
     respond_with(@time_entry)
@@ -74,12 +69,6 @@ class TimeEntriesController < ApplicationController
     respond_with(@time_entry)
   end
 
-  def report
-    redirect_to time_entries_path, alert: "No tag provided!" unless @tag
-
-    @tasks = @tag.tasks.includes(:time_entries).order_last_touched
-  end
-
   def export
     @time_entries = TimeEntry.includes(task: [:tags])
     @time_entries = @time_entries.where(user: current_user) unless current_user.admin?
@@ -100,10 +89,6 @@ class TimeEntriesController < ApplicationController
       @tasks << @time_entry.task
     end
     @tasks = @tasks.map { |task| [task.explicit_name, task.id] }
-  end
-
-  def set_tag
-    @tag = Tag.find(params[:tag_id])
   end
 
   def set_time_entry
