@@ -1,18 +1,21 @@
 j3rn = User.create!(username: "J3RN",
                     display_name: "J3RN",
                     email: "jonarnett90@gmail.com",
-                    password: "blargblarg")
+                    password: "blargblarg",
+                    confirmed_at: Time.now())
 
 test = User.create!(username: "Test User",
                     display_name: "Test User",
                     email: "test@example.com",
-                    password: "foobarbar")
+                    password: "foobarbar",
+                    confirmed_at: Time.now())
 
 User.create!(username: "ADMIN",
              display_name: "ADMIN",
              admin: true,
              email: "admin@example.com",
-             password: "foobarbar")
+             password: "foobarbar",
+             confirmed_at: Time.now())
 
 j3rn_tags = j3rn.tags.create!(
   [
