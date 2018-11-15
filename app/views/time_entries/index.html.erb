@@ -5,7 +5,9 @@
     <div class="btn-group time-nav">
       <%= link_to "<<", time_entries_path(date: @date - 1.day), class: 'btn btn-default' %>
       <%= link_to "Today", time_entries_path, class: 'btn btn-default' %>
-      <%= link_to ">>", time_entries_path(date: @date + 1.day), class: 'btn btn-default' %>
+      <% if @date < Date.today %>
+        <%= link_to ">>", time_entries_path(date: @date + 1.day), class: 'btn btn-default' %>
+      <% end %>
     </div>
   </div>
 </h1>
