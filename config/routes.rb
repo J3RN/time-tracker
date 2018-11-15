@@ -5,7 +5,6 @@ Rails.application.routes.draw do
 
   resources :time_entries, except: :show do
     collection do
-      get "report"
       get "export"
       get :updates_all_time_entries
     end

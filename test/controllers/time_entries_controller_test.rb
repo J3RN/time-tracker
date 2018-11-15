@@ -99,15 +99,4 @@ class TimeEntriesControllerTest < ActionController::TestCase
 
     assert_redirected_to time_entries_path
   end
-
-  test "should get report" do
-    get :report, params: { tag_id: @tag.id }
-    assert_response :success
-  end
-
-  test "should not get report on other's tags" do
-    get :report, params: { tag_id: @tag2.id }
-
-    assert_redirected_to time_entries_path
-  end
 end
