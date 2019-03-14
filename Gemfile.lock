@@ -53,7 +53,7 @@ GEM
     bootstrap3-datetimepicker-rails (4.17.47)
       momentjs-rails (>= 2.8.1)
     builder (3.2.3)
-    byebug (10.0.2)
+    byebug (11.0.0)
     capistrano (3.10.1)
       airbrussh (>= 1.0.0)
       i18n
