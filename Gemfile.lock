@@ -95,7 +95,7 @@ GEM
     execjs (2.7.0)
     faraday (0.14.0)
       multipart-post (>= 1.2, < 3)
-    ffi (1.9.23)
+    ffi (1.10.0)
     formatador (0.2.5)
     globalid (0.4.1)
       activesupport (>= 4.2.0)
