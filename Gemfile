@@ -43,7 +43,7 @@ group :development do
   gem "spring-watcher-listen", "~> 2.0.0"
 
   # Capistrano for deployment
-  gem "capistrano", "~> 3.6"
+  gem "capistrano", "~> 3.11"
   gem "capistrano-rails", "~> 1.2"
   gem "capistrano-rvm"
   gem "capistrano-passenger"
