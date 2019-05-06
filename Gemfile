@@ -3,7 +3,7 @@ source "https://rubygems.org"
 ruby "2.5.1"
 
 gem "rails", "~> 5.1.7"
-gem "pg", "~> 0.19.0"
+gem "pg", "~> 1.1.4"
 gem "passenger", ">= 5.0.25", require: "phusion_passenger/rack_handler"
 gem "sass-rails", "~> 5.0"
 gem "uglifier", ">= 1.3.0"
