@@ -42,7 +42,7 @@ GEM
       sshkit (>= 1.6.1, != 1.7.0)
     arel (8.0.0)
     ast (2.4.0)
-    autoprefixer-rails (8.2.0)
+    autoprefixer-rails (9.5.1.1)
       execjs
     awesome_print (1.8.0)
     bcrypt (3.1.12)
