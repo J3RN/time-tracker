@@ -7,6 +7,7 @@ class TimeEntry < ApplicationRecord
 
   validates_presence_of :task_id
   validates_presence_of :user_id
+  validates :start_time, historic: true
 
   scope :filter_by_date, lambda { |date|
     today = date.to_time
